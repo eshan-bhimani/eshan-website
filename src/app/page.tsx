@@ -63,7 +63,7 @@ function HeroSection() {
           <span className="text-text-primary font-medium">Georgia Tech</span>{" "}
           building products at the intersection of{" "}
           <span className="text-text-primary font-medium">
-            technology &amp; finance
+            AI, technology &amp; finance
           </span>
           .
         </motion.p>
@@ -224,7 +224,7 @@ function AboutPreview() {
             and their pain points. My long-term goal is to build a startup in
             NYC or SF that bridges the{" "}
             <span className="text-text-primary font-medium">
-              tech and financial industries
+              AI, tech, and financial industries
             </span>
             .
           </p>

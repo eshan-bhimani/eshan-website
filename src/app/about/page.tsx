@@ -33,7 +33,7 @@ export default function AboutPage() {
           </p>
           <p>
             My long-term goal is to start a company in NYC or SF that builds a
-            bridge between the tech and financial industries. I believe
+            bridge between AI, tech, and the financial industries. I believe
             there&apos;s enormous untapped potential at that intersection, and
             I want to be the one building there.
           </p>
