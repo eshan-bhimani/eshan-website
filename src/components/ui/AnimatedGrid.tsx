@@ -22,23 +22,19 @@ export default function AnimatedGrid() {
             strokeWidth="0.5"
           />
         ))}
-        {/* Radial lines — every 30° */}
-        {Array.from({ length: 12 }).map((_, i) => {
-          const angle = (i * 30 * Math.PI) / 180;
-          const x2 = 600 + 600 * Math.cos(angle);
-          const y2 = 600 + 600 * Math.sin(angle);
-          return (
-            <line
-              key={i}
-              x1="600"
-              y1="600"
-              x2={x2}
-              y2={y2}
-              stroke="rgba(56,189,248,0.4)"
-              strokeWidth="0.5"
-            />
-          );
-        })}
+        {/* Radial lines — every 30° (precomputed to avoid hydration mismatch) */}
+        <line x1="600" y1="600" x2="1200" y2="600" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="1120" y2="900" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="900" y2="1120" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="600" y2="1200" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="300" y2="1120" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="80" y2="900" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="0" y2="600" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="80" y2="300" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="300" y2="80" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="600" y2="0" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="900" y2="80" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
+        <line x1="600" y1="600" x2="1120" y2="300" stroke="rgba(56,189,248,0.4)" strokeWidth="0.5" />
         {/* Small crosshair at center */}
         <circle
           cx="600"
