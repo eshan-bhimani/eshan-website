@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: "Eshan Bhimani",
   title: "Eshan Bhimani — Builder & CS Student",
   description:
-    "CS student at Georgia Tech focused on building products that solve real problems. Interested in the intersection of technology and finance.",
+    "CS student at Georgia Tech focused on building products that solve real problems. Interested in the intersection of AI, technology, and finance.",
   url: "https://eshanbhimani.com",
 } as const;
 
@@ -47,7 +47,7 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "Project Three",
     description:
-      "Bridging tech and finance — placeholder for your real project.",
+      "Bridging AI, tech, and finance — placeholder for your real project.",
     tags: ["Next.js", "Tailwind", "Stripe"],
     github: "#",
   },
