@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AnimatedGrid from "@/components/ui/AnimatedGrid";
 import { SITE_CONFIG } from "@/lib/constants";
 import "./globals.css";
 
@@ -37,10 +38,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="font-sans antialiased">
-        <Navbar />
-        <main className="min-h-screen pt-[73px]">{children}</main>
-        <Footer />
+        <AnimatedGrid />
+        <div className="relative z-10">
+          <Navbar />
+          <main className="min-h-screen pt-[73px]">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

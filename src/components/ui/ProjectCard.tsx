@@ -14,37 +14,40 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: index * 0.15, ease: "easeOut" }}
-      whileHover={{ y: -6 }}
-      className="group relative rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/40 hover:bg-surface-light"
+      transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
+      whileHover={{ y: -4, transition: { duration: 0.25 } }}
+      className="group relative rounded-xl border border-border bg-surface/60 p-6 transition-all duration-300 hover:border-accent/30 hover:bg-surface"
     >
       {/* Glow effect on hover */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity group-hover:opacity-100 bg-accent-glow" />
+      <div className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-br from-accent/[0.04] to-teal/[0.02]" />
+
+      {/* Top accent line */}
+      <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-accent/0 to-transparent transition-all duration-300 group-hover:via-accent/40" />
 
       <div className="relative">
-        <h3 className="text-lg font-semibold text-text-primary mb-2">
+        <h3 className="text-base font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors duration-300">
           {project.title}
         </h3>
-        <p className="text-sm text-text-secondary leading-relaxed mb-4">
+        <p className="text-sm text-text-secondary leading-relaxed mb-5">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-5">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent-light"
+              className="rounded-full border border-border bg-background px-3 py-0.5 text-[11px] font-medium text-text-muted transition-colors group-hover:border-accent/20 group-hover:text-accent/80"
             >
               {tag}
             </span>
           ))}
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-4">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-text-secondary hover:text-accent-light transition-colors"
+              className="text-xs font-medium text-text-muted hover:text-accent transition-colors"
               aria-label={`View ${project.title} on GitHub`}
             >
               GitHub &rarr;
@@ -55,10 +58,10 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-text-secondary hover:text-accent-light transition-colors"
+              className="text-xs font-medium text-text-muted hover:text-teal transition-colors"
               aria-label={`View live demo of ${project.title}`}
             >
-              Live Demo &rarr;
+              Live &rarr;
             </a>
           )}
         </div>

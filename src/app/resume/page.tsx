@@ -7,37 +7,39 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <section className="px-6 py-24">
+    <section className="px-6 py-28">
       <div className="mx-auto max-w-3xl">
-        <h1 className="text-sm font-medium tracking-widest text-accent-light uppercase mb-2">
+        <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
           Resume
-        </h1>
-        <h2 className="text-3xl font-bold text-text-primary mb-12">
+        </p>
+        <h1 className="text-3xl font-bold text-text-primary mb-14 sm:text-4xl">
           Education &amp; Experience
-        </h2>
+        </h1>
 
-        <div className="space-y-10">
+        <div className="space-y-12">
           {/* Education */}
           <div>
-            <h3 className="text-lg font-semibold text-text-primary mb-4">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-6">
               Education
-            </h3>
-            <div className="border-l-2 border-border pl-6 space-y-6">
+            </h2>
+            <div className="border-l border-border-light pl-6 space-y-8">
               <div>
-                <p className="text-sm text-accent-light">2026 — 2028 (expected)</p>
-                <p className="font-medium text-text-primary">
+                <p className="text-xs font-mono text-accent">
+                  2026 — 2028 (expected)
+                </p>
+                <p className="font-semibold text-text-primary mt-1">
                   Georgia Institute of Technology
                 </p>
-                <p className="text-sm text-text-secondary">
+                <p className="text-sm text-text-secondary mt-0.5">
                   B.S. Computer Science — Intelligence &amp; People threads
                 </p>
               </div>
               <div>
-                <p className="text-sm text-accent-light">2024 — 2026</p>
-                <p className="font-medium text-text-primary">
+                <p className="text-xs font-mono text-teal">2024 — 2026</p>
+                <p className="font-semibold text-text-primary mt-1">
                   University of Georgia
                 </p>
-                <p className="text-sm text-text-secondary">
+                <p className="text-sm text-text-secondary mt-0.5">
                   Computer Science (transferred to Georgia Tech)
                 </p>
               </div>
@@ -46,9 +48,9 @@ export default function ResumePage() {
 
           {/* Skills */}
           <div>
-            <h3 className="text-lg font-semibold text-text-primary mb-4">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-6">
               Skills
-            </h3>
+            </h2>
             <div className="flex flex-wrap gap-2">
               {[
                 "TypeScript",
@@ -63,7 +65,7 @@ export default function ResumePage() {
               ].map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent-light"
+                  className="rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   {skill}
                 </span>
