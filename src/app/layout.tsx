@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedGrid from "@/components/ui/AnimatedGrid";
+import MouseGlow from "@/components/ui/MouseGlow";
 import { SITE_CONFIG } from "@/lib/constants";
 import "./globals.css";
 
@@ -52,6 +53,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <AnimatedGrid />
+        <MouseGlow />
         <div className="relative z-10">
           <Navbar />
           <main className="min-h-screen pt-[73px]">{children}</main>

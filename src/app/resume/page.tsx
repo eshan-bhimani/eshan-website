@@ -43,6 +43,37 @@ export default function ResumePage() {
                   Computer Science (transferred to Georgia Tech)
                 </p>
               </div>
+              <div>
+                <p className="text-xs font-mono text-text-muted">
+                  2020 — 2024
+                </p>
+                <p className="font-semibold text-text-primary mt-1">
+                  Woodward Academy
+                </p>
+                <p className="text-sm text-text-secondary mt-0.5">
+                  High School Diploma
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Experience */}
+          <div>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-6">
+              Experience
+            </h2>
+            <div className="border-l border-border-light pl-6 space-y-8">
+              <div>
+                <p className="text-xs font-mono text-accent">
+                  Summer 2026
+                </p>
+                <p className="font-semibold text-text-primary mt-1">
+                  NCR Atleos — Software Engineer Intern
+                </p>
+                <p className="text-sm text-text-secondary mt-0.5">
+                  Data Engineering Team
+                </p>
+              </div>
             </div>
           </div>
 

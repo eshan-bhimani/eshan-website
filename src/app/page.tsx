@@ -33,6 +33,26 @@ function HeroSection() {
           </span>
         </motion.h1>
 
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="mt-4 inline-flex items-center gap-2 text-sm text-text-muted"
+        >
+          <svg
+            className="h-3.5 w-3.5 text-teal"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Atlanta, GA — Georgia Tech
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,23 +112,17 @@ function HeroSection() {
 function EducationSection() {
   const milestones = [
     {
-      period: "2024 – 2026",
+      period: "2024 – Spring 2026",
       school: "University of Georgia",
       detail: "Computer Science · Athens, GA",
       badge: "Foundation",
     },
     {
-      period: "Summer 2026",
-      school: "Transfer",
-      detail: "Admitted to Georgia Tech",
-      badge: "Transition",
-      highlight: true,
-    },
-    {
-      period: "2026 – 2028",
+      period: "Summer 2026 – 2028",
       school: "Georgia Institute of Technology",
       detail: "CS · Intelligence & People Threads · Atlanta, GA",
       badge: "Current",
+      highlight: true,
     },
   ];
 
