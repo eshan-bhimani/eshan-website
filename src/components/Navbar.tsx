@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,18 +9,31 @@ import { NAV_LINKS } from "@/lib/constants";
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
+    <header
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? "border-b border-border/60 bg-background/90 backdrop-blur-xl"
+          : "bg-transparent"
+      }`}
+    >
       <nav
         className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4"
         aria-label="Main navigation"
       >
         <Link
           href="/"
-          className="text-lg font-bold tracking-tight text-text-primary hover:text-accent-light transition-colors"
+          className="text-lg font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
         >
-          EB
+          EB<span className="text-accent">.</span>
         </Link>
 
         {/* Desktop links */}
@@ -29,17 +42,18 @@ export default function Navbar() {
             <li key={href}>
               <Link
                 href={href}
-                className={`relative text-sm transition-colors ${
+                className={`relative text-sm font-medium transition-colors ${
                   pathname === href
-                    ? "text-accent-light"
-                    : "text-text-secondary hover:text-text-primary"
+                    ? "text-accent"
+                    : "text-text-muted hover:text-text-primary"
                 }`}
               >
                 {label}
                 {pathname === href && (
                   <motion.span
                     layoutId="nav-underline"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-accent rounded-full"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
                   />
                 )}
               </Link>
@@ -50,17 +64,17 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-text-secondary hover:text-text-primary p-1"
+          className="md:hidden text-text-muted hover:text-text-primary p-1 transition-colors"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >
           <svg
-            width="24"
-            height="24"
+            width="22"
+            height="22"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="1.5"
             strokeLinecap="round"
           >
             {mobileOpen ? (
@@ -86,18 +100,18 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-md overflow-hidden"
+            className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-xl overflow-hidden"
           >
-            <ul className="flex flex-col px-6 py-4 gap-3">
+            <ul className="flex flex-col px-6 py-4 gap-1">
               {NAV_LINKS.map(({ label, href }) => (
                 <li key={href}>
                   <Link
                     href={href}
                     onClick={() => setMobileOpen(false)}
-                    className={`block py-2 text-sm transition-colors ${
+                    className={`block py-2.5 text-sm font-medium transition-colors ${
                       pathname === href
-                        ? "text-accent-light"
-                        : "text-text-secondary hover:text-text-primary"
+                        ? "text-accent"
+                        : "text-text-muted hover:text-text-primary"
                     }`}
                   >
                     {label}

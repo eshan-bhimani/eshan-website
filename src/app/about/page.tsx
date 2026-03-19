@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <section className="px-6 py-24">
+    <section className="px-6 py-28">
       <div className="mx-auto max-w-3xl">
-        <h1 className="text-sm font-medium tracking-widest text-accent-light uppercase mb-2">
+        <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
           About
-        </h1>
-        <h2 className="text-3xl font-bold text-text-primary mb-8">
+        </p>
+        <h1 className="text-3xl font-bold text-text-primary mb-10 sm:text-4xl">
           A bit about me
-        </h2>
+        </h1>
 
         <div className="space-y-6 text-lg leading-relaxed text-text-secondary">
           <p>
