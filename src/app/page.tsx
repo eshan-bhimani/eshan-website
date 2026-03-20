@@ -43,8 +43,8 @@ function HeroSection() {
           {/* Spokes – 24 lines radiating from center */}
           {Array.from({ length: 24 }).map((_, i) => {
             const angle = (i * 15 * Math.PI) / 180;
-            const x2 = 450 + 440 * Math.cos(angle);
-            const y2 = 450 + 440 * Math.sin(angle);
+            const x2 = (450 + 440 * Math.cos(angle)).toFixed(2);
+            const y2 = (450 + 440 * Math.sin(angle)).toFixed(2);
             return (
               <line
                 key={`spoke-${i}`}
@@ -63,10 +63,10 @@ function HeroSection() {
             [0, 60, 120, 180, 240, 300].map((startDeg) => {
               const start = (startDeg * Math.PI) / 180;
               const end = ((startDeg + 40) * Math.PI) / 180;
-              const x1 = 450 + r * Math.cos(start);
-              const y1 = 450 + r * Math.sin(start);
-              const x2 = 450 + r * Math.cos(end);
-              const y2 = 450 + r * Math.sin(end);
+              const x1 = (450 + r * Math.cos(start)).toFixed(2);
+              const y1 = (450 + r * Math.sin(start)).toFixed(2);
+              const x2 = (450 + r * Math.cos(end)).toFixed(2);
+              const y2 = (450 + r * Math.sin(end)).toFixed(2);
               return (
                 <path
                   key={`arc-${ri}-${startDeg}`}
