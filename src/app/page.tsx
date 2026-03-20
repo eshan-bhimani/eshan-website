@@ -10,6 +10,77 @@ import { FEATURED_PROJECTS } from "@/lib/constants";
 function HeroSection() {
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden px-6">
+      {/* Radial geometric pattern */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <svg
+          className="w-[700px] h-[700px] sm:w-[900px] sm:h-[900px] opacity-[0.06]"
+          viewBox="0 0 900 900"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Central bloom/glow */}
+          <defs>
+            <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.5" />
+              <stop offset="30%" stopColor="#2dd4bf" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#0b0f1a" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <circle cx="450" cy="450" r="180" fill="url(#bloom)" />
+
+          {/* Concentric circles */}
+          {[90, 150, 220, 300, 380, 440].map((r) => (
+            <circle
+              key={r}
+              cx="450"
+              cy="450"
+              r={r}
+              stroke="#38bdf8"
+              strokeWidth="0.5"
+            />
+          ))}
+
+          {/* Spokes – 24 lines radiating from center */}
+          {Array.from({ length: 24 }).map((_, i) => {
+            const angle = (i * 15 * Math.PI) / 180;
+            const x2 = 450 + 440 * Math.cos(angle);
+            const y2 = 450 + 440 * Math.sin(angle);
+            return (
+              <line
+                key={`spoke-${i}`}
+                x1="450"
+                y1="450"
+                x2={x2}
+                y2={y2}
+                stroke="#38bdf8"
+                strokeWidth="0.4"
+              />
+            );
+          })}
+
+          {/* Arcs at mid-radii */}
+          {[180, 260, 350].map((r, ri) =>
+            [0, 60, 120, 180, 240, 300].map((startDeg) => {
+              const start = (startDeg * Math.PI) / 180;
+              const end = ((startDeg + 40) * Math.PI) / 180;
+              const x1 = 450 + r * Math.cos(start);
+              const y1 = 450 + r * Math.sin(start);
+              const x2 = 450 + r * Math.cos(end);
+              const y2 = 450 + r * Math.sin(end);
+              return (
+                <path
+                  key={`arc-${ri}-${startDeg}`}
+                  d={`M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`}
+                  stroke="#2dd4bf"
+                  strokeWidth="0.6"
+                  fill="none"
+                />
+              );
+            })
+          )}
+        </svg>
+      </div>
+
       <div className="relative mx-auto max-w-3xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -27,16 +98,25 @@ function HeroSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-5xl font-bold tracking-tight leading-[1.1] sm:text-6xl lg:text-7xl"
         >
-          <span className="text-text-primary">Eshan</span>{" "}
+          <span className="bg-gradient-to-r from-accent to-teal bg-clip-text text-transparent">Eshan</span>{" "}
           <span className="bg-gradient-to-r from-accent to-teal bg-clip-text text-transparent">
             Bhimani
           </span>
         </motion.h1>
 
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="mt-3 text-lg font-medium tracking-wide text-text-secondary sm:text-xl"
+        >
+          Building for the future
+        </motion.p>
+
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.18 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
           className="mt-4 inline-flex items-center gap-2 text-sm text-text-muted"
         >
           <svg
@@ -56,7 +136,7 @@ function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
+          transition={{ duration: 0.6, delay: 0.32 }}
           className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-secondary sm:text-xl"
         >
           CS student at{" "}
@@ -71,7 +151,7 @@ function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
           className="mt-10 flex flex-wrap justify-center gap-4"
         >
           <Link
