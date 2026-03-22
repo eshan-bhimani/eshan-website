@@ -12,7 +12,7 @@ export default function ProjectsPage() {
           <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
             Projects
           </p>
-          <h1 className="text-3xl font-bold text-text-primary mb-14 sm:text-4xl">
+          <h1 className="text-3xl font-bold text-gt-gold mb-14 sm:text-4xl">
             What I&apos;ve been building
           </h1>
         </SectionReveal>

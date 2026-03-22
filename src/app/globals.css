@@ -24,6 +24,11 @@
   --color-teal-dim: #14b8a6;
   --color-teal-glow: rgba(45, 212, 191, 0.08);
 
+  /* Georgia Tech gold */
+  --color-gt-gold: #B3A369;
+  --color-gt-gold-light: #C4B77D;
+  --color-gt-gold-dim: #A0914F;
+
   /* Gradients */
   --color-gradient-start: #38bdf8;
   --color-gradient-end: #2dd4bf;

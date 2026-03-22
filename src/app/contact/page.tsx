@@ -13,7 +13,7 @@ export default function ContactPage() {
         <p className="text-xs font-mono font-medium tracking-widest text-teal uppercase mb-3">
           Contact
         </p>
-        <h1 className="text-3xl font-bold text-text-primary mb-6 sm:text-4xl">
+        <h1 className="text-3xl font-bold text-gt-gold mb-6 sm:text-4xl">
           Let&apos;s connect
         </h1>
         <p className="text-lg text-text-secondary mb-10">
