@@ -130,7 +130,7 @@ function HeroSection() {
               clipRule="evenodd"
             />
           </svg>
-          Atlanta, GA — Georgia Tech
+          Atlanta, GA — <span className="text-gt-gold font-medium">Georgia Tech</span>
         </motion.div>
 
         <motion.p
@@ -140,9 +140,9 @@ function HeroSection() {
           className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-secondary sm:text-xl"
         >
           CS student at{" "}
-          <span className="text-text-primary font-medium">Georgia Tech</span>{" "}
+          <span className="text-gt-gold font-medium">Georgia Tech</span>{" "}
           building products at the intersection of{" "}
-          <span className="text-text-primary font-medium">
+          <span className="text-gt-gold font-medium">
             AI, technology &amp; finance
           </span>
           .
@@ -213,7 +213,7 @@ function EducationSection() {
           <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
             Education
           </p>
-          <h2 className="text-3xl font-bold text-text-primary mb-16 sm:text-4xl">
+          <h2 className="text-3xl font-bold text-gt-gold mb-16 sm:text-4xl">
             The trajectory
           </h2>
         </SectionReveal>
@@ -282,7 +282,7 @@ function AboutPreview() {
           <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
             About
           </p>
-          <h2 className="text-3xl font-bold text-text-primary mb-8 sm:text-4xl">
+          <h2 className="text-3xl font-bold text-gt-gold mb-8 sm:text-4xl">
             A bit about me
           </h2>
         </SectionReveal>
@@ -335,7 +335,7 @@ function FeaturedProjects() {
           <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
             Projects
           </p>
-          <h2 className="text-3xl font-bold text-text-primary mb-14 sm:text-4xl">
+          <h2 className="text-3xl font-bold text-gt-gold mb-14 sm:text-4xl">
             Things I&apos;ve built
           </h2>
         </SectionReveal>
@@ -370,7 +370,7 @@ function CTASection() {
           <p className="text-xs font-mono font-medium tracking-widest text-teal uppercase mb-3">
             Contact
           </p>
-          <h2 className="text-3xl font-bold text-text-primary mb-4 sm:text-4xl">
+          <h2 className="text-3xl font-bold text-gt-gold mb-4 sm:text-4xl">
             Let&apos;s build something together
           </h2>
           <p className="text-text-secondary mb-10 text-lg">

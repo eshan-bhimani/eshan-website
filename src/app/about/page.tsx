@@ -13,7 +13,7 @@ export default function AboutPage() {
         <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
           About
         </p>
-        <h1 className="text-3xl font-bold text-text-primary mb-10 sm:text-4xl">
+        <h1 className="text-3xl font-bold text-gt-gold mb-10 sm:text-4xl">
           A bit about me
         </h1>
 
