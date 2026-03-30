@@ -304,81 +304,79 @@ async function advance(
   {
     title: "VesselNav",
     description:
-      "Google Maps for the human vascular system. Interactive force-directed graph of coronary arteries with vessel search, pathfinding between any two vessels, neighbor navigation, and clinical notes for each vessel.",
-    tags: ["React", "TypeScript", "D3.js", "Spring Boot", "PostgreSQL"],
+      "A Cyber-Medical discovery platform for the human vascular system. Dark glassmorphism dashboard with a physics-based force graph, ⌘K command palette pathfinder, particle flow simulation, and a Vessel Deep Dive panel with conditions, connected systems, and an animated 3D-style segment preview.",
+    tags: ["React", "TypeScript", "D3.js", "Framer Motion", "Spring Boot", "PostgreSQL"],
     github: "https://github.com/eshan-bhimani/vaso-map",
     image: "/projects/vesselnav.png",
     deepDive: {
-      tagline: "Navigate the cardiovascular system like a map.",
+      tagline: "Explore the cardiovascular system. Visualize blood flow in real time.",
       overview:
-        "VesselNav is a Google Maps-style explorer for the human vascular system. The MVP covers the coronary arteries as a directed graph — 15 vessels seeded from standard anatomy — with force-directed visualization, vessel search by name or clinical abbreviation (LAD, RCA, LCx), shortest-path routing between any two vessels, and per-vessel clinical notes. Built as a full-stack project to combine medical education with graph algorithm engineering.",
+        "VesselNav is a premium Cyber-Medical discovery platform for the human vascular system. Beyond the core graph and pathfinding, the UI was overhauled into a full dark glassmorphism dashboard: per-vessel-type SVG glow filters, a RAF-driven particle system that animates blood flow along any found path, a ⌘K command palette for search-to-select pathfinding, and a four-tab Vessel Deep Dive panel covering anatomy, common conditions, connected body systems, and an animated Canvas 2D vessel segment. Built full-stack with Spring Boot + Flyway-seeded PostgreSQL and a React/D3 frontend.",
       challenges: [
         {
-          title: "Force-Directed Graph with D3.js",
-          body: "The vascular system is modeled as a directed graph where vessels are nodes and anatomical connections are edges. D3's force simulation applies repulsion between nodes, link-length constraints along edges, and a centering force. Node positions are seeded from the adjacency data returned by the Spring Boot API, then the simulation runs until kinetic energy falls below a threshold — resulting in a stable, readable layout without manual coordinate assignment.",
-          code: `const simulation = d3.forceSimulation(nodes)
-  .force("link",  d3.forceLink(links)
-    .id((d) => d.id)
-    .distance(80))
-  .force("charge", d3.forceManyBody().strength(-300))
-  .force("center", d3.forceCenter(width / 2, height / 2))
-  .force("collision", d3.forceCollide(24));
+          title: "SVG Glow Filters & Physics Force Graph",
+          body: "Each vessel type (artery, vein, capillary) has a dedicated SVG feGaussianBlur + feMerge filter applied to both its glow halo and solid core circle. Node physics were tuned to charge −380, link distance 110, and collision radius 26 for organic spacing. Path-highlighted edges get the CSS dash-flow animation and cyan glow; normal edges stay at 12% white opacity to reduce visual noise.",
+          code: `const createGlow = (id: string, color: string) => {
+  const f = defs.append("filter").attr("id", id)
+    .attr("x", "-50%").attr("y", "-50%")
+    .attr("width", "200%").attr("height", "200%");
+  f.append("feGaussianBlur")
+    .attr("in", "colorized").attr("stdDeviation", "5")
+    .attr("result", "blurred");
+  const merge = f.append("feMerge");
+  merge.append("feMergeNode").attr("in", "blurred");
+  merge.append("feMergeNode").attr("in", "SourceGraphic");
+};
 
+createGlow("glow-artery",    "#e11d48");
+createGlow("glow-vein",      "#2563eb");
+createGlow("glow-capillary", "#7c3aed");`,
+        },
+        {
+          title: "RAF Particle Flow Along Path Edges",
+          body: "When 'Simulate Flow' is toggled, a requestAnimationFrame loop animates D3-managed circle elements along each highlighted edge. Node positions are cached in a Map<id, {x,y}> on every simulation tick. Each frame, particle t-position is computed as (phase + phaseOffset) % 1 and linearly interpolated between source and target coordinates — giving a smooth, continuous blood-flow effect without any WebGL.",
+          code: `// Store positions on each D3 tick
 simulation.on("tick", () => {
-  link
-    .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-    .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-  node
-    .attr("cx", d => d.x)
-    .attr("cy", d => d.y);
-});`,
+  nodes.forEach(n => {
+    if (n.x !== undefined)
+      nodePositionsRef.current.set(n.id, { x: n.x!, y: n.y! });
+  });
+});
+
+// RAF loop updates particle positions
+const animate = () => {
+  phase = (phase + 0.006) % 1;
+  g.selectAll(".flow-particle")
+    .attr("cx", (d) => {
+      const src = nodePositionsRef.current.get(pathHighlight[d.edgeIdx]);
+      const tgt = nodePositionsRef.current.get(pathHighlight[d.edgeIdx + 1]);
+      const t = (phase + d.phaseOffset) % 1;
+      return src!.x + (tgt!.x - src!.x) * t;
+    });
+  rafRef.current = requestAnimationFrame(animate);
+};`,
         },
         {
-          title: "BFS Pathfinding on the Vessel Graph",
-          body: "The shortest path between two vessels is computed server-side using BFS over the directed vessel_edges table. The starting vessel expands outward through outgoing edges; each visited node records its predecessor for path reconstruction. The API returns the ordered vessel sequence — e.g., Ascending Aorta → Left Coronary Artery → LAD — which the frontend highlights on the D3 graph.",
-          code: `public PathResponseDTO findShortestPath(Long sourceId, Long targetId) {
-  Map<Long, Long> prev = new HashMap<>();
-  Queue<Long> queue    = new LinkedList<>();
-  Set<Long>   visited  = new HashSet<>();
-
-  queue.add(sourceId);
-  visited.add(sourceId);
-
-  while (!queue.isEmpty()) {
-    Long curr = queue.poll();
-    if (curr.equals(targetId)) break;
-    for (VesselEdge edge : vesselRepo.findOutgoingEdges(curr)) {
-      Long next = edge.getChild().getId();
-      if (!visited.contains(next)) {
-        visited.add(next);
-        prev.put(next, curr);
-        queue.add(next);
-      }
-    }
-  }
-  return reconstructPath(prev, sourceId, targetId);
-}`,
-        },
-        {
-          title: "Flyway Schema Migrations & Seed Data",
-          body: "The database schema and all 15 coronary vessel seed records are managed by Flyway migrations, keeping the schema versioned alongside the application code. Two migration scripts handle initial schema creation (vessels, vessel_edges, regions, aliases, notes tables) and the coronary data seed — so a fresh Docker Compose startup produces a fully populated, query-ready database without any manual steps.",
+          title: "BFS Pathfinding & Flyway-Seeded Graph",
+          body: "Shortest-path routing is computed server-side via BFS over the directed vessel_edges table in Spring Boot. The full schema and all 15 coronary vessel records are managed by two Flyway migrations — so a fresh Docker Compose startup produces a fully populated, query-ready database. The API returns the ordered vessel sequence which the frontend highlights and animates.",
         },
       ],
       metrics: [
-        { value: "15", label: "Coronary Vessels", sub: "seeded via Flyway migration" },
-        { value: "BFS", label: "Pathfinding Algorithm", sub: "O(V + E) over directed graph" },
-        { value: "< 2s", label: "Spring Boot Startup", sub: "with Flyway + Hibernate" },
-        { value: "5", label: "DB Tables", sub: "vessels, edges, regions, aliases, notes" },
+        { value: "15", label: "Coronary Vessels", sub: "seeded via Flyway" },
+        { value: "3×", label: "Particles per Edge", sub: "staggered phase offsets" },
+        { value: "4", label: "Deep Dive Tabs", sub: "overview · 3D · conditions · systems" },
+        { value: "BFS", label: "Pathfinding", sub: "O(V + E) server-side" },
       ],
       stack: [
         { name: "React 18", color: "#61dafb" },
         { name: "TypeScript", color: "#38bdf8" },
-        { name: "D3.js", color: "#f97316" },
+        { name: "D3.js v7", color: "#f97316" },
+        { name: "Framer Motion", color: "#a78bfa" },
         { name: "Zustand", color: "#fbbf24" },
+        { name: "Tailwind CSS", color: "#7dd3fc" },
         { name: "Spring Boot 3", color: "#74c69d" },
         { name: "PostgreSQL 15", color: "#818cf8" },
         { name: "Flyway", color: "#e2e8f0" },
-        { name: "Docker", color: "#38bdf8" },
       ],
     },
   },
