@@ -342,7 +342,7 @@ function FeaturedProjects() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURED_PROJECTS.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
+            <ProjectCard key={project.title} project={project} index={i} onClick={() => {}} />
           ))}
         </div>
 
