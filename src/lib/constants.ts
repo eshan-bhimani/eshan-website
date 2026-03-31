@@ -306,6 +306,7 @@ async function advance(
     description:
       "A Cyber-Medical discovery platform for the human vascular system. Dark glassmorphism dashboard with a physics-based force graph, ⌘K command palette pathfinder, particle flow simulation, and a Vessel Deep Dive panel with conditions, connected systems, and an animated 3D-style segment preview.",
     tags: ["React", "TypeScript", "D3.js", "Framer Motion", "Spring Boot", "PostgreSQL"],
+    link: "https://vessel-nav-nu.vercel.app",
     github: "https://github.com/eshan-bhimani/vaso-map",
     image: "/projects/vesselnav-v2.png",
     deepDive: {
