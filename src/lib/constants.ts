@@ -307,7 +307,7 @@ async function advance(
       "A Cyber-Medical discovery platform for the human vascular system. Dark glassmorphism dashboard with a physics-based force graph, ⌘K command palette pathfinder, particle flow simulation, and a Vessel Deep Dive panel with conditions, connected systems, and an animated 3D-style segment preview.",
     tags: ["React", "TypeScript", "D3.js", "Framer Motion", "Spring Boot", "PostgreSQL"],
     github: "https://github.com/eshan-bhimani/vaso-map",
-    image: "/projects/vesselnav.png",
+    image: "/projects/vesselnav-v2.png",
     deepDive: {
       tagline: "Explore the cardiovascular system. Visualize blood flow in real time.",
       overview:
