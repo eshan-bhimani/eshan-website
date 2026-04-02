@@ -381,4 +381,61 @@ const animate = () => {
       ],
     },
   },
+  {
+    title: "Polymarket Trading Bot",
+    description:
+      "A hybrid Python/C++ high-frequency trading framework for Polymarket BTC 15-minute prediction markets. Identifies cross-venue arbitrage between Polymarket, Kalshi, and Binance using a Log-Normal probability model, and executes trades via a PPO reinforcement learning agent with an LSTM actor-critic network.",
+    tags: ["Python", "C++20", "PyTorch", "Gymnasium", "boost::beast", "pybind11"],
+    github: "https://github.com/eshan-bhimani/polymarket-hft-bot",
+    deepDive: {
+      tagline: "Quantitative trading meets reinforcement learning on prediction markets.",
+      overview:
+        "A production-grade framework that fuses a C++20 execution engine with a Python RL loop. The C++ layer handles sub-millisecond WebSocket ingestion from Polymarket's CLOB and Binance aggTrade feeds, maintaining a thread-safe L2 order book with real-time micro-price and volatility estimation. The Python layer runs a PPO agent with LSTM actor-critic architecture that learns optimal entry/exit timing across the 15-minute contract lifecycle, with reward shaping that accounts for fees, gas costs, and inventory risk.",
+      challenges: [
+        {
+          title: "Log-Normal Fair Pricing & Bregman Divergence",
+          body: "The probability engine computes the theoretical fair price of a 'BTC > $X' binary contract using P(S_T > K) = Phi([ln(S0/K) + (mu - 0.5*sigma^2)*T] / (sigma*sqrt(T))). Realized volatility is estimated from a 60-second rolling window of Binance ticks. The Bregman (KL) divergence between this model price and the market price feeds directly into the RL observation space, giving the agent a continuous signal for mispricing.",
+          code: `def fair_price(self, strike, time_to_expiry_sec=None):
+    s0, sigma = self.spot(), self.realised_vol()
+    T = (time_to_expiry_sec or self.contract_sec) / (365.25 * 86400)
+    d = (math.log(s0 / strike) + (self.mu - 0.5 * sigma**2) * T) / (sigma * math.sqrt(T))
+    return float(norm.cdf(d))`,
+        },
+        {
+          title: "LSTM Actor-Critic with Recurrent PPO",
+          body: "Standard PPO loses temporal context across the 15-minute window. The LSTM trunk preserves hidden state across rollout steps, and a dual-mode forward pass enables single-step inference during trading and full-sequence evaluation during PPO updates. Per-timestep logits and values are computed in sequence_mode for correct advantage estimation.",
+          code: `if sequence_mode:
+    features = lstm_out.squeeze(0)     # (seq_len, hidden)
+    logits = self.actor(features)      # (seq_len, n_actions)
+    values = self.critic(features).squeeze(-1)
+    dist = Categorical(logits=logits)
+else:
+    last = lstm_out[:, -1, :]          # (batch, hidden)
+    logits = self.actor(last)
+    value = self.critic(last).squeeze(-1)
+    dist = Categorical(logits=logits)`,
+        },
+        {
+          title: "C++/Python Bridge via pybind11",
+          body: "The C++ execution engine runs WebSocket feeds on dedicated threads with boost::beast, using shared_mutex for lock-free reads on the order book. pybind11 exposes the engine to Python with GIL-released blocking calls, so the RL loop on the main thread can query micro-prices and volatility at native speed without serialization overhead.",
+        },
+      ],
+      metrics: [
+        { value: "< 1ms", label: "Tick-to-Signal", sub: "C++ micro-price latency" },
+        { value: "3", label: "Venue Arbitrage", sub: "Polymarket + Kalshi + Binance" },
+        { value: "8-dim", label: "State Space", sub: "prob, divergence, OB, gas, time, pos, PnL, spread" },
+        { value: "PPO", label: "RL Algorithm", sub: "LSTM actor-critic (128 hidden)" },
+      ],
+      stack: [
+        { name: "Python 3.11", color: "#fbbf24" },
+        { name: "C++20", color: "#38bdf8" },
+        { name: "PyTorch", color: "#f97316" },
+        { name: "Gymnasium", color: "#a78bfa" },
+        { name: "boost::beast", color: "#74c69d" },
+        { name: "pybind11", color: "#e2e8f0" },
+        { name: "scipy", color: "#818cf8" },
+        { name: "py-clob-client", color: "#2dd4bf" },
+      ],
+    },
+  },
 ];
