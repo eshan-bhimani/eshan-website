@@ -438,4 +438,44 @@ else:
       ],
     },
   },
+  {
+    title: "Order Book Simulator",
+    description:
+      "Real-time limit order book simulator with a price-time priority matching engine, WebSocket streaming, Redis persistence, and a live web dashboard.",
+    tags: ["Python", "FastAPI", "WebSockets", "Redis", "Finance"],
+    github: "https://github.com/eshan-bhimani/order-book-simulator",
+    deepDive: {
+      tagline: "A full-stack CLOB matching engine with synthetic market data",
+      overview:
+        "Built a production-style central limit order book (CLOB) from scratch — featuring price-time priority matching, limit/market/IOC/FOK orders, order cancellation and amendment, self-trade prevention, and a synthetic market simulator driven by an Ornstein-Uhlenbeck mean-reverting price process. The system streams real-time depth, trade, and order events over WebSockets to a live dark-themed dashboard with a depth ladder, trade tape, and manual order entry. Redis provides persistence for orders, trade logs, OHLCV candle aggregation, and pub/sub event broadcast.",
+      challenges: [
+        {
+          title: "Price-Time Priority Matching Engine",
+          body: "Implemented a CLOB that matches incoming orders against resting liquidity using strict price-time priority. Each price level maintains a FIFO queue, and the engine sweeps through levels to fill aggressive orders — handling partial fills, IOC/FOK semantics, and self-trade prevention via trader ID checks. Thread-safe with reader-writer locking to support concurrent simulator and manual order submission.",
+        },
+        {
+          title: "Ornstein-Uhlenbeck Market Simulator",
+          body: "Designed a synthetic market data generator using a mean-reverting OU stochastic process with Poisson-distributed order arrivals. Three agent archetypes — market makers (tight spread quoting), noise traders (random aggression), and momentum traders (trend-following) — create realistic microstructure dynamics with configurable volatility, speed, and order rate.",
+        },
+        {
+          title: "Real-Time WebSocket Streaming Architecture",
+          body: "Engineered an event-driven architecture where book mutations trigger callbacks that broadcast depth snapshots, trade fills, and order status updates to all connected WebSocket clients simultaneously. The FastAPI server supports both REST API for CRUD operations and WebSocket for live streaming, with Redis pub/sub enabling horizontal scaling across server instances.",
+        },
+      ],
+      metrics: [
+        { value: "~1ms", label: "Order Matching", sub: "single order latency" },
+        { value: "3", label: "Agent Types", sub: "MM / noise / momentum" },
+        { value: "5", label: "Order Types", sub: "limit / market / IOC / FOK / cancel" },
+        { value: "Real-Time", label: "Dashboard", sub: "depth ladder + trade tape" },
+      ],
+      stack: [
+        { name: "Python 3.11", color: "#fbbf24" },
+        { name: "FastAPI", color: "#22d3ee" },
+        { name: "WebSockets", color: "#a78bfa" },
+        { name: "Redis", color: "#ef4444" },
+        { name: "Pydantic", color: "#38bdf8" },
+        { name: "asyncio", color: "#74c69d" },
+      ],
+    },
+  },
 ];
