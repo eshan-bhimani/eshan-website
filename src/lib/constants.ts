@@ -478,4 +478,87 @@ else:
       ],
     },
   },
+  {
+    title: "AutoTenant",
+    description:
+      "AI-powered property management platform that automates the entire rental workflow — from listing optimization and tenant screening to lease generation and payment processing. Integrates Zillow, Stripe, TransUnion, and DocuSign into a single dashboard for landlords and tenants.",
+    tags: ["Next.js", "FastAPI", "PostgreSQL", "Stripe", "Zillow API", "Framer Motion"],
+    link: "https://autotennant.com",
+    github: "https://github.com/eshan-bhimani/autotennant",
+    image: "/projects/autotenant.png",
+    deepDive: {
+      tagline: "From listing to lease in days, not weeks.",
+      overview:
+        "AutoTenant replaces the fragmented stack of tools landlords juggle — Zillow for listings, TransUnion for screening, DocuSign for leases, Stripe for payments — with a single AI-powered platform. The core engineering challenge was building a unified pipeline that ingests property data, runs AI-driven applicant scoring, generates lease documents, and processes payments, while providing separate role-based dashboards for landlords and tenants with real-time status tracking.",
+      challenges: [
+        {
+          title: "AI Tenant Screening Pipeline",
+          body: "When a tenant applies, the backend orchestrates parallel requests to TransUnion (credit/background), income verification APIs, and employment checks. Results are normalized into a canonical ApplicantProfile and fed to a scoring model that produces a 0–100 confidence score. The pipeline uses asyncio.gather() for concurrent API calls and stores intermediate results in Redis for idempotent retries.",
+          code: `async def score_applicant(
+  application_id: str,
+) -> ScoredApplication:
+    app = await db.get(Application, application_id)
+
+    credit, background, income = await asyncio.gather(
+        transunion.pull_credit(app.ssn_token),
+        transunion.pull_background(app.ssn_token),
+        verify_income(app.employer, app.income),
+    )
+
+    profile = ApplicantProfile(
+        credit_score=credit.score,
+        monthly_income=income.verified_amount,
+        background_flags=background.flags,
+        rental_history=app.rental_history,
+    )
+
+    score = scoring_model.predict(profile)
+    await db.update(app, ai_score=score, status="SCORED")
+    return ScoredApplication(app=app, score=score)`,
+        },
+        {
+          title: "Role-Based Architecture with Route Guards",
+          body: "The frontend uses a Zustand store with localStorage persistence to track the active role (landlord/tenant). Route guards check both authentication state (JWT in localStorage) and role authorization before rendering. The AppShell component dynamically switches sidebar navigation, and a Framer Motion layoutId animates the role switcher pill between states.",
+          code: `// Zustand store for role state
+const useAppStore = create<AppState>((set) => ({
+  activeRole: localStorage.getItem("activeRole"),
+  setActiveRole: (role) => {
+    localStorage.setItem("activeRole", role);
+    set({ activeRole: role });
+  },
+  isAuthenticated: () =>
+    !!localStorage.getItem("access_token"),
+}));
+
+// Route guard component
+function RouteGuard({ role, children }) {
+  const { activeRole, isAuthenticated } = useAppStore();
+  if (!isAuthenticated()) redirect("/login");
+  if (activeRole !== role) redirect("/");
+  return children;
+}`,
+        },
+        {
+          title: "Zillow API Integration & Unified Search",
+          body: "The tenant search page aggregates listings from both the internal database and Zillow's API via a RapidAPI proxy. A Next.js API route normalizes Zillow's response into a canonical listing schema matching the internal PropertyResponse type. The frontend provides a source toggle (All/AutoTenant/Zillow) with shared filter controls for beds, baths, and price range.",
+        },
+      ],
+      metrics: [
+        { value: "73%", label: "Faster Leasing", sub: "avg time-to-lease reduction" },
+        { value: "6", label: "Integrations", sub: "Zillow · Stripe · TransUnion · DocuSign · Twilio · Google" },
+        { value: "< 5min", label: "Response Time", sub: "to applicant notifications" },
+        { value: "4.9/5", label: "User Rating", sub: "across 2,400+ users" },
+      ],
+      stack: [
+        { name: "Next.js 14", color: "#e2e8f0" },
+        { name: "FastAPI", color: "#2dd4bf" },
+        { name: "PostgreSQL", color: "#818cf8" },
+        { name: "Stripe", color: "#635BFF" },
+        { name: "Zillow API", color: "#38bdf8" },
+        { name: "Framer Motion", color: "#f472b6" },
+        { name: "Zustand", color: "#fbbf24" },
+        { name: "Redis", color: "#ef4444" },
+      ],
+    },
+  },
 ];
