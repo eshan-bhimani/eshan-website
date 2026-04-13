@@ -1,13 +1,42 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import SectionReveal from "@/components/ui/SectionReveal";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { FEATURED_PROJECTS } from "@/lib/constants";
 
+/* ─── Typing animation hook ─── */
+function useTypingAnimation(text: string, speed = 90, startDelay = 400) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    let i = 0;
+    const startTimeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        i++;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) {
+          clearInterval(interval);
+          setDone(true);
+        }
+      }, speed);
+      return () => clearInterval(interval);
+    }, startDelay);
+    return () => clearTimeout(startTimeout);
+  }, [text, speed, startDelay]);
+
+  return { displayed, done };
+}
+
 /* ─── Hero ─── */
 function HeroSection() {
+  const { displayed, done } = useTypingAnimation("Eshan Bhimani", 100, 500);
+  // Delay the rest of the hero content until typing finishes or nearly finishes
+  const showContent = displayed.length >= 6;
+
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden px-6">
       {/* Radial geometric pattern */}
@@ -92,81 +121,90 @@ function HeroSection() {
           Available for opportunities
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl font-bold tracking-tight leading-[1.1] sm:text-6xl lg:text-7xl"
-        >
-          <span className="bg-gradient-to-r from-accent to-teal bg-clip-text text-transparent">Eshan</span>{" "}
+        <h1 className="text-5xl font-bold tracking-tight leading-[1.1] sm:text-6xl lg:text-7xl">
           <span className="bg-gradient-to-r from-accent to-teal bg-clip-text text-transparent">
-            Bhimani
+            {displayed}
           </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.18 }}
-          className="mt-3 text-lg font-medium tracking-wide text-text-secondary sm:text-xl"
-        >
-          Building for the future
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="mt-4 inline-flex items-center gap-2 text-sm text-text-muted"
-        >
-          <svg
-            className="h-3.5 w-3.5 text-teal"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-              clipRule="evenodd"
+          <motion.span
+            className="inline-block w-[3px] h-[0.85em] align-middle bg-gradient-to-b from-accent to-teal rounded-full ml-1"
+            animate={{ opacity: [1, 1, 0, 0] }}
+            transition={{ duration: 0.8, repeat: Infinity, times: [0, 0.49, 0.5, 1] }}
+            style={{ display: done ? "none" : undefined }}
+          />
+          {/* Persistent subtle cursor after typing finishes */}
+          {done && (
+            <motion.span
+              className="inline-block w-[3px] h-[0.85em] align-middle bg-gradient-to-b from-accent/60 to-teal/60 rounded-full ml-1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             />
-          </svg>
-          Atlanta, GA — <span className="text-gt-gold font-medium">Georgia Tech</span>
-        </motion.div>
+          )}
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.32 }}
-          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-secondary sm:text-xl"
-        >
-          CS student at{" "}
-          <span className="text-gt-gold font-medium">Georgia Tech</span>{" "}
-          building products at the intersection of{" "}
-          <span className="text-gt-gold font-medium">
-            AI, technology &amp; finance
-          </span>
-          .
-        </motion.p>
+        <AnimatePresence>
+          {showContent && (
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <p className="mt-3 text-lg font-medium tracking-wide text-text-secondary sm:text-xl">
+                Building for the future
+              </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-10 flex flex-wrap justify-center gap-4"
-        >
-          <Link
-            href="/projects"
-            className="group relative rounded-full bg-accent/10 px-8 py-3 text-sm font-semibold text-accent transition-all hover:bg-accent/20 hover:shadow-lg hover:shadow-accent/10"
-          >
-            <span className="relative z-10">View My Work</span>
-          </Link>
-          <Link
-            href="/contact"
-            className="rounded-full border border-border px-8 py-3 text-sm font-semibold text-text-secondary transition-all hover:border-border-light hover:text-text-primary"
-          >
-            Get in Touch
-          </Link>
-        </motion.div>
+              <div className="mt-4 inline-flex items-center gap-2 text-sm text-text-muted">
+                <svg
+                  className="h-3.5 w-3.5 text-teal"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Atlanta, GA — <span className="text-gt-gold font-medium">Georgia Tech</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {done && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-secondary sm:text-xl">
+                CS student at{" "}
+                <span className="text-gt-gold font-medium">Georgia Tech</span>{" "}
+                building products at the intersection of{" "}
+                <span className="text-gt-gold font-medium">
+                  AI, technology &amp; finance
+                </span>
+                .
+              </p>
+
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/projects"
+                  className="group relative rounded-full bg-accent/10 px-8 py-3 text-sm font-semibold text-accent transition-all hover:bg-accent/20 hover:shadow-lg hover:shadow-accent/10"
+                >
+                  <span className="relative z-10">View My Work</span>
+                </Link>
+                <Link
+                  href="/contact"
+                  className="rounded-full border border-border px-8 py-3 text-sm font-semibold text-text-secondary transition-all hover:border-border-light hover:text-text-primary"
+                >
+                  Get in Touch
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Scroll indicator */}
