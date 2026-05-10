@@ -10,7 +10,7 @@ const EDUCATION = {
   degree: "Bachelors of Science, Computer Science",
   gpa: "3.83 / 4.0",
   grad: "May 2028",
-  concentration: "Intelligence & People",
+  concentration: "Intelligence & Systems & Architecture",
   honors: "Presidential Scholar, Dean's List, Zell Miller Scholarship",
   courses: [
     "Data Structures",

@@ -48,6 +48,15 @@ export default function ContactPage() {
             >
               LinkedIn
             </a>
+            <a
+              href={SOCIAL_LINKS.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-text-muted hover:text-accent transition-colors"
+              aria-label="X"
+            >
+              X
+            </a>
           </div>
         </div>
       </div>

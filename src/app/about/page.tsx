@@ -20,7 +20,7 @@ export default function AboutPage() {
         <div className="space-y-6 text-lg leading-relaxed text-text-secondary">
           <p>
             I&apos;m currently a junior CS major at Georgia Tech, with threads
-            in Intelligence and People. I transferred from UGA after my
+            in Intelligence and Systems &amp; Architecture. I transferred from UGA after my
             sophomore year in Summer 2026, and I anticipate graduating in May
             2028.
           </p>

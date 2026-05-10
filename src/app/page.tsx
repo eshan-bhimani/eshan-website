@@ -233,12 +233,12 @@ function EducationSection() {
       period: "2024 – Spring 2026",
       school: "University of Georgia",
       detail: "Computer Science · Athens, GA",
-      badge: "Foundation",
+      badge: "",
     },
     {
       period: "Summer 2026 – 2028",
       school: "Georgia Institute of Technology",
-      detail: "CS · Intelligence & People Threads · Atlanta, GA",
+      detail: "CS · Intelligence & Systems & Architecture Threads · Atlanta, GA",
       badge: "Current",
       highlight: true,
     },
@@ -248,11 +248,8 @@ function EducationSection() {
     <section className="relative px-6 py-28">
       <div className="mx-auto max-w-3xl">
         <SectionReveal>
-          <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
+          <h2 className="text-4xl font-bold text-gt-gold mb-16 sm:text-5xl">
             Education
-          </p>
-          <h2 className="text-3xl font-bold text-gt-gold mb-16 sm:text-4xl">
-            The trajectory
           </h2>
         </SectionReveal>
 
@@ -284,15 +281,17 @@ function EducationSection() {
                       <span className="text-xs font-mono text-text-muted">
                         {m.period}
                       </span>
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
-                          m.highlight
-                            ? "bg-teal/10 text-teal"
-                            : "bg-accent/10 text-accent"
-                        }`}
-                      >
-                        {m.badge}
-                      </span>
+                      {m.badge && (
+                        <span
+                          className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+                            m.highlight
+                              ? "bg-teal/10 text-teal"
+                              : "bg-accent/10 text-accent"
+                          }`}
+                        >
+                          {m.badge}
+                        </span>
+                      )}
                     </div>
                     <h3 className="text-lg font-semibold text-text-primary">
                       {m.school}
@@ -330,7 +329,7 @@ function AboutPreview() {
             I&apos;m a junior CS major at Georgia Tech with threads in{" "}
             <span className="text-text-primary font-medium">Intelligence</span>{" "}
             and{" "}
-            <span className="text-text-primary font-medium">People</span>. I
+            <span className="text-text-primary font-medium">Systems &amp; Architecture</span>. I
             transferred from UGA in Summer 2026, and I&apos;m on track to
             graduate in May 2028.
           </p>
