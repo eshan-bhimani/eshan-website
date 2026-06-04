@@ -25,6 +25,11 @@ export default function AboutPage() {
             2028.
           </p>
           <p>
+            I&apos;m currently a SWE Intern at NCR Atleos at their Global HQ in
+            Atlanta, where I&apos;m working on creating AI Agents and systems
+            over data layers.
+          </p>
+          <p>
             I love building things that solve daily inconveniences — products
             that people actually want to use. Whether it&apos;s a tool that
             saves someone five minutes a day or a platform that fundamentally
