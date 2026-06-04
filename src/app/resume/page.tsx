@@ -108,6 +108,9 @@ const SKILLS = {
     "PyTorch",
     "JUnit",
   ],
+  "AI Tools": [
+    "Coming soon",
+  ],
   Awards: [
     "Presidential Scholar (4.0 GPA)",
     "Dean's List",
