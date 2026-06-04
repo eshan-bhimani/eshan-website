@@ -38,7 +38,7 @@ const EXPERIENCE = [
     company: "University of Georgia",
     role: "Undergraduate Researcher",
     location: "Athens, GA",
-    period: "September 2025 - Present",
+    period: "September 2025 - April 2026",
     bullets: [
       "Developing high-performance spectral preprocessing algorithms in Python for signal normalization and noise reduction, optimizing computational throughput by 25% across high-dimensional datasets for downstream ML models",
       "Architecting robust, modular data pipelines to automate raw spectral data transformation into analysis-ready formats",
