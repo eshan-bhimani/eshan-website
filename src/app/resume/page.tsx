@@ -8,7 +8,7 @@ import SectionReveal from "@/components/ui/SectionReveal";
 const EDUCATION = {
   school: "Georgia Institute of Technology",
   degree: "Bachelors of Science, Computer Science",
-  gpa: "3.83 / 4.0",
+  gpa: "3.86 / 4.0",
   grad: "May 2028",
   concentration: "Intelligence & Systems & Architecture",
   honors: "Presidential Scholar, Dean's List, Zell Miller Scholarship",
