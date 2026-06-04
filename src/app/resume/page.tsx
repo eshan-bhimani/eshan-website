@@ -24,6 +24,15 @@ const EDUCATION = {
 
 const EXPERIENCE = [
   {
+    company: "NCR Atleos",
+    role: "Software Engineer Intern",
+    location: "Atlanta, GA (Global HQ)",
+    period: "May 2026 - Present",
+    bullets: [
+      "Creating AI Agents and systems over data layers at NCR Atleos Global Headquarters in Atlanta",
+    ],
+  },
+  {
     company: "ConventionConnection",
     role: "Software Engineer Intern",
     location: "Atlanta, GA",
