@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: "Eshan Bhimani",
   title: "Eshan Bhimani — Builder & CS Student",
   description:
-    "CS student at Georgia Tech focused on building products that solve real problems. Interested in the intersection of AI, technology, and finance.",
+    "CS student at Georgia Tech focused on building products that solve real problems. Interested in the intersection of AI, technology, and software development.",
   url: "https://eshanbhimani.com",
 } as const;
 

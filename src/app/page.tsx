@@ -183,7 +183,7 @@ function HeroSection() {
                 <span className="text-gt-gold font-medium">Georgia Tech</span>{" "}
                 building products at the intersection of{" "}
                 <span className="text-gt-gold font-medium">
-                  AI, technology &amp; finance
+                  AI, technology &amp; software development
                 </span>
                 .
               </p>
@@ -341,7 +341,7 @@ function AboutPreview() {
             and their pain points. My long-term goal is to build a startup in
             NYC or SF that bridges the{" "}
             <span className="text-text-primary font-medium">
-              AI, tech, and financial industries
+              AI, tech, and software development industries
             </span>
             .
           </p>
