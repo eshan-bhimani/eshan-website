@@ -523,6 +523,14 @@ else:
     },
   },
   {
+    title: "FolioTrust",
+    description:
+      "A two-portal personal fund management web app. Manager portal for adding investors, creating allocations (stocks/ETFs/crypto), approving withdrawals, and generating PDF reports. Investor portals for viewing holdings, real-time P&L, requesting withdrawals, and downloading statements. Prices pulled from Alpaca and Coinbase, with end-to-end Postgres Row Level Security.",
+    tags: ["Next.js", "TypeScript", "Supabase", "Alpaca API", "Coinbase API", "React-PDF", "Resend"],
+    github: "https://github.com/eshan-bhimani/FolioTrust",
+    image: "/projects/foliotrust.png",
+  },
+  {
     title: "Order Book Simulator",
     description:
       "Real-time limit order book simulator with a price-time priority matching engine, WebSocket streaming, Redis persistence, and a live web dashboard.",
