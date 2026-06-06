@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS } from "@/lib/constants";
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -49,12 +48,16 @@ export default function Navbar() {
         className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4"
         aria-label="Main navigation"
       >
-        <Link
-          href="/"
-          className="text-lg font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="text-lg font-bold tracking-tight text-text-primary transition-colors hover:text-accent cursor-pointer"
         >
           EB<span className="text-accent">.</span>
-        </Link>
+        </a>
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-7">

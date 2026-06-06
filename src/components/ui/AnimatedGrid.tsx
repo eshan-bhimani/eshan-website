@@ -1,28 +1,29 @@
 "use client";
 
+import { useTheme } from "@/components/ThemeProvider";
+
 export default function AnimatedGrid() {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+
+  const ringColor = isLight ? "rgba(148,163,184,0.35)" : "rgba(56,189,248,0.6)";
+  const lineColor = isLight ? "rgba(148,163,184,0.25)" : "rgba(56,189,248,0.4)";
+  const crosshairColor = isLight ? "rgba(124,58,237,0.3)" : "rgba(167,139,250,0.5)";
+
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {/* ── Radial sci-fi grid (celestial navigation map) ── */}
+      {/* ── Radial sci-fi grid — shifted left to center on text column ── */}
       <svg
-        className="absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 opacity-[0.04]"
+        className="absolute top-[30%] -translate-y-1/2"
+        style={{ left: "25%", transform: "translateX(-50%) translateY(-50%)" }}
         width="1200"
         height="1200"
         viewBox="0 0 1200 1200"
         fill="none"
       >
-        {/* Concentric rings */}
         {[120, 220, 340, 480, 600].map((r) => (
-          <circle
-            key={r}
-            cx="600"
-            cy="600"
-            r={r}
-            stroke="rgba(56,189,248,0.6)"
-            strokeWidth="0.5"
-          />
+          <circle key={r} cx="600" cy="600" r={r} stroke={ringColor} strokeWidth="0.5" />
         ))}
-        {/* Radial lines — every 30° */}
         {([
           [1200, 600],
           [1119.6152422706632, 900],
@@ -37,124 +38,78 @@ export default function AnimatedGrid() {
           [900, 80.38475772933674],
           [1119.615242270663, 299.9999999999999],
         ] as const).map(([x2, y2], i) => (
-          <line
-            key={i}
-            x1="600"
-            y1="600"
-            x2={x2}
-            y2={y2}
-            stroke="rgba(56,189,248,0.4)"
-            strokeWidth="0.5"
-          />
+          <line key={i} x1="600" y1="600" x2={x2} y2={y2} stroke={lineColor} strokeWidth="0.5" />
         ))}
-        {/* Small crosshair at center */}
-        <circle
-          cx="600"
-          cy="600"
-          r="3"
-          fill="none"
-          stroke="rgba(45,212,191,0.5)"
-          strokeWidth="0.5"
-        />
+        <circle cx="600" cy="600" r="3" fill="none" stroke={crosshairColor} strokeWidth="0.5" />
       </svg>
 
-      {/* ── Vertical aurora streaks ── */}
-      {/* Streak 1 — left of center, teal */}
+      {/* ── Vertical aurora streaks — purple tones ── */}
       <div
         className="absolute animate-pulse"
         style={{
-          left: "22%",
+          left: "15%",
           top: "-5%",
           width: "1.5px",
           height: "110%",
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(45,212,191,0.06) 20%, rgba(45,212,191,0.12) 45%, rgba(56,189,248,0.06) 70%, transparent 100%)",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(167,139,250,0.06) 20%, rgba(139,92,246,0.12) 45%, rgba(56,189,248,0.06) 70%, transparent 100%)",
           filter: "blur(3px)",
           animationDuration: "8s",
         }}
       />
-
-      {/* Streak 2 — right of center, cyan */}
       <div
         className="absolute animate-pulse"
         style={{
-          left: "68%",
+          left: "48%",
           top: "-5%",
           width: "2px",
           height: "110%",
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(56,189,248,0.05) 15%, rgba(56,189,248,0.10) 40%, rgba(45,212,191,0.05) 65%, transparent 100%)",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(56,189,248,0.05) 15%, rgba(167,139,250,0.10) 40%, rgba(56,189,248,0.05) 65%, transparent 100%)",
           filter: "blur(4px)",
           animationDuration: "11s",
         }}
       />
-
-      {/* Streak 3 — far left, very faint */}
       <div
         className="absolute animate-pulse"
         style={{
-          left: "8%",
+          left: "5%",
           top: "-5%",
           width: "1px",
           height: "110%",
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(45,212,191,0.04) 30%, rgba(56,189,248,0.07) 55%, transparent 100%)",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(139,92,246,0.04) 30%, rgba(56,189,248,0.07) 55%, transparent 100%)",
           filter: "blur(2px)",
           animationDuration: "14s",
         }}
       />
-
-      {/* Streak 4 — far right, very faint */}
-      <div
-        className="absolute animate-pulse"
-        style={{
-          left: "85%",
-          top: "-5%",
-          width: "1px",
-          height: "110%",
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(56,189,248,0.03) 25%, rgba(45,212,191,0.06) 50%, transparent 100%)",
-          filter: "blur(2px)",
-          animationDuration: "12s",
-        }}
-      />
-
-      {/* Streak 5 — center-left, wider diffuse glow */}
-      <div
-        className="absolute animate-pulse"
-        style={{
-          left: "38%",
-          top: "-5%",
-          width: "3px",
-          height: "110%",
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(45,212,191,0.03) 20%, rgba(56,189,248,0.06) 50%, rgba(45,212,191,0.03) 80%, transparent 100%)",
-          filter: "blur(8px)",
-          animationDuration: "10s",
-        }}
-      />
-
-      {/* Streak 6 — center-right, wider diffuse glow */}
       <div
         className="absolute animate-pulse"
         style={{
           left: "55%",
           top: "-5%",
-          width: "2px",
+          width: "1px",
           height: "110%",
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(56,189,248,0.04) 25%, rgba(45,212,191,0.08) 50%, rgba(56,189,248,0.03) 75%, transparent 100%)",
-          filter: "blur(6px)",
-          animationDuration: "13s",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(56,189,248,0.03) 25%, rgba(167,139,250,0.06) 50%, transparent 100%)",
+          filter: "blur(2px)",
+          animationDuration: "12s",
+        }}
+      />
+      <div
+        className="absolute animate-pulse"
+        style={{
+          left: "30%",
+          top: "-5%",
+          width: "3px",
+          height: "110%",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(139,92,246,0.03) 20%, rgba(56,189,248,0.06) 50%, rgba(167,139,250,0.03) 80%, transparent 100%)",
+          filter: "blur(8px)",
+          animationDuration: "10s",
         }}
       />
 
-      {/* ── Subtle top vignette (ambient atmosphere) ── */}
+      {/* ── Subtle top vignette ── */}
       <div
         className="absolute inset-x-0 top-0 h-[500px]"
         style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(56,189,248,0.03) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 80% 60% at 35% 0%, rgba(56,189,248,0.03) 0%, transparent 70%)",
         }}
       />
 

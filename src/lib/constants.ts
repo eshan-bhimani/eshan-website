@@ -31,7 +31,7 @@ export const ROTATING_TITLES = [
   "Software Engineer",
   "AI Builder",
   "Full-Stack Developer",
-  "Entrepreneur",
+  "Startup Founder",
 ] as const;
 
 export const IMPACT_METRICS = [
