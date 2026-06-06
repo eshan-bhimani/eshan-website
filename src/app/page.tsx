@@ -248,7 +248,7 @@ function HeroSection() {
               {/* Photo */}
               <div className="relative h-56 w-56 rounded-full border-2 border-accent/30 overflow-hidden bg-surface">
                 <Image
-                  src="/profile.jpg"
+                  src="/Users/eshanbhimani/Downloads/Eshan_Headshot-compressed.png"
                   alt="Eshan Bhimani"
                   fill
                   className="object-cover object-top"
@@ -305,7 +305,7 @@ function AboutSection() {
                 About
               </p>
               <h2 className="text-3xl font-bold text-text-primary mb-6 sm:text-4xl">
-                A bit about me
+                About Me
               </h2>
             </SectionReveal>
 
@@ -314,7 +314,7 @@ function AboutSection() {
                 I&apos;m a CS major at{" "}
                 <span className="text-text-primary font-medium">Georgia Tech</span>{" "}
                 — Presidential Scholar, Dean&apos;s List, and Zell Miller Scholar — with
-                threads in Intelligence and Systems & Architecture, graduating May 2028.
+                threads in Systems & Architecture and Intelligence, graduating May 2028.
               </p>
             </SectionReveal>
 
@@ -331,7 +331,7 @@ function AboutSection() {
               <p className="text-base leading-relaxed text-text-secondary">
                 Long term, I want to build a startup at the intersection of{" "}
                 <span className="text-text-primary font-medium">AI, technology & software</span>{" "}
-                — turning hard engineering problems into simple, delightful experiences.
+                — turning hard engineering problems into simple, productive experiences.
               </p>
             </SectionReveal>
           </div>
@@ -346,7 +346,7 @@ function AboutSection() {
                 <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/40 via-border-light to-transparent" />
                 {[
                   { period: "2024 – 2026", school: "Univ. of Georgia", detail: "Computer Science", current: false },
-                  { period: "2026 – 2028", school: "Georgia Tech", detail: "CS · Intelligence & Systems", current: true },
+                  { period: "2026 – 2028", school: "Georgia Tech", detail: "CS · Systems & Architecture + Intelligence", current: true },
                 ].map((edu) => (
                   <div key={edu.school} className="flex gap-4">
                     <div className="relative mt-1.5 shrink-0">
