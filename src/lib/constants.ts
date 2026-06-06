@@ -7,19 +7,93 @@ export const SITE_CONFIG = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Resume", href: "/resume" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
 ] as const;
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/eshan-bhimani",
   linkedin: "https://linkedin.com/in/eshan-bhimani",
   twitter: "https://x.com/im_eshanb",
-  email: "mailto:eshan@example.com",
+  email: "mailto:bhimanieshan@gmail.com",
 } as const;
+
+export const HERO_TAGS = [
+  { label: "NCR Atleos Intern" },
+  { label: "CS at Georgia Tech" },
+  { label: "3.86 GPA" },
+] as const;
+
+export const ROTATING_TITLES = [
+  "Software Engineer",
+  "AI Builder",
+  "Full-Stack Developer",
+  "Entrepreneur",
+] as const;
+
+export const IMPACT_METRICS = [
+  { target: 8, suffix: "+", label: "Projects Built", decimals: 0 },
+  { target: 3, suffix: "", label: "Internships", decimals: 0 },
+  { target: 3.86, suffix: "", label: "GPA", decimals: 2 },
+  { target: 60, suffix: "%", label: "Avg. Efficiency Gain", decimals: 0 },
+] as const;
+
+export interface Experience {
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  bullets: string[];
+  tags: string[];
+}
+
+export const EXPERIENCE: Experience[] = [
+  {
+    company: "NCR Atleos",
+    role: "Software Engineer Intern — Data Engineering",
+    period: "May 2026 – Present",
+    location: "Atlanta, GA",
+    bullets: [
+      "Architecting an enterprise knowledge graph in Neo4j with 10K+ nodes and 25K+ relationships across cross-domain internal data",
+      "Implementing a Graph RAG Q&A layer via LangChain and Cypher-generating LLM pipelines for non-technical stakeholders",
+      "Building an AI semantic layer recommendation engine with Azure OpenAI that reduces Power BI scaffolding time by ~60%",
+    ],
+    tags: ["Neo4j", "LangChain", "Azure OpenAI", "Graph RAG", "Python"],
+  },
+  {
+    company: "ConventionConnection",
+    role: "Software Engineer Intern",
+    period: "Dec 2025 – Present",
+    location: "Atlanta, GA",
+    bullets: [
+      "Engineered an AI-powered image processing pipeline with OpenCV and FastAPI, cutting manual processing time by 75%",
+      "Architected a pricing engine and auction monitor in Python with 90 rules and real-time bid tracking across marketplaces",
+      "Built a domain-aware trade matching engine with a weighted scoring algorithm across grade, set, and grading company",
+    ],
+    tags: ["OpenCV", "FastAPI", "Python", "GCP", "Google Photos API"],
+  },
+  {
+    company: "Algoverse AI",
+    role: "Software Engineer (Research) Intern",
+    period: "Sep 2025 – Mar 2026",
+    location: "Remote",
+    bullets: [
+      "Developed a novel multi-task benchmark evaluating LLMs' vision-based tool use in geolocation reasoning; submitted to COLM 2026",
+      "Automated 300+ location data collection via Python/Selenium and Street View API with programmatic validation",
+      "Refactored codebase to production-ready with CI/CD and 50+ automated tests, reducing setup time by 20%",
+    ],
+    tags: ["Python", "Selenium", "Street View API", "CI/CD", "LLMs"],
+  },
+];
+
+export const SKILLS: Record<string, string[]> = {
+  Languages: ["Python", "C++", "Java", "TypeScript", "JavaScript", "SQL", "Bash"],
+  "Frameworks & Tools": ["React", "Next.js", "FastAPI", "Spring Boot", "Node.js", "D3.js", "Docker", "AWS", "Neo4j", "PostgreSQL", "Redis", "OpenCV"],
+  "AI & ML": ["Azure OpenAI", "LangChain", "LangGraph", "pgvector", "PyTorch", "Gymnasium", "pybind11", "SQLAlchemy"],
+};
 
 export interface DeepDiveChallenge {
   title: string;

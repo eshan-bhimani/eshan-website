@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedGrid from "@/components/ui/AnimatedGrid";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 import { SITE_CONFIG } from "@/lib/constants";
 import "./globals.css";
@@ -38,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -52,12 +53,14 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        <AnimatedGrid />
-        <div className="relative z-10">
-          <Navbar />
-          <main className="min-h-screen pt-[73px]">{children}</main>
-          <Footer />
-        </div>
+        <ThemeProvider>
+          <AnimatedGrid />
+          <div className="relative z-10">
+            <Navbar />
+            <main className="min-h-screen pt-[73px]">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
