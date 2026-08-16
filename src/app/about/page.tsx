@@ -15,9 +15,8 @@ export default function AboutPage() {
       <div className="mt-10 space-y-5">
         <p>
           I&apos;m a junior CS major at Georgia Tech, with threads in
-          Intelligence and Systems &amp; Architecture. I transferred from the
-          University of Georgia after my sophomore year in Summer 2026, and I
-          anticipate graduating in May 2028.
+          Intelligence and Systems &amp; Architecture, and I anticipate
+          graduating in May 2028.
         </p>
         <p>
           I&apos;m currently a Software Engineer Intern at NCR Atleos at their

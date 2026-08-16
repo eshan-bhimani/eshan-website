@@ -62,8 +62,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${garamond.variable} ${instrumentSans.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        {/* Applies the stored theme before first paint so night mode never flashes */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("theme")==="dark"){document.documentElement.dataset.theme="dark"}}catch(e){}`,
+          }}
+        />
+      </head>
       <body>
         <div className="mx-auto w-full max-w-[46rem] px-6 sm:px-8">
           <Navbar />

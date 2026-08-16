@@ -1,13 +1,15 @@
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 import { NAV_LINKS } from "@/lib/constants";
 
 export default function Navbar() {
   return (
     <header className="pt-14 sm:pt-20">
       <nav
-        className="flex flex-wrap items-baseline gap-x-5 gap-y-2 text-sm text-ink-muted"
+        className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-muted"
         aria-label="Main navigation"
       >
+        <ThemeToggle />
         <Link href="/" className="prose-link no-underline text-ink">
           Eshan Bhimani
         </Link>

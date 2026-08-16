@@ -15,6 +15,16 @@
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
+/* Night mode — paper and ink swap places */
+[data-theme="dark"] {
+  --color-paper: #14120d;
+  --color-paper-deep: #1e1b14;
+  --color-ink: #f4f0e6;
+  --color-ink-soft: #cec8b8;
+  --color-ink-muted: #938c7c;
+  --color-rule: #3a352a;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -67,7 +77,7 @@ hr {
 }
 
 ::selection {
-  background-color: #dcd3ba;
+  background-color: color-mix(in srgb, var(--color-ink) 22%, transparent);
   color: var(--color-ink);
 }
 

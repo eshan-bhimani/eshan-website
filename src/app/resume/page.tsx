@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import YellowJacket from "@/components/YellowJacket";
 import {
   EDUCATION,
   RESUME_EXPERIENCE,
@@ -31,26 +32,23 @@ export default function ResumePage() {
 
       {/* ── Education ── */}
       <Section title="Education">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-          <h3 className="display text-2xl">{EDUCATION.school}</h3>
-          <span className="text-sm text-ink-muted">{EDUCATION.grad}</span>
+        <div className="flex items-start gap-4">
+          <YellowJacket size={40} className="mt-1 shrink-0" />
+          <div className="flex-1">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+              <h3 className="display text-2xl">{EDUCATION.school}</h3>
+              <span className="text-sm text-ink-muted">{EDUCATION.grad}</span>
+            </div>
+            <p className="mt-0.5 text-ink-soft">
+              {EDUCATION.degree} · GPA {EDUCATION.gpa}
+            </p>
+          </div>
         </div>
-        <p className="mt-0.5 text-ink-soft">
-          {EDUCATION.degree} · GPA {EDUCATION.gpa}
-        </p>
-        <ul className="mt-3 space-y-2">
+        <ul className="mt-4 space-y-2">
           <Bullet>Concentration: {EDUCATION.concentration}</Bullet>
           <Bullet>Honors: {EDUCATION.honors}</Bullet>
           <Bullet>Relevant coursework: {EDUCATION.courses.join(", ")}</Bullet>
         </ul>
-
-        <div className="mt-7 flex flex-wrap items-baseline justify-between gap-x-4">
-          <h3 className="display text-2xl">University of Georgia</h3>
-          <span className="text-sm text-ink-muted">2024 – 2026</span>
-        </div>
-        <p className="mt-0.5 text-ink-soft">
-          Computer Science · transferred to Georgia Tech after sophomore year
-        </p>
       </Section>
 
       {/* ── Experience ── */}

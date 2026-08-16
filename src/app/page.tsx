@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import YellowJacket from "@/components/YellowJacket";
 import {
   EXPERIENCE,
   FEATURED_PROJECTS,
@@ -37,8 +38,7 @@ export default function Home() {
           I&apos;m a Computer Science student at{" "}
           <span className="font-medium">Georgia Tech</span> — Presidential
           Scholar, Dean&apos;s List, and Zell Miller Scholar — with threads in
-          Intelligence and Systems &amp; Architecture, graduating May 2028. I
-          transferred from the University of Georgia after my sophomore year.
+          Intelligence and Systems &amp; Architecture, graduating May 2028.
         </p>
         <p>
           Right now I&apos;m a Software Engineer Intern at{" "}
@@ -55,6 +55,24 @@ export default function Home() {
           experiences.
         </p>
       </section>
+
+      {/* ── Education ── */}
+      <Section id="education" title="Education">
+        <div className="flex items-start gap-4">
+          <YellowJacket size={40} className="mt-1 shrink-0" />
+          <div>
+            <p className="display text-2xl">{EDUCATION.school}</p>
+            <p className="mt-1 text-ink-soft">
+              {EDUCATION.degree} · GPA {EDUCATION.gpa} · {EDUCATION.grad}
+            </p>
+          </div>
+        </div>
+        <ul className="mt-4 space-y-2">
+          <Bullet>Concentration: {EDUCATION.concentration}</Bullet>
+          <Bullet>Honors: {EDUCATION.honors}</Bullet>
+          <Bullet>Coursework: {EDUCATION.courses.join(", ")}</Bullet>
+        </ul>
+      </Section>
 
       {/* ── Experience ── */}
       <Section id="experience" title="Where I've worked">
@@ -115,22 +133,6 @@ export default function Home() {
           <Link href="/projects" className="prose-link">
             All {FEATURED_PROJECTS.length} projects, with engineering write-ups
           </Link>
-        </p>
-      </Section>
-
-      {/* ── Education ── */}
-      <Section id="education" title="Education">
-        <p className="display text-2xl">{EDUCATION.school}</p>
-        <p className="mt-1 text-ink-soft">
-          {EDUCATION.degree} · GPA {EDUCATION.gpa} · {EDUCATION.grad}
-        </p>
-        <ul className="mt-3 space-y-2">
-          <Bullet>Concentration: {EDUCATION.concentration}</Bullet>
-          <Bullet>Honors: {EDUCATION.honors}</Bullet>
-          <Bullet>Coursework: {EDUCATION.courses.join(", ")}</Bullet>
-        </ul>
-        <p className="mt-4 text-ink-soft">
-          Previously: University of Georgia, Computer Science (2024 – 2026).
         </p>
       </Section>
 
