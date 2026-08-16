@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -8,58 +9,61 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="px-6 py-28">
-      <div className="mx-auto max-w-xl text-center">
-        <p className="text-xs font-mono font-medium tracking-widest text-teal uppercase mb-3">
-          Contact
-        </p>
-        <h1 className="text-3xl font-bold text-gt-gold mb-6 sm:text-4xl">
-          Let&apos;s connect
-        </h1>
-        <p className="text-lg text-text-secondary mb-10">
+    <article className="pt-16 sm:pt-24">
+      <h1 className="display text-4xl sm:text-5xl">Let&apos;s connect</h1>
+
+      <div className="mt-10 space-y-5">
+        <p>
           Whether you have a project idea, an opportunity, or just want to say
-          hi — I&apos;d love to hear from you.
-        </p>
-
-        <div className="flex flex-col items-center gap-4">
-          <a
-            href={SOCIAL_LINKS.email}
-            className="inline-block rounded-full border border-accent/30 bg-accent/10 px-10 py-3.5 text-sm font-semibold text-accent transition-all hover:bg-accent/20 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
-          >
-            Send an Email
+          hi — I&apos;d love to hear from you. The fastest way to reach me is
+          email:{" "}
+          <a href={SOCIAL_LINKS.email} className="prose-link">
+            bhimanieshan@gmail.com
           </a>
-
-          <div className="flex gap-8 mt-4">
-            <a
-              href={SOCIAL_LINKS.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-text-muted hover:text-accent transition-colors"
-              aria-label="GitHub"
-            >
-              GitHub
-            </a>
-            <a
-              href={SOCIAL_LINKS.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-text-muted hover:text-accent transition-colors"
-              aria-label="LinkedIn"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={SOCIAL_LINKS.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-text-muted hover:text-accent transition-colors"
-              aria-label="X"
-            >
-              X
-            </a>
-          </div>
-        </div>
+          .
+        </p>
+        <p>
+          You can also find me on{" "}
+          <a
+            href={SOCIAL_LINKS.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="prose-link"
+          >
+            GitHub
+          </a>
+          ,{" "}
+          <a
+            href={SOCIAL_LINKS.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="prose-link"
+          >
+            LinkedIn
+          </a>
+          , and{" "}
+          <a
+            href={SOCIAL_LINKS.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="prose-link"
+          >
+            X
+          </a>
+          . I&apos;m based in Atlanta, GA.
+        </p>
+        <p>
+          <a href="/resume.pdf" className="prose-link">
+            Download my resume (PDF)
+          </a>
+        </p>
       </div>
-    </section>
+
+      <p className="mt-12">
+        <Link href="/" className="prose-link">
+          ← Back home
+        </Link>
+      </p>
+    </article>
   );
 }

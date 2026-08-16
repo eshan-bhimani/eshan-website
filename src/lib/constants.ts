@@ -7,11 +7,9 @@ export const SITE_CONFIG = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+  { label: "Projects", href: "/projects" },
+  { label: "Resume", href: "/resume" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export const SOCIAL_LINKS = {
@@ -94,6 +92,95 @@ export const SKILLS: Record<string, string[]> = {
   "Frameworks & Tools": ["React", "Next.js", "FastAPI", "Spring Boot", "Node.js", "D3.js", "Docker", "AWS", "Neo4j", "PostgreSQL", "Redis", "OpenCV"],
   "AI & ML": ["Azure OpenAI", "LangChain", "LangGraph", "pgvector", "PyTorch", "Gymnasium", "pybind11", "SQLAlchemy"],
 };
+
+export const EDUCATION = {
+  school: "Georgia Institute of Technology",
+  degree: "B.S. Computer Science",
+  gpa: "3.86 / 4.0",
+  grad: "Expected May 2028",
+  concentration: "Intelligence and Systems & Architecture",
+  honors: "Presidential Scholar, Dean's List, Zell Miller Scholarship",
+  courses: [
+    "Data Structures",
+    "Algorithms",
+    "Database Management",
+    "Software Development",
+    "Linear Algebra",
+    "Discrete Math",
+  ],
+} as const;
+
+/* Full resume history — includes roles not shown on the home page */
+export const RESUME_EXPERIENCE: Experience[] = [
+  {
+    company: "NCR Atleos",
+    role: "Software Engineer Intern — Data Engineering",
+    period: "May 2026 – Present",
+    location: "Atlanta, GA (Global HQ)",
+    bullets: [
+      "Architecting an enterprise knowledge graph in Neo4j with 10K+ nodes and 25K+ relationships across cross-domain internal data",
+      "Implementing a Graph RAG Q&A layer via LangChain and Cypher-generating LLM pipelines for non-technical stakeholders",
+      "Building an AI semantic layer recommendation engine with Azure OpenAI that reduces Power BI scaffolding time by ~60%",
+      "Creating AI agents and systems over internal data layers",
+    ],
+    tags: ["Neo4j", "LangChain", "Azure OpenAI", "Graph RAG", "Python"],
+  },
+  {
+    company: "ConventionConnection",
+    role: "Software Engineer Intern",
+    period: "December 2025 – Present",
+    location: "Atlanta, GA",
+    bullets: [
+      "Engineering an AI-powered image processing pipeline using OpenCV and FastAPI to automate card photo cropping, reducing manual processing time by 75% and managing 1,000+ images via the Google Photos API on GCP",
+      "Architecting a pricing engine and auction monitor in Python with 20 rules and real-time bid tracking across marketplaces",
+      "Building a domain-aware trade matching engine with a weighted scoring algorithm across grade, set, and grading company",
+      "Developing full-stack features with a React frontend and FastAPI backend services, deployed on Render and Vercel",
+    ],
+    tags: ["OpenCV", "FastAPI", "Python", "GCP", "Google Photos API"],
+  },
+  {
+    company: "University of Georgia",
+    role: "Undergraduate Researcher",
+    period: "September 2025 – April 2026",
+    location: "Athens, GA",
+    bullets: [
+      "Developed high-performance spectral preprocessing algorithms in Python for signal normalization and noise reduction, optimizing computational throughput by 25% across high-dimensional datasets for downstream ML models",
+      "Architected robust, modular data pipelines to automate raw spectral data transformation into analysis-ready formats",
+      "Implemented programmatic verification systems using NumPy and SciPy to validate signal accuracy across the data lifecycle",
+    ],
+    tags: ["Python", "NumPy", "SciPy", "Data Pipelines"],
+  },
+  {
+    company: "Algoverse AI",
+    role: "Software Engineer (Research) Intern",
+    period: "September 2025 – March 2026",
+    location: "Remote",
+    bullets: [
+      "Developed a novel multi-task benchmark evaluating LLMs' vision-based tool use in geolocation reasoning tasks, architecting evaluation frameworks that test spatial reasoning; paper submitted to COLM 2026",
+      "Built an automated data collection and experimentation pipeline using Python, Selenium, and the Google Street View API, processing 300+ diverse global locations with programmatic verification for benchmark question validation",
+      "Refactored the prototype codebase into a production-ready repository with CI/CD, 50+ automated tests and type checks, reducing setup time by 20% and enabling reproducible one-command execution",
+    ],
+    tags: ["Python", "Selenium", "Street View API", "CI/CD", "LLMs"],
+  },
+];
+
+export const AWARDS = [
+  "Presidential Scholar (4.0 GPA)",
+  "Dean's List",
+  "AP Scholar Award",
+  "National Honor Society",
+  "2021 Tennis State Championship",
+] as const;
+
+export const INTERESTS = [
+  "Tennis",
+  "Weightlifting",
+  "Running",
+  "Basketball",
+  "Pickleball",
+  "Poker",
+  "Investing",
+] as const;
 
 export interface DeepDiveChallenge {
   title: string;

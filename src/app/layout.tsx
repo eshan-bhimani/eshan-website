@@ -1,11 +1,32 @@
 import type { Metadata } from "next";
+import { EB_Garamond, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AnimatedGrid from "@/components/ui/AnimatedGrid";
-import { ThemeProvider } from "@/components/ThemeProvider";
 
 import { SITE_CONFIG } from "@/lib/constants";
 import "./globals.css";
+
+const garamond = EB_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-eb-garamond",
+  display: "swap",
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-instrument-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -39,28 +60,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="font-sans antialiased">
-        <ThemeProvider>
-          <AnimatedGrid />
-          <div className="relative z-10">
-            <Navbar />
-            <main className="min-h-screen pt-[73px]">{children}</main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+    <html
+      lang="en"
+      className={`${garamond.variable} ${instrumentSans.variable} ${jetbrainsMono.variable}`}
+    >
+      <body>
+        <div className="mx-auto w-full max-w-[46rem] px-6 sm:px-8">
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
