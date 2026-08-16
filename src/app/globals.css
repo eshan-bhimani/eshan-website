@@ -17,12 +17,12 @@
 
 /* Night mode — paper and ink swap places */
 [data-theme="dark"] {
-  --color-paper: #14120d;
-  --color-paper-deep: #1e1b14;
+  --color-paper: #000000;
+  --color-paper-deep: #0e0e0e;
   --color-ink: #f4f0e6;
-  --color-ink-soft: #cec8b8;
-  --color-ink-muted: #938c7c;
-  --color-rule: #3a352a;
+  --color-ink-soft: #c9c6bf;
+  --color-ink-muted: #8d8a83;
+  --color-rule: #2e2e2e;
 }
 
 html {
