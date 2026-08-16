@@ -139,6 +139,18 @@ export const RESUME_EXPERIENCE: Experience[] = [
     tags: ["OpenCV", "FastAPI", "Python", "GCP", "Google Photos API"],
   },
   {
+    company: "University of Georgia",
+    role: "Undergraduate Researcher",
+    period: "September 2025 – April 2026",
+    location: "Athens, GA",
+    bullets: [
+      "Developed high-performance spectral preprocessing algorithms in Python for signal normalization and noise reduction, optimizing computational throughput by 25% across high-dimensional datasets for downstream ML models",
+      "Architected robust, modular data pipelines to automate raw spectral data transformation into analysis-ready formats",
+      "Implemented programmatic verification systems using NumPy and SciPy to validate signal accuracy across the data lifecycle",
+    ],
+    tags: ["Python", "NumPy", "SciPy", "Data Pipelines"],
+  },
+  {
     company: "Algoverse AI",
     role: "Software Engineer (Research) Intern",
     period: "September 2025 – March 2026",
