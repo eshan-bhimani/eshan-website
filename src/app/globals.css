@@ -10,9 +10,9 @@
   --color-rule: #d9d2c1;
 
   /* Fonts */
-  --font-serif: var(--font-eb-garamond), "Iowan Old Style", Georgia, serif;
-  --font-sans: var(--font-instrument-sans), ui-sans-serif, -apple-system, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-serif: "EB Garamond", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, -apple-system, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 /* Night mode — paper and ink swap places */
