@@ -155,7 +155,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     location: "San Francisco, CA",
   },
   {
-    date: "2026-08-14",
+    date: "2026-08-06",
     title: "Wrapped up my summer on the Data & AI team at NCR Atleos",
     body: "Shipped a Graph RAG question-answering layer on Microsoft Fabric and a Neo4j data layer unifying 5+ internal sources across 10M+ node relationships. Three months of building agentic systems on top of enterprise data.",
     location: "Atlanta, GA",
