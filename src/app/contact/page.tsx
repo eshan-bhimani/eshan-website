@@ -50,7 +50,7 @@ export default function ContactPage() {
           >
             X
           </a>
-          . I&apos;m based in Atlanta, GA.
+          . I&apos;m based in Atlanta, GA and San Francisco, CA.
         </p>
         <p>
           <a href="/resume.pdf" className="prose-link">
