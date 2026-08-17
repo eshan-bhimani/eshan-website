@@ -105,13 +105,6 @@ export default function ResumePage() {
               <dd className="mt-1">{items.join(", ")}</dd>
             </div>
           ))}
-          <div>
-            <dt className="eyebrow">Tools</dt>
-            <dd className="mt-1">
-              Git, GitHub, Linux/Unix, CI/CD, Vercel, Maven, JUnit, Streamlit,
-              Flask, JavaFX, MongoDB
-            </dd>
-          </div>
         </dl>
       </Section>
 

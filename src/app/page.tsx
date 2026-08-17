@@ -28,7 +28,7 @@ export default function Home() {
           width={104}
           height={104}
           priority
-          className="hidden h-26 w-26 shrink-0 rounded-full object-cover object-top grayscale sm:block"
+          className="hidden h-26 w-26 shrink-0 rounded-full object-cover object-top sm:block"
         />
       </header>
 
@@ -41,11 +41,12 @@ export default function Home() {
           Intelligence and Systems &amp; Architecture, graduating May 2028.
         </p>
         <p>
-          Right now I&apos;m a Software Engineer Intern at{" "}
-          <span className="font-medium">NCR Atleos</span>, where I&apos;m
-          building an enterprise knowledge graph in Neo4j — 10K+ nodes, Graph
-          RAG Q&amp;A pipelines, and an AI semantic layer engine that cuts Power
-          BI scaffolding time by roughly 60%.
+          This summer I was a Software Engineer Intern on the Data &amp; AI team
+          at <span className="font-medium">NCR Atleos</span>, where I built a
+          Graph RAG question-answering layer on Microsoft Fabric, an AI semantic
+          layer engine that cut Power BI scaffolding time by roughly 60%, and a
+          Neo4j data layer unifying 5+ internal sources across 10M+ node
+          relationships.
         </p>
         <p>
           I like building things that remove friction from someone&apos;s day:

@@ -7,6 +7,7 @@ export const SITE_CONFIG = {
 } as const;
 
 export const NAV_LINKS = [
+  { label: "News", href: "/news" },
   { label: "Projects", href: "/projects" },
   { label: "Resume", href: "/resume" },
   { label: "Contact", href: "/contact" },
@@ -18,26 +19,6 @@ export const SOCIAL_LINKS = {
   twitter: "https://x.com/im_eshanb",
   email: "mailto:bhimanieshan@gmail.com",
 } as const;
-
-export const HERO_TAGS = [
-  { label: "NCR Atleos Intern" },
-  { label: "CS at Georgia Tech" },
-  { label: "3.86 GPA" },
-] as const;
-
-export const ROTATING_TITLES = [
-  "Software Engineer",
-  "AI Builder",
-  "Full-Stack Developer",
-  "Startup Founder",
-] as const;
-
-export const IMPACT_METRICS = [
-  { target: 8, suffix: "+", label: "Projects Built", decimals: 0 },
-  { target: 3, suffix: "", label: "Internships", decimals: 0 },
-  { target: 3.86, suffix: "", label: "GPA", decimals: 2 },
-  { target: 60, suffix: "%", label: "Avg. Efficiency Gain", decimals: 0 },
-] as const;
 
 export interface Experience {
   company: string;
@@ -51,23 +32,23 @@ export interface Experience {
 export const EXPERIENCE: Experience[] = [
   {
     company: "NCR Atleos",
-    role: "Software Engineer Intern — Data Engineering",
-    period: "May 2026 – Present",
+    role: "Software Engineer Intern — Data & AI Team",
+    period: "May 2026 – August 2026",
     location: "Atlanta, GA",
     bullets: [
-      "Architecting an enterprise knowledge graph in Neo4j with 10K+ nodes and 25K+ relationships across cross-domain internal data",
-      "Implementing a Graph RAG Q&A layer via LangChain and Cypher-generating LLM pipelines for non-technical stakeholders",
-      "Building an AI semantic layer recommendation engine with Azure OpenAI that reduces Power BI scaffolding time by ~60%",
+      "Built a Graph RAG natural language Q&A layer on Microsoft Fabric using LangChain and Cypher-generating LLM pipelines, reducing agent response times by ~70% while increasing answer accuracy and capability by ~50%",
+      "Developed an AI-powered semantic layer recommendation engine using Azure OpenAI and agentic workflows to profile raw SQL tables and auto-generate Power BI-ready schemas, reducing scaffolding time by ~60%",
+      "Architected a Neo4j-backed data layer integrating 5+ cross-domain internal data sources (10M+ node relationships) into a unified backend, enabling connected querying and reducing multi-hop retrieval latency by ~40%",
     ],
-    tags: ["Neo4j", "LangChain", "Azure OpenAI", "Graph RAG", "Python"],
+    tags: ["Neo4j", "LangChain", "Azure OpenAI", "Microsoft Fabric", "Graph RAG"],
   },
   {
-    company: "ConventionConnection",
+    company: "Convention Connection",
     role: "Software Engineer Intern",
-    period: "Dec 2025 – Present",
+    period: "December 2025 – July 2026",
     location: "Atlanta, GA",
     bullets: [
-      "Engineered an AI-powered image processing pipeline with OpenCV and FastAPI, cutting manual processing time by 75%",
+      "Engineered an AI-powered image processing pipeline using OpenCV and FastAPI to automate card photo cropping, reducing manual processing time by 75% and managing 1,000+ images via the Google Photos API on GCP",
       "Architected a pricing engine and auction monitor in Python with 90 rules and real-time bid tracking across marketplaces",
       "Built a domain-aware trade matching engine with a weighted scoring algorithm across grade, set, and grading company",
     ],
@@ -75,30 +56,95 @@ export const EXPERIENCE: Experience[] = [
   },
   {
     company: "Algoverse AI",
-    role: "Software Engineer (Research) Intern",
-    period: "Sep 2025 – Mar 2026",
+    role: "AI Researcher",
+    period: "September 2025 – March 2026",
     location: "Remote",
     bullets: [
-      "Developed a novel multi-task benchmark evaluating LLMs' vision-based tool use in geolocation reasoning; submitted to COLM 2026",
-      "Automated 300+ location data collection via Python/Selenium and Street View API with programmatic validation",
-      "Refactored codebase to production-ready with CI/CD and 50+ automated tests, reducing setup time by 20%",
+      "Developed a novel multi-task benchmark evaluating LLMs' vision-based tool use capabilities in geolocation reasoning tasks, architecting evaluation frameworks that test spatial reasoning; submitted to COLM 2026",
+      "Automated 300+ location data collection via Python/Selenium and the Street View API with programmatic validation",
+      "Refactored the prototype codebase into a production-ready repository with CI/CD integration, implementing 50+ automated tests and type checks that reduced setup time by 20% and enabled reproducible one-command execution",
     ],
     tags: ["Python", "Selenium", "Street View API", "CI/CD", "LLMs"],
   },
 ];
 
 export const SKILLS: Record<string, string[]> = {
-  Languages: ["Python", "C++", "Java", "TypeScript", "JavaScript", "SQL", "Bash"],
-  "Frameworks & Tools": ["React", "Next.js", "FastAPI", "Spring Boot", "Node.js", "D3.js", "Docker", "AWS", "Neo4j", "PostgreSQL", "Redis", "OpenCV"],
-  "AI & ML": ["Azure OpenAI", "LangChain", "LangGraph", "pgvector", "PyTorch", "Gymnasium", "pybind11", "SQLAlchemy"],
+  Languages: ["Python", "Java", "C++", "TypeScript", "JavaScript", "SQL", "Bash"],
+  "AI Tools": [
+    "Azure OpenAI",
+    "LangChain",
+    "LangGraph",
+    "Agno Agent",
+    "Claude Code",
+    "pgvector",
+    "MCP",
+    "Antigravity",
+    "GitHub Copilot",
+  ],
+  Frameworks: ["React", "Next.js", "FastAPI", "Spring Boot", "Node.js", "D3.js"],
+  "Tools & Libraries": [
+    "Git",
+    "Docker",
+    "CI/CD",
+    "AWS",
+    "Vercel",
+    "Neo4j",
+    "PostgreSQL",
+    "Redis",
+    "OpenCV",
+    "PyTorch",
+    "pybind11",
+    "SQLAlchemy",
+  ],
 };
+
+export interface NewsItem {
+  /** ISO date (YYYY-MM-DD) — used for sorting and for the displayed date */
+  date: string;
+  title: string;
+  /** A sentence or two. Plain text. */
+  body: string;
+  /** Optional: where it happened */
+  location?: string;
+  /** Optional: a link out — write-up, photos, the event page */
+  link?: { label: string; href: string };
+}
+
+/*
+  ── How to post news ──
+  Add a new object to the TOP of this array and redeploy. Only `date`,
+  `title`, and `body` are required; `location` and `link` are optional.
+  Entries render newest-first automatically, so order here doesn't matter —
+  but keeping newest on top makes the file easy to scan.
+
+  {
+    date: "2026-09-14",
+    title: "Something cool I did",
+    body: "A sentence or two about it.",
+    location: "Atlanta, GA",
+    link: { label: "Write-up", href: "https://example.com" },
+  },
+*/
+export const NEWS_ITEMS: NewsItem[] = [
+  {
+    date: "2026-08-14",
+    title: "Wrapped up my summer on the Data & AI team at NCR Atleos",
+    body: "Shipped a Graph RAG question-answering layer on Microsoft Fabric and a Neo4j data layer unifying 5+ internal sources across 10M+ node relationships. Three months of building agentic systems on top of enterprise data.",
+    location: "Atlanta, GA",
+  },
+  {
+    date: "2026-03-20",
+    title: "Submitted our geolocation reasoning benchmark to COLM 2026",
+    body: "Six months of research at Algoverse AI on how well LLMs actually use vision-based tools for spatial reasoning — a new multi-task benchmark built from 300+ globally sampled locations.",
+  },
+];
 
 export const EDUCATION = {
   school: "Georgia Institute of Technology",
   degree: "B.S. Computer Science",
-  gpa: "3.86 / 4.0",
+  gpa: "3.87 / 4.0",
   grad: "Expected May 2028",
-  concentration: "Intelligence and Systems & Architecture",
+  concentration: "Systems & Architecture + Intelligence",
   honors: "Presidential Scholar, Dean's List, Zell Miller Scholarship",
   courses: [
     "Data Structures",
@@ -110,58 +156,29 @@ export const EDUCATION = {
   ],
 } as const;
 
-/* Full resume history — includes roles not shown on the home page */
+/* UGA research role — on the site but not on the current resume PDF */
+const UGA_RESEARCH: Experience = {
+  company: "University of Georgia",
+  role: "Undergraduate Researcher",
+  period: "September 2025 – April 2026",
+  location: "Athens, GA",
+  bullets: [
+    "Developed high-performance spectral preprocessing algorithms in Python for signal normalization and noise reduction, optimizing computational throughput by 25% across high-dimensional datasets for downstream ML models",
+    "Architected robust, modular data pipelines to automate raw spectral data transformation into analysis-ready formats",
+    "Implemented programmatic verification systems using NumPy and SciPy to validate signal accuracy across the data lifecycle",
+  ],
+  tags: ["Python", "NumPy", "SciPy", "Data Pipelines"],
+};
+
+/*
+  Full resume history, reverse-chronological. Derived from EXPERIENCE so the
+  shared roles never drift between the home page and the resume page.
+*/
 export const RESUME_EXPERIENCE: Experience[] = [
-  {
-    company: "NCR Atleos",
-    role: "Software Engineer Intern — Data Engineering",
-    period: "May 2026 – Present",
-    location: "Atlanta, GA (Global HQ)",
-    bullets: [
-      "Architecting an enterprise knowledge graph in Neo4j with 10K+ nodes and 25K+ relationships across cross-domain internal data",
-      "Implementing a Graph RAG Q&A layer via LangChain and Cypher-generating LLM pipelines for non-technical stakeholders",
-      "Building an AI semantic layer recommendation engine with Azure OpenAI that reduces Power BI scaffolding time by ~60%",
-      "Creating AI agents and systems over internal data layers",
-    ],
-    tags: ["Neo4j", "LangChain", "Azure OpenAI", "Graph RAG", "Python"],
-  },
-  {
-    company: "ConventionConnection",
-    role: "Software Engineer Intern",
-    period: "December 2025 – Present",
-    location: "Atlanta, GA",
-    bullets: [
-      "Engineering an AI-powered image processing pipeline using OpenCV and FastAPI to automate card photo cropping, reducing manual processing time by 75% and managing 1,000+ images via the Google Photos API on GCP",
-      "Architecting a pricing engine and auction monitor in Python with 20 rules and real-time bid tracking across marketplaces",
-      "Building a domain-aware trade matching engine with a weighted scoring algorithm across grade, set, and grading company",
-      "Developing full-stack features with a React frontend and FastAPI backend services, deployed on Render and Vercel",
-    ],
-    tags: ["OpenCV", "FastAPI", "Python", "GCP", "Google Photos API"],
-  },
-  {
-    company: "University of Georgia",
-    role: "Undergraduate Researcher",
-    period: "September 2025 – April 2026",
-    location: "Athens, GA",
-    bullets: [
-      "Developed high-performance spectral preprocessing algorithms in Python for signal normalization and noise reduction, optimizing computational throughput by 25% across high-dimensional datasets for downstream ML models",
-      "Architected robust, modular data pipelines to automate raw spectral data transformation into analysis-ready formats",
-      "Implemented programmatic verification systems using NumPy and SciPy to validate signal accuracy across the data lifecycle",
-    ],
-    tags: ["Python", "NumPy", "SciPy", "Data Pipelines"],
-  },
-  {
-    company: "Algoverse AI",
-    role: "Software Engineer (Research) Intern",
-    period: "September 2025 – March 2026",
-    location: "Remote",
-    bullets: [
-      "Developed a novel multi-task benchmark evaluating LLMs' vision-based tool use in geolocation reasoning tasks, architecting evaluation frameworks that test spatial reasoning; paper submitted to COLM 2026",
-      "Built an automated data collection and experimentation pipeline using Python, Selenium, and the Google Street View API, processing 300+ diverse global locations with programmatic verification for benchmark question validation",
-      "Refactored the prototype codebase into a production-ready repository with CI/CD, 50+ automated tests and type checks, reducing setup time by 20% and enabling reproducible one-command execution",
-    ],
-    tags: ["Python", "Selenium", "Street View API", "CI/CD", "LLMs"],
-  },
+  EXPERIENCE[0],
+  EXPERIENCE[1],
+  UGA_RESEARCH,
+  EXPERIENCE[2],
 ];
 
 export const AWARDS = [
@@ -216,8 +233,8 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "Switch",
     description:
-      "Chat with multiple LLMs in a single conversation. Switch between models mid-conversation without losing context — persistent threads, markdown rendering, and syntax-highlighted code blocks.",
-    tags: ["Next.js", "TypeScript", "Supabase", "OpenAI", "Anthropic"],
+      "A full-stack multi-model AI platform serving 100+ users and 14K+ daily backend requests. Switch between models mid-conversation without losing context, with a custom prompt-routing classifier splitting traffic 70/30 between economy and premium models, and Cortex — a persistent memory system on Supabase Postgres with pgvector embeddings for low-latency semantic retrieval across 10K+ daily queries.",
+    tags: ["Next.js", "TypeScript", "Supabase", "pgvector", "OpenAI", "Anthropic"],
     link: "https://theswitchai.com",
     github: "https://github.com/importgabriel/switch",
     image: "/projects/switch.png",
@@ -627,10 +644,10 @@ const animate = () => {
     },
   },
   {
-    title: "Polymarket Trading Bot",
+    title: "Polymarket HFT Bot",
     description:
-      "A hybrid Python/C++ high-frequency trading framework for Polymarket BTC 15-minute prediction markets. Identifies cross-venue arbitrage between Polymarket, Kalshi, and Binance using a Log-Normal probability model, and executes trades via a PPO reinforcement learning agent with an LSTM actor-critic network.",
-    tags: ["Python", "C++20", "PyTorch", "Gymnasium", "boost::beast", "pybind11"],
+      "A low-latency hybrid C++/Python trading framework targeting Polymarket BTC 15-minute prediction markets, integrating the Polymarket CLOB API and Goldsky for real-time on-chain market data ingestion. Detects cross-venue arbitrage across Polymarket, Kalshi, and Binance with a Log-Normal probability model, and executes via a PPO agent with an LSTM actor-critic network — bridging the C++20 execution engine to Python ML inference through pybind11 for sub-millisecond order routing.",
+    tags: ["C++20", "Python", "PyTorch", "Goldsky", "pybind11", "Polymarket CLOB"],
     github: "https://github.com/eshan-bhimani/polymarket-hft-bot",
     deepDive: {
       tagline: "Quantitative trading meets reinforcement learning on prediction markets.",

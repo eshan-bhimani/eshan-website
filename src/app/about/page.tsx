@@ -19,9 +19,9 @@ export default function AboutPage() {
           graduating in May 2028.
         </p>
         <p>
-          I&apos;m currently a Software Engineer Intern at NCR Atleos at their
-          Global HQ in Atlanta, where I&apos;m working on creating AI agents and
-          systems over data layers.
+          This past summer I was a Software Engineer Intern on the Data &amp; AI
+          team at NCR Atleos in Atlanta, building AI agents and Graph RAG
+          systems over enterprise data layers.
         </p>
         <p>
           I love building things that solve daily inconveniences — products that
