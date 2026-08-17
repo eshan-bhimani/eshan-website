@@ -187,7 +187,7 @@ export default function Home() {
           .
         </p>
         <p className="mt-4">
-          Based in Atlanta, GA.{" "}
+          Based in Atlanta, GA and San Francisco, CA.{" "}
           <a href="/resume.pdf" className="prose-link">
             Download my resume (PDF)
           </a>

@@ -108,6 +108,8 @@ export interface NewsItem {
   location?: string;
   /** Optional: a link out — write-up, photos, the event page */
   link?: { label: string; href: string };
+  /** Optional: small photos, rendered as a thumbnail row. Put files in public/news/. */
+  images?: { src: string; alt: string; width: number; height: number }[];
 }
 
 /*
@@ -126,6 +128,32 @@ export interface NewsItem {
   },
 */
 export const NEWS_ITEMS: NewsItem[] = [
+  {
+    date: "2026-08-15",
+    title: "Invited to the YC Startup Internship Expo",
+    body: "Spent the day at Y Combinator meeting founders and teams hiring student interns.",
+    location: "San Francisco, CA",
+    images: [
+      {
+        src: "/news/yc-badge.jpg",
+        alt: "My YC Startup Internship Expo badge",
+        width: 644,
+        height: 1000,
+      },
+      {
+        src: "/news/yc-office.jpg",
+        alt: "Y Combinator sign at their office",
+        width: 1000,
+        height: 750,
+      },
+    ],
+  },
+  {
+    date: "2026-08-13",
+    title: "MongoDB Buildfest and Hackathon",
+    body: "Two days of building with the MongoDB team in San Francisco.",
+    location: "San Francisco, CA",
+  },
   {
     date: "2026-08-14",
     title: "Wrapped up my summer on the Data & AI team at NCR Atleos",

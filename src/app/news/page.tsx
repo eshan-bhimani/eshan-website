@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { NEWS_ITEMS, type NewsItem } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -43,6 +44,20 @@ export default function NewsPage() {
               </p>
               <h2 className="display mt-2 text-2xl">{item.title}</h2>
               <p className="mt-2 text-ink-soft">{item.body}</p>
+              {item.images && (
+                <div className="mt-4 flex flex-wrap items-start gap-3">
+                  {item.images.map((img) => (
+                    <Image
+                      key={img.src}
+                      src={img.src}
+                      alt={img.alt}
+                      width={img.width}
+                      height={img.height}
+                      className="h-32 w-auto rounded border border-rule object-cover sm:h-40"
+                    />
+                  ))}
+                </div>
+              )}
               {item.link && (
                 <p className="mt-2 text-sm">
                   <a
