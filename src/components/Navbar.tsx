@@ -1,127 +1,26 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "@/components/ThemeToggle";
 import { NAV_LINKS } from "@/lib/constants";
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "border-b border-border/60 bg-background/90 backdrop-blur-xl"
-          : "bg-transparent"
-      }`}
-    >
+    <header className="pt-14 sm:pt-20">
       <nav
-        className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4"
+        className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-muted"
         aria-label="Main navigation"
       >
-        <Link
-          href="/"
-          className="text-lg font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
-        >
-          EB<span className="text-accent">.</span>
+        <ThemeToggle />
+        <Link href="/" className="prose-link no-underline text-ink">
+          Eshan Bhimani
         </Link>
-
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(({ label, href }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className={`relative text-sm font-medium transition-colors ${
-                  pathname === href
-                    ? "text-accent"
-                    : "text-text-muted hover:text-text-primary"
-                }`}
-              >
-                {label}
-                {pathname === href && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-accent rounded-full"
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </Link>
-            </li>
+        <span className="ml-auto flex flex-wrap gap-x-5 gap-y-2">
+          {NAV_LINKS.map((link) => (
+            <Link key={link.href} href={link.href} className="prose-link">
+              {link.label}
+            </Link>
           ))}
-        </ul>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-text-muted hover:text-text-primary p-1 transition-colors"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-        >
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          >
-            {mobileOpen ? (
-              <>
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </>
-            ) : (
-              <>
-                <line x1="4" y1="7" x2="20" y2="7" />
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="17" x2="20" y2="17" />
-              </>
-            )}
-          </svg>
-        </button>
+        </span>
       </nav>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-xl overflow-hidden"
-          >
-            <ul className="flex flex-col px-6 py-4 gap-1">
-              {NAV_LINKS.map(({ label, href }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`block py-2.5 text-sm font-medium transition-colors ${
-                      pathname === href
-                        ? "text-accent"
-                        : "text-text-muted hover:text-text-primary"
-                    }`}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
 }

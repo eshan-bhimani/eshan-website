@@ -1,10 +1,48 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AnimatedGrid from "@/components/ui/AnimatedGrid";
 
 import { SITE_CONFIG } from "@/lib/constants";
 import "./globals.css";
+
+/*
+  Fonts are self-hosted from src/fonts (SIL OFL, see LICENSE.md there).
+  next/font/local avoids the next/font/google resolver, which fails to build
+  EB Garamond under Turbopack on Vercel.
+*/
+const garamond = localFont({
+  src: [
+    {
+      path: "../fonts/eb-garamond-latin.woff2",
+      weight: "400 500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/eb-garamond-italic-latin.woff2",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  variable: "--font-eb-garamond",
+  display: "swap",
+});
+
+const instrumentSans = localFont({
+  src: "../fonts/instrument-sans-latin.woff2",
+  weight: "400 600",
+  style: "normal",
+  variable: "--font-instrument-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = localFont({
+  src: "../fonts/jetbrains-mono-latin.woff2",
+  weight: "400 500",
+  style: "normal",
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -38,24 +76,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${garamond.variable} ${instrumentSans.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
+        {/* Applies the stored theme before first paint so night mode never flashes */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("theme")==="dark"){document.documentElement.dataset.theme="dark"}}catch(e){}`,
+          }}
         />
       </head>
-      <body className="font-sans antialiased">
-        <AnimatedGrid />
-        <div className="relative z-10">
+      <body>
+        <div className="mx-auto w-full max-w-[46rem] px-6 sm:px-8">
           <Navbar />
-          <main className="min-h-screen pt-[73px]">{children}</main>
+          <main>{children}</main>
           <Footer />
         </div>
       </body>

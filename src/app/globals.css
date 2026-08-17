@@ -1,71 +1,115 @@
 @import "tailwindcss";
 
 @theme {
-  /* Midnight navy / graphite palette */
-  --color-background: #0b0f1a;
-  --color-surface: #111827;
-  --color-surface-light: #1a2236;
-  --color-border: #1e293b;
-  --color-border-light: #334155;
-
-  /* Text */
-  --color-text-primary: #e2e8f0;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
-
-  /* Icy blue accent */
-  --color-accent: #38bdf8;
-  --color-accent-light: #7dd3fc;
-  --color-accent-dim: #0ea5e9;
-  --color-accent-glow: rgba(56, 189, 248, 0.08);
-
-  /* Muted teal secondary */
-  --color-teal: #2dd4bf;
-  --color-teal-dim: #14b8a6;
-  --color-teal-glow: rgba(45, 212, 191, 0.08);
-
-  /* Georgia Tech gold */
-  --color-gt-gold: #B3A369;
-  --color-gt-gold-light: #C4B77D;
-  --color-gt-gold-dim: #A0914F;
-
-  /* Gradients */
-  --color-gradient-start: #38bdf8;
-  --color-gradient-end: #2dd4bf;
+  /* Paper & ink */
+  --color-paper: #f4f0e6;
+  --color-paper-deep: #eee9dc;
+  --color-ink: #14120d;
+  --color-ink-soft: #3c382f;
+  --color-ink-muted: #7a7466;
+  --color-rule: #d9d2c1;
 
   /* Fonts */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-serif: var(--font-eb-garamond), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, -apple-system, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+/* Night mode — paper and ink swap places */
+[data-theme="dark"] {
+  --color-paper: #000000;
+  --color-paper-deep: #0e0e0e;
+  --color-ink: #f4f0e6;
+  --color-ink-soft: #c9c6bf;
+  --color-ink-muted: #8d8a83;
+  --color-rule: #2e2e2e;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.62;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display serif — the artistic note against the plain body text */
+.display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+}
+
+/* Small caps eyebrow labels */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+/* Links read like prose — underlined, no color shift */
+.prose-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--color-ink) 35%, transparent);
+  transition: text-decoration-color 0.15s ease, opacity 0.15s ease;
+}
+
+.prose-link:hover {
+  text-decoration-color: var(--color-ink);
+}
+
+/* Backing plate for dark-inked brand logos, needed only in night mode */
+.brand-plate {
+  display: inline-flex;
+  border-radius: 6px;
+}
+
+[data-theme="dark"] .brand-plate {
+  background-color: #f4f0e6;
+  padding: 5px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-rule);
 }
 
 ::selection {
-  background-color: var(--color-accent-dim);
-  color: white;
+  background-color: color-mix(in srgb, var(--color-ink) 22%, transparent);
+  color: var(--color-ink);
 }
 
-/* Subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 9px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background);
+  background: var(--color-paper);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-light);
-  border-radius: 3px;
+  background: var(--color-rule);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
+  background: var(--color-ink-muted);
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
 }

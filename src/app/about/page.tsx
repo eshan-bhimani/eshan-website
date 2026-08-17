@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
@@ -8,42 +9,40 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <section className="px-6 py-28">
-      <div className="mx-auto max-w-3xl">
-        <p className="text-xs font-mono font-medium tracking-widest text-accent uppercase mb-3">
-          About
-        </p>
-        <h1 className="text-3xl font-bold text-gt-gold mb-10 sm:text-4xl">
-          A bit about me
-        </h1>
+    <article className="pt-16 sm:pt-24">
+      <h1 className="display text-4xl sm:text-5xl">A bit about me</h1>
 
-        <div className="space-y-6 text-lg leading-relaxed text-text-secondary">
-          <p>
-            I&apos;m currently a junior CS major at Georgia Tech, with threads
-            in Intelligence and Systems &amp; Architecture. I transferred from UGA after my
-            sophomore year in Summer 2026, and I anticipate graduating in May
-            2028.
-          </p>
-          <p>
-            I&apos;m currently a SWE Intern at NCR Atleos at their Global HQ in
-            Atlanta, where I&apos;m working on creating AI Agents and systems
-            over data layers.
-          </p>
-          <p>
-            I love building things that solve daily inconveniences — products
-            that people actually want to use. Whether it&apos;s a tool that
-            saves someone five minutes a day or a platform that fundamentally
-            changes how people interact with a system, I&apos;m drawn to
-            practical, impactful work.
-          </p>
-          <p>
-            My long-term goal is to start a company in NYC or SF that builds a
-            bridge between AI, tech, and the software development industries. I believe
-            there&apos;s enormous untapped potential at that intersection, and
-            I want to be the one building there.
-          </p>
-        </div>
+      <div className="mt-10 space-y-5">
+        <p>
+          I&apos;m a junior CS major at Georgia Tech, with threads in
+          Intelligence and Systems &amp; Architecture, and I anticipate
+          graduating in May 2028.
+        </p>
+        <p>
+          This past summer I was a Software Engineer Intern on the Data &amp; AI
+          team at NCR Atleos in Atlanta, building AI agents and Graph RAG
+          systems over enterprise data layers.
+        </p>
+        <p>
+          I love building things that solve daily inconveniences — products that
+          people actually want to use. Whether it&apos;s a tool that saves
+          someone five minutes a day or a platform that fundamentally changes
+          how people interact with a system, I&apos;m drawn to practical,
+          impactful work.
+        </p>
+        <p>
+          My long-term goal is to start a company in NYC or SF that builds a
+          bridge between AI, tech, and the software development industries. I
+          believe there&apos;s enormous untapped potential at that intersection,
+          and I want to be the one building there.
+        </p>
       </div>
-    </section>
+
+      <p className="mt-12">
+        <Link href="/" className="prose-link">
+          ← Back home
+        </Link>
+      </p>
+    </article>
   );
 }

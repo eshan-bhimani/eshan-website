@@ -7,8 +7,7 @@ export const SITE_CONFIG = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "News", href: "/news" },
   { label: "Projects", href: "/projects" },
   { label: "Resume", href: "/resume" },
   { label: "Contact", href: "/contact" },
@@ -18,8 +17,187 @@ export const SOCIAL_LINKS = {
   github: "https://github.com/eshan-bhimani",
   linkedin: "https://linkedin.com/in/eshan-bhimani",
   twitter: "https://x.com/im_eshanb",
-  email: "mailto:eshan@example.com",
+  email: "mailto:bhimanieshan@gmail.com",
 } as const;
+
+export interface Experience {
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  bullets: string[];
+  tags: string[];
+}
+
+export const EXPERIENCE: Experience[] = [
+  {
+    company: "NCR Atleos",
+    role: "Software Engineer Intern — Data & AI Team",
+    period: "May 2026 – August 2026",
+    location: "Atlanta, GA",
+    bullets: [
+      "Built a Graph RAG natural language Q&A layer on Microsoft Fabric using LangChain and Cypher-generating LLM pipelines, reducing agent response times by ~70% while increasing answer accuracy and capability by ~50%",
+      "Developed an AI-powered semantic layer recommendation engine using Azure OpenAI and agentic workflows to profile raw SQL tables and auto-generate Power BI-ready schemas, reducing scaffolding time by ~60%",
+      "Architected a Neo4j-backed data layer integrating 5+ cross-domain internal data sources (10M+ node relationships) into a unified backend, enabling connected querying and reducing multi-hop retrieval latency by ~40%",
+    ],
+    tags: ["Neo4j", "LangChain", "Azure OpenAI", "Microsoft Fabric", "Graph RAG"],
+  },
+  {
+    company: "Convention Connection",
+    role: "Software Engineer Intern",
+    period: "December 2025 – July 2026",
+    location: "Atlanta, GA",
+    bullets: [
+      "Engineered an AI-powered image processing pipeline using OpenCV and FastAPI to automate card photo cropping, reducing manual processing time by 75% and managing 1,000+ images via the Google Photos API on GCP",
+      "Architected a pricing engine and auction monitor in Python with 90 rules and real-time bid tracking across marketplaces",
+      "Built a domain-aware trade matching engine with a weighted scoring algorithm across grade, set, and grading company",
+    ],
+    tags: ["OpenCV", "FastAPI", "Python", "GCP", "Google Photos API"],
+  },
+  {
+    company: "Algoverse AI",
+    role: "AI Researcher",
+    period: "September 2025 – March 2026",
+    location: "Remote",
+    bullets: [
+      "Developed a novel multi-task benchmark evaluating LLMs' vision-based tool use capabilities in geolocation reasoning tasks, architecting evaluation frameworks that test spatial reasoning; submitted to COLM 2026",
+      "Automated 300+ location data collection via Python/Selenium and the Street View API with programmatic validation",
+      "Refactored the prototype codebase into a production-ready repository with CI/CD integration, implementing 50+ automated tests and type checks that reduced setup time by 20% and enabled reproducible one-command execution",
+    ],
+    tags: ["Python", "Selenium", "Street View API", "CI/CD", "LLMs"],
+  },
+];
+
+export const SKILLS: Record<string, string[]> = {
+  Languages: ["Python", "Java", "C++", "TypeScript", "JavaScript", "SQL", "Bash"],
+  "AI Tools": [
+    "Azure OpenAI",
+    "LangChain",
+    "LangGraph",
+    "Agno Agent",
+    "Claude Code",
+    "pgvector",
+    "MCP",
+    "Antigravity",
+    "GitHub Copilot",
+  ],
+  Frameworks: ["React", "Next.js", "FastAPI", "Spring Boot", "Node.js", "D3.js"],
+  "Tools & Libraries": [
+    "Git",
+    "Docker",
+    "CI/CD",
+    "AWS",
+    "Vercel",
+    "Neo4j",
+    "PostgreSQL",
+    "Redis",
+    "OpenCV",
+    "PyTorch",
+    "pybind11",
+    "SQLAlchemy",
+  ],
+};
+
+export interface NewsItem {
+  /** ISO date (YYYY-MM-DD) — used for sorting and for the displayed date */
+  date: string;
+  title: string;
+  /** A sentence or two. Plain text. */
+  body: string;
+  /** Optional: where it happened */
+  location?: string;
+  /** Optional: a link out — write-up, photos, the event page */
+  link?: { label: string; href: string };
+}
+
+/*
+  ── How to post news ──
+  Add a new object to the TOP of this array and redeploy. Only `date`,
+  `title`, and `body` are required; `location` and `link` are optional.
+  Entries render newest-first automatically, so order here doesn't matter —
+  but keeping newest on top makes the file easy to scan.
+
+  {
+    date: "2026-09-14",
+    title: "Something cool I did",
+    body: "A sentence or two about it.",
+    location: "Atlanta, GA",
+    link: { label: "Write-up", href: "https://example.com" },
+  },
+*/
+export const NEWS_ITEMS: NewsItem[] = [
+  {
+    date: "2026-08-14",
+    title: "Wrapped up my summer on the Data & AI team at NCR Atleos",
+    body: "Shipped a Graph RAG question-answering layer on Microsoft Fabric and a Neo4j data layer unifying 5+ internal sources across 10M+ node relationships. Three months of building agentic systems on top of enterprise data.",
+    location: "Atlanta, GA",
+  },
+  {
+    date: "2026-03-20",
+    title: "Submitted our geolocation reasoning benchmark to COLM 2026",
+    body: "Six months of research at Algoverse AI on how well LLMs actually use vision-based tools for spatial reasoning — a new multi-task benchmark built from 300+ globally sampled locations.",
+  },
+];
+
+export const EDUCATION = {
+  school: "Georgia Institute of Technology",
+  degree: "B.S. Computer Science",
+  gpa: "3.87 / 4.0",
+  grad: "Expected May 2028",
+  concentration: "Systems & Architecture + Intelligence",
+  honors: "Presidential Scholar, Dean's List, Zell Miller Scholarship",
+  courses: [
+    "Data Structures",
+    "Algorithms",
+    "Database Management",
+    "Software Development",
+    "Linear Algebra",
+    "Discrete Math",
+  ],
+} as const;
+
+/* UGA research role — on the site but not on the current resume PDF */
+const UGA_RESEARCH: Experience = {
+  company: "University of Georgia",
+  role: "Undergraduate Researcher",
+  period: "September 2025 – April 2026",
+  location: "Athens, GA",
+  bullets: [
+    "Developed high-performance spectral preprocessing algorithms in Python for signal normalization and noise reduction, optimizing computational throughput by 25% across high-dimensional datasets for downstream ML models",
+    "Architected robust, modular data pipelines to automate raw spectral data transformation into analysis-ready formats",
+    "Implemented programmatic verification systems using NumPy and SciPy to validate signal accuracy across the data lifecycle",
+  ],
+  tags: ["Python", "NumPy", "SciPy", "Data Pipelines"],
+};
+
+/*
+  Full resume history, reverse-chronological. Derived from EXPERIENCE so the
+  shared roles never drift between the home page and the resume page.
+*/
+export const RESUME_EXPERIENCE: Experience[] = [
+  EXPERIENCE[0],
+  EXPERIENCE[1],
+  UGA_RESEARCH,
+  EXPERIENCE[2],
+];
+
+export const AWARDS = [
+  "Presidential Scholar (4.0 GPA)",
+  "Dean's List",
+  "AP Scholar Award",
+  "National Honor Society",
+  "2021 Tennis State Championship",
+] as const;
+
+export const INTERESTS = [
+  "Tennis",
+  "Weightlifting",
+  "Running",
+  "Basketball",
+  "Pickleball",
+  "Poker",
+  "Investing",
+] as const;
 
 export interface DeepDiveChallenge {
   title: string;
@@ -55,8 +233,8 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "Switch",
     description:
-      "Chat with multiple LLMs in a single conversation. Switch between models mid-conversation without losing context — persistent threads, markdown rendering, and syntax-highlighted code blocks.",
-    tags: ["Next.js", "TypeScript", "Supabase", "OpenAI", "Anthropic"],
+      "A full-stack multi-model AI platform serving 100+ users and 14K+ daily backend requests. Switch between models mid-conversation without losing context, with a custom prompt-routing classifier splitting traffic 70/30 between economy and premium models, and Cortex — a persistent memory system on Supabase Postgres with pgvector embeddings for low-latency semantic retrieval across 10K+ daily queries.",
+    tags: ["Next.js", "TypeScript", "Supabase", "pgvector", "OpenAI", "Anthropic"],
     link: "https://theswitchai.com",
     github: "https://github.com/importgabriel/switch",
     image: "/projects/switch.png",
@@ -466,10 +644,10 @@ const animate = () => {
     },
   },
   {
-    title: "Polymarket Trading Bot",
+    title: "Polymarket HFT Bot",
     description:
-      "A hybrid Python/C++ high-frequency trading framework for Polymarket BTC 15-minute prediction markets. Identifies cross-venue arbitrage between Polymarket, Kalshi, and Binance using a Log-Normal probability model, and executes trades via a PPO reinforcement learning agent with an LSTM actor-critic network.",
-    tags: ["Python", "C++20", "PyTorch", "Gymnasium", "boost::beast", "pybind11"],
+      "A low-latency hybrid C++/Python trading framework targeting Polymarket BTC 15-minute prediction markets, integrating the Polymarket CLOB API and Goldsky for real-time on-chain market data ingestion. Detects cross-venue arbitrage across Polymarket, Kalshi, and Binance with a Log-Normal probability model, and executes via a PPO agent with an LSTM actor-critic network — bridging the C++20 execution engine to Python ML inference through pybind11 for sub-millisecond order routing.",
+    tags: ["C++20", "Python", "PyTorch", "Goldsky", "pybind11", "Polymarket CLOB"],
     github: "https://github.com/eshan-bhimani/polymarket-hft-bot",
     deepDive: {
       tagline: "Quantitative trading meets reinforcement learning on prediction markets.",
