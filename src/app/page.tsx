@@ -60,7 +60,7 @@ export default function Home() {
       {/* ── Education ── */}
       <Section id="education" title="Education">
         <div className="flex items-start gap-4">
-          <YellowJacket size={40} className="mt-1 shrink-0" />
+          <YellowJacket size={64} className="mt-1 shrink-0" />
           <div>
             <p className="display text-2xl">{EDUCATION.school}</p>
             <p className="mt-1 text-ink-soft">

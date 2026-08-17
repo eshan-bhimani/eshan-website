@@ -23,13 +23,17 @@ export default function YellowJacket({
 }) {
   if (CUSTOM_LOGO) {
     return (
-      <Image
-        src={CUSTOM_LOGO}
-        alt="Georgia Tech"
-        width={size}
-        height={size}
-        className={`object-contain ${className}`}
-      />
+      // brand-plate gives the logo a light backing in night mode, so a dark
+      // wordmark stays legible against the black background
+      <span className={`brand-plate ${className}`}>
+        <Image
+          src={CUSTOM_LOGO}
+          alt="Georgia Tech"
+          width={size}
+          height={size}
+          className="object-contain"
+        />
+      </span>
     );
   }
 
