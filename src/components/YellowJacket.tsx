@@ -1,7 +1,19 @@
-/**
- * A stylized yellow jacket in Georgia Tech's palette — an original mark drawn
- * for this site rather than the licensed Buzz athletic logo.
- */
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
+
+/*
+  ── To use your own logo ──
+  Drop a file at public/gt-logo.(svg|png|webp|jpg) and it replaces the drawn
+  mark below automatically — no code change needed. Square images look best.
+  Delete the file to go back to the SVG.
+*/
+const CUSTOM_LOGO = ["svg", "png", "webp", "jpg", "jpeg"]
+  .map((ext) => `/gt-logo.${ext}`)
+  .find((src) =>
+    fs.existsSync(path.join(process.cwd(), "public", src.replace(/^\//, "")))
+  );
+
 export default function YellowJacket({
   size = 30,
   className = "",
@@ -9,6 +21,18 @@ export default function YellowJacket({
   size?: number;
   className?: string;
 }) {
+  if (CUSTOM_LOGO) {
+    return (
+      <Image
+        src={CUSTOM_LOGO}
+        alt="Georgia Tech"
+        width={size}
+        height={size}
+        className={`object-contain ${className}`}
+      />
+    );
+  }
+
   return (
     <svg
       width={size}
