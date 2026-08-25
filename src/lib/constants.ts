@@ -177,6 +177,10 @@ export const EDUCATION = {
   courses: [
     "Data Structures",
     "Algorithms",
+    "Computer Organization",
+    "Artificial Intelligence",
+    "Objects and Design",
+    "Machine Learning",
     "Database Management",
     "Software Development",
     "Linear Algebra",
