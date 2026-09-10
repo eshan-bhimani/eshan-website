@@ -39,6 +39,14 @@ export default async function ProjectPage({
   const project = FEATURED_PROJECTS.find((p) => p.slug === slug);
   if (!project) notFound();
 
+  const sections = [
+    { heading: "What it is", body: project.whatItIs },
+    { heading: "Why it matters", body: project.whyItMatters },
+    ...(project.inspiration
+      ? [{ heading: "Inspiration", body: project.inspiration }]
+      : []),
+  ];
+
   return (
     <article className="pt-16 sm:pt-24">
       {project.date && (
@@ -68,66 +76,40 @@ export default async function ProjectPage({
 
       <p className="mt-10 text-lg">{project.description}</p>
 
-      {(project.link || project.github) && (
-        <p className="mt-4 flex flex-wrap gap-x-4 text-sm">
-          {project.link && (
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="prose-link">
-              Live site
-            </a>
-          )}
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="prose-link">
-              Source
-            </a>
-          )}
-        </p>
-      )}
-
-      {project.sections?.map((section) => (
+      {sections.map((section) => (
         <section key={section.heading} className="mt-12">
           <h2 className="display text-3xl">{section.heading}</h2>
           <p className="mt-4 text-ink-soft">{section.body}</p>
         </section>
       ))}
 
-      {project.deepDive && (
-        <section className="mt-12">
-          <h2 className="display text-3xl">Under the hood</h2>
-          <p className="mt-1 font-serif text-lg italic text-ink-soft">
-            {project.deepDive.tagline}
-          </p>
-          <p className="mt-4 text-ink-soft">{project.deepDive.overview}</p>
-
-          {project.deepDive.metrics.length > 0 && (
-            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4">
-              {project.deepDive.metrics.map((metric) => (
-                <div key={metric.label}>
-                  <dt className="display text-2xl">{metric.value}</dt>
-                  <dd className="text-sm text-ink-muted">
-                    {metric.label}
-                    {metric.sub ? ` — ${metric.sub}` : ""}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          )}
-
-          {project.deepDive.challenges.map((challenge) => (
-            <div key={challenge.title} className="mt-8">
-              <h3 className="eyebrow">{challenge.title}</h3>
-              <p className="mt-2 text-ink-soft">{challenge.body}</p>
-              {challenge.code && (
-                <pre className="mt-3 overflow-x-auto border border-rule bg-paper-deep p-4 font-mono text-[13px] leading-relaxed">
-                  <code>{challenge.code}</code>
-                </pre>
-              )}
-            </div>
+      <section className="mt-12">
+        <h2 className="display text-3xl">Stack</h2>
+        <p className="mt-4 flex flex-wrap gap-2">
+          {project.stack.map((s) => (
+            <span
+              key={s}
+              className="rounded-full border border-rule px-3 py-0.5 font-mono text-sm text-ink-soft"
+            >
+              {s}
+            </span>
           ))}
+        </p>
+      </section>
 
-          <p className="mt-6 text-sm text-ink-muted">
-            Stack: {project.deepDive.stack.map((s) => s.name).join(" · ")}
-          </p>
-        </section>
+      {(project.github || project.link) && (
+        <p className="mt-12 flex flex-wrap gap-x-5 text-sm">
+          {project.github && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="prose-link">
+              View on GitHub →
+            </a>
+          )}
+          {project.link && (
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="prose-link">
+              Live site →
+            </a>
+          )}
+        </p>
       )}
 
       <p className="mt-16">
