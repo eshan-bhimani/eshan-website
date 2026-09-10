@@ -251,19 +251,88 @@ export interface ProjectDeepDive {
   stack: { name: string; color: string }[];
 }
 
+export interface ProjectSection {
+  heading: string;
+  body: string;
+}
+
 export interface Project {
   title: string;
+  /** URL segment for the project's detail page, e.g. /projects/overflow */
+  slug: string;
+  /** One-line summary shown in the projects list */
+  summary: string;
   description: string;
+  /** Display tags (proper-cased) used on the home page */
   tags: string[];
+  /** Lowercase filter tags — domain, AI type, and stack — shown on /projects */
+  categories: string[];
+  /** ISO date (YYYY-MM-DD) shown on the detail page */
+  date?: string;
+  status?: "wip";
   link?: string;
   github?: string;
   image?: string;
+  /** Short prose sections rendered before the deep dive */
+  sections?: ProjectSection[];
   deepDive?: ProjectDeepDive;
 }
 
 export const FEATURED_PROJECTS: Project[] = [
   {
+    title: "Overflow",
+    slug: "overflow",
+    date: "2026-08-01",
+    summary:
+      "Multi-agent RL environment for autonomous vehicle fleet oversight, built on Meta's OpenEnv.",
+    categories: ["RL", "multi-agent", "autonomous-vehicles", "python", "openenv"],
+    description:
+      "An autonomous vehicle fleet oversight environment for OpenEnv — Meta's open framework for RL environments. An AI agent monitors a fleet of self-driving cars for crashes, choosing among five driving actions and justifying each decision in natural language under a hybrid reward that combines rule-based safety scoring with LLM reasoning.",
+    tags: ["Python", "OpenEnv", "Reinforcement Learning", "Multi-Agent", "LLM Agents"],
+    sections: [
+      {
+        heading: "What it is",
+        body: "A 2D road grid with N cars. Car 0 is controlled by an LLM agent; the rest follow simple scripted driving rules. An observer detects crashes and near-misses on every step and computes rewards based on safety. The agent chooses among accelerate, brake, lane_change_left, lane_change_right, and maintain, and has to justify its decision in natural language.",
+      },
+      {
+        heading: "Why it matters",
+        body: "Most RL agent benchmarks reward task completion. Fleet oversight is the inverse: the agent's job is to not cause incidents while staying useful. Overflow makes that the reward function — what an LLM would actually need to do if it were the supervisor of a Waymo-style fleet rather than the driver.",
+      },
+    ],
+    deepDive: {
+      tagline: "Reward safety, not completion.",
+      overview:
+        "Overflow frames fleet supervision as an RL problem where the reward is defined by what doesn't happen. The environment exposes the standard OpenEnv reset/step interface so any agent harness can drive it, while a hybrid reward system scores each step with deterministic safety rules and asks the LLM to justify its action — so the trace is auditable, not just a scalar.",
+      challenges: [
+        {
+          title: "Hybrid Rule-Based + LLM Reward",
+          body: "Every step, an observer scans the grid for crashes and near-misses and assigns a rule-based safety score. The agent must pick one of five driving actions and justify it in natural language, and that reasoning is scored alongside the safety rules — so the trace is auditable rather than a bare scalar. Across simulated scenarios this reduced the crash/incident rate by 80%.",
+        },
+        {
+          title: "Evaluation & Benchmarking Tooling",
+          body: "A Python harness runs an agent across simulated scenarios and reports safety performance per episode, framing the reward function around fleet-safety objectives rather than task completion so different agents and prompts can be compared on the same footing.",
+        },
+      ],
+      metrics: [
+        { value: "80%", label: "Lower crash/incident rate", sub: "across simulated scenarios" },
+        { value: "5", label: "Driving actions", sub: "accelerate / brake / lanes / maintain" },
+        { value: "N", label: "Cars per grid", sub: "1 LLM-controlled, rest scripted" },
+        { value: "OpenEnv", label: "Interface", sub: "standard reset / step API" },
+      ],
+      stack: [
+        { name: "Python", color: "#fbbf24" },
+        { name: "OpenEnv", color: "#60a5fa" },
+        { name: "LLM Agents", color: "#a78bfa" },
+      ],
+    },
+  },
+  {
     title: "Switch",
+    slug: "switch",
+    date: "2026-02-01",
+    summary:
+      "Multi-model AI chat platform — switch between OpenAI and Anthropic mid-conversation without losing context.",
+    categories: ["llm", "nextjs", "typescript", "supabase", "pgvector", "streaming"],
     description:
       "A full-stack multi-model AI platform serving 100+ users and 14K+ daily backend requests. Switch between models mid-conversation without losing context, with a custom prompt-routing classifier splitting traffic 70/30 between economy and premium models, and Cortex — a persistent memory system on Supabase Postgres with pgvector embeddings for low-latency semantic retrieval across 10K+ daily queries.",
     tags: ["Next.js", "TypeScript", "Supabase", "pgvector", "OpenAI", "Anthropic"],
@@ -343,6 +412,11 @@ function toAnthropic(msgs: NormalizedMessage[]) {
   },
   {
     title: "AutoTenant",
+    slug: "autotenant",
+    date: "2025-11-01",
+    summary:
+      "AI-powered property management — listing, tenant screening, leases, and payments in one dashboard.",
+    categories: ["llm", "nextjs", "fastapi", "postgresql", "stripe", "proptech"],
     description:
       "AI-powered property management platform that automates the entire rental workflow — from listing optimization and tenant screening to lease generation and payment processing. Integrates Zillow, Stripe, TransUnion, and DocuSign into a single dashboard for landlords and tenants.",
     tags: ["Next.js", "FastAPI", "PostgreSQL", "Stripe", "Zillow API", "Framer Motion"],
@@ -426,6 +500,11 @@ function RouteGuard({ role, children }) {
   },
   {
     title: "CollectHub",
+    slug: "collecthub",
+    date: "2026-01-01",
+    summary:
+      "Computer-vision pipeline that auto-crops trading card photos and tracks auction prices.",
+    categories: ["computer-vision", "python", "opencv", "fastapi", "nextjs", "google-cloud"],
     description:
       "Crop, grade, track, and trade — your entire baseball card collection, managed in one place. PSA-ready auto-cropping, auto-orientation, Vault format export, and auction intelligence across Fanatics, Goldin & PWCC.",
     tags: ["Next.js", "FastAPI", "OpenCV", "Python", "Google Cloud"],
@@ -508,6 +587,11 @@ def warp_card(
   },
   {
     title: "SwiftTrust",
+    slug: "swifttrust",
+    date: "2025-09-01",
+    summary:
+      "Escrow marketplace for peer-to-peer deals — state-machine lifecycle, Stripe Connect payouts, shareable trust links.",
+    categories: ["marketplace", "nextjs", "typescript", "supabase", "stripe"],
     description:
       "Hold. Verify. Release. SwiftTrust holds funds in escrow until the buyer confirms delivery — built for Discord communities, ticket trades, and P2P software sales. 3% fee, only on completed deals.",
     tags: ["Next.js", "Supabase", "Stripe", "TypeScript", "Resend"],
@@ -597,6 +681,11 @@ async function advance(
   },
   {
     title: "VesselNav",
+    slug: "vesselnav",
+    date: "2025-04-01",
+    summary:
+      "Interactive force-graph route visualizer with BFS pathfinding over a Spring Boot API.",
+    categories: ["visualization", "react", "typescript", "d3", "spring-boot", "postgresql"],
     description:
       "A Cyber-Medical discovery platform for the human vascular system. Dark glassmorphism dashboard with a physics-based force graph, ⌘K command palette pathfinder, particle flow simulation, and a Vessel Deep Dive panel with conditions, connected systems, and an animated 3D-style segment preview.",
     tags: ["React", "TypeScript", "D3.js", "Framer Motion", "Spring Boot", "PostgreSQL"],
@@ -677,6 +766,11 @@ const animate = () => {
   },
   {
     title: "Polymarket HFT Bot",
+    slug: "polymarket-hft-bot",
+    date: "2025-12-01",
+    summary:
+      "C++/Python market-making bot for Polymarket with an LSTM actor-critic trained via recurrent PPO.",
+    categories: ["RL", "trading", "cpp", "python", "pytorch"],
     description:
       "A low-latency hybrid C++/Python trading framework targeting Polymarket BTC 15-minute prediction markets, integrating the Polymarket CLOB API and Goldsky for real-time on-chain market data ingestion. Detects cross-venue arbitrage across Polymarket, Kalshi, and Binance with a Log-Normal probability model, and executes via a PPO agent with an LSTM actor-critic network — bridging the C++20 execution engine to Python ML inference through pybind11 for sub-millisecond order routing.",
     tags: ["C++20", "Python", "PyTorch", "Goldsky", "pybind11", "Polymarket CLOB"],
@@ -734,6 +828,11 @@ else:
   },
   {
     title: "FolioTrust",
+    slug: "foliotrust",
+    date: "2025-07-01",
+    summary:
+      "Two-portal fund management app — allocations, live P&L, withdrawals, and PDF statements with Postgres RLS.",
+    categories: ["fintech", "nextjs", "typescript", "supabase"],
     description:
       "A two-portal personal fund management web app. Manager portal for adding investors, creating allocations (stocks/ETFs/crypto), approving withdrawals, and generating PDF reports. Investor portals for viewing holdings, real-time P&L, requesting withdrawals, and downloading statements. Prices pulled from Alpaca and Coinbase, with end-to-end Postgres Row Level Security.",
     tags: ["Next.js", "TypeScript", "Supabase", "Alpaca API", "Coinbase API", "React-PDF", "Resend"],
@@ -742,6 +841,11 @@ else:
   },
   {
     title: "Order Book Simulator",
+    slug: "order-book-simulator",
+    date: "2025-10-01",
+    summary:
+      "Real-time limit order book with price-time matching, an OU market simulator, and WebSocket streaming.",
+    categories: ["finance", "python", "fastapi", "websockets", "redis"],
     description:
       "Real-time limit order book simulator with a price-time priority matching engine, WebSocket streaming, Redis persistence, and a live web dashboard.",
     tags: ["Python", "FastAPI", "WebSockets", "Redis", "Finance"],
