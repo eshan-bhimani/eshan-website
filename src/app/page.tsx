@@ -40,25 +40,22 @@ export default function Home() {
       {/* ── Intro ── */}
       <section className="mt-12 space-y-5">
         <p>
-          I&apos;m a Computer Science student at{" "}
-          <span className="font-medium">Georgia Tech</span> — Presidential
-          Scholar, Dean&apos;s List, and Zell Miller Scholar — with threads in
-          Intelligence and Systems &amp; Architecture, graduating May 2028.
+          I&apos;m a third-year Computer Science student at{" "}
+          <span className="font-medium">Georgia Tech</span>, graduating May
+          2028. I&apos;m a Presidential Scholar, Zell Miller Scholar, and on
+          the Dean&apos;s List, with threads in Intelligence and Systems &amp;
+          Architecture.
         </p>
         <p>
           This summer I was a Software Engineer Intern on the Data &amp; AI team
-          at <span className="font-medium">NCR Atleos</span>, where I built a
-          Graph RAG question-answering layer on Microsoft Fabric, an AI semantic
-          layer engine that cut Power BI scaffolding time by roughly 60%, and a
-          Neo4j data layer unifying 5+ internal sources across 10M+ node
-          relationships.
+          at <span className="font-medium">NCR Atleos</span>, where I built
+          agents and reduced their time to action.
         </p>
         <p>
-          I like building things that remove friction from someone&apos;s day:
-          tools people actually reach for, not demos. Long term, I want to start
-          a company at the intersection of AI, technology, and software —
-          turning hard engineering problems into simple, productive
-          experiences.
+          I&apos;m currently looking for Spring and Summer 2027 internships. My
+          interests include AI, software, startups, health &amp; wellness,
+          fashion, tennis, poker, and content creation. Long term, I want to
+          start a company at the intersection of AI, technology, and software.
         </p>
       </section>
 
