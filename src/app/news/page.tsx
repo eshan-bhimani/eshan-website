@@ -39,7 +39,14 @@ export default function NewsPage() {
           {items.map((item) => (
             <li key={`${item.date}-${item.title}`}>
               <p className="eyebrow">
+                {item.upcoming && "Coming soon · "}
                 <time dateTime={item.date}>{formatDate(item.date)}</time>
+                {item.endDate && (
+                  <>
+                    {" – "}
+                    <time dateTime={item.endDate}>{formatDate(item.endDate)}</time>
+                  </>
+                )}
                 {item.location ? ` · ${item.location}` : ""}
               </p>
               <h2 className="display mt-2 text-2xl">{item.title}</h2>
@@ -62,8 +69,9 @@ export default function NewsPage() {
                 <p className="mt-2 text-sm">
                   <a
                     href={item.link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(item.link.href.startsWith("/")
+                      ? {}
+                      : { target: "_blank", rel: "noopener noreferrer" })}
                     className="prose-link"
                   >
                     {item.link.label}

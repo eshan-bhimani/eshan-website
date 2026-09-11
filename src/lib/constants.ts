@@ -106,6 +106,10 @@ export interface NewsItem {
   body: string;
   /** Optional: where it happened */
   location?: string;
+  /** Optional: a future event — rendered with a "Coming soon" label and an end date */
+  upcoming?: boolean;
+  /** Optional: ISO end date for multi-day events */
+  endDate?: string;
   /** Optional: a link out — write-up, photos, the event page */
   link?: { label: string; href: string };
   /** Optional: small photos, rendered as a thumbnail row. Put files in public/news/. */
@@ -128,6 +132,21 @@ export interface NewsItem {
   },
 */
 export const NEWS_ITEMS: NewsItem[] = [
+  {
+    date: "2026-09-25",
+    endDate: "2026-09-27",
+    upcoming: true,
+    title: "HackGT 13 — Seaside Market",
+    body: "Heading to HackGT 13 at Georgia Tech, planning to compete in the AI/ML/Data Visualization track.",
+    location: "Atlanta, GA",
+    link: { label: "HackGT", href: "https://hack.gt" },
+  },
+  {
+    date: "2026-08-20",
+    title: "Finished building Overflow",
+    body: "Wrapped up Overflow, a multi-agent fleet oversight environment on Meta's OpenEnv where an LLM agent supervises a grid of scripted cars and is rewarded for what doesn't happen. Getting agents to coordinate without causing incidents taught me how much reinforcement learning matters when the goal is safety rather than task completion. I also just got FSD on my Tesla, and watching it handle odd merges and unprotected turns has me thinking about how to feed my agent the same kind of edge cases so it learns from the rare situations, not just the common ones.",
+    link: { label: "Project write-up", href: "/projects/overflow" },
+  },
   {
     date: "2026-08-15",
     title: "Invited to the YC Startup Internship Expo",
