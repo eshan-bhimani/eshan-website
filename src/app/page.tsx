@@ -21,6 +21,11 @@ export default function Home() {
           <p className="mt-3 text-ink-soft">
             Building at the intersection of AI, systems, and software.
           </p>
+          <p className="mt-2 text-sm text-ink-muted">
+            <a href="mailto:ebhimani3@gatech.edu" className="prose-link">
+              ebhimani3@gatech.edu
+            </a>
+          </p>
         </div>
         <Image
           src="/profile.jpg"
