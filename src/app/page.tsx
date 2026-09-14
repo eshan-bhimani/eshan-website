@@ -104,7 +104,11 @@ export default function Home() {
         <ul className="space-y-7">
           {featured.map((project) => (
             <li key={project.title}>
-              <h3 className="display text-2xl">{project.title}</h3>
+              <h3 className="display text-2xl">
+                <Link href={`/projects/${project.slug}`} className="hover:underline">
+                  {project.title}
+                </Link>
+              </h3>
               <p className="mt-1 text-ink-soft">{project.description}</p>
               <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
                 {project.link && (
