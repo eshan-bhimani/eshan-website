@@ -41,7 +41,9 @@ export default async function ProjectPage({
 
   const sections = [
     { heading: "What it is", body: project.whatItIs },
-    { heading: "Why it matters", body: project.whyItMatters },
+    ...(project.whyItMatters
+      ? [{ heading: "Why it matters", body: project.whyItMatters }]
+      : []),
     ...(project.inspiration
       ? [{ heading: "Inspiration", body: project.inspiration }]
       : []),
@@ -102,12 +104,12 @@ export default async function ProjectPage({
         <p className="mt-12 flex flex-wrap gap-x-5 text-sm">
           {project.github && (
             <a href={project.github} target="_blank" rel="noopener noreferrer" className="prose-link">
-              View on GitHub →
+              {project.githubLabel ?? "View on GitHub →"}
             </a>
           )}
           {project.link && (
             <a href={project.link} target="_blank" rel="noopener noreferrer" className="prose-link">
-              Live site →
+              {project.linkLabel ?? "Live site →"}
             </a>
           )}
           {project.video && (

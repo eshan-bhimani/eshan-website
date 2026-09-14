@@ -266,10 +266,14 @@ export interface Project {
   date?: string;
   status?: "wip";
   link?: string;
+  /** Optional override for the live-site link text (defaults to "Live site →") */
+  linkLabel?: string;
   github?: string;
+  /** Optional override for the GitHub link text (defaults to "View on GitHub →") */
+  githubLabel?: string;
   image?: string;
   whatItIs: string;
-  whyItMatters: string;
+  whyItMatters?: string;
   inspiration?: string;
   /** Optional: how you worked — methodology, approach, how doubts were navigated */
   process?: string;
@@ -327,12 +331,13 @@ export const FEATURED_PROJECTS: Project[] = [
       "A full-stack Django web application for browsing movies, reading and writing reviews, and placing orders, built for Georgia Tech's CS 2340 Objects and Design course.",
     tags: ["Django", "Python", "SQLite", "Bootstrap"],
     link: "https://eshanb.pythonanywhere.com",
+    linkLabel: "Live App Link: https://eshanb.pythonanywhere.com",
+    github: "https://github.com/eshan-bhimani/moviesstore",
+    githubLabel: "GitHub Link: https://github.com/eshan-bhimani/moviesstore",
     whatItIs:
-      "Each screen maps to a user story from the course spec. The home page introduces the store; the movie list and search page lets a user browse the full catalog or search by title; a movie detail page shows full movie information alongside its reviews. On that page, signed-in users can create, edit, and delete their own reviews, and report reviews that are inappropriate or offensive — a report immediately removes the review from the page. A shopping cart lets a user add movies, view cart contents, and clear the cart entirely before checking out. An accounts flow covers registration and login, and an order history page lists a user's past orders. An administrative panel, restricted to staff, gives full create/read/update/delete control over users, movies, reviews, and orders. The whole app is deployed on PythonAnywhere with a responsive Bootstrap layout that adapts across screen sizes.",
-    whyItMatters:
-      "This was my introduction to full-stack web development in CS 2340 — the first time I took a project from data models through templates, forms, and auth to a deployed, publicly reachable app, instead of just a local script or a class assignment run in isolation.",
+      "Each screen maps to a user story from the course spec. The home page introduces the store, the movie list and search page lets a user browse the full catalog or search by title, and a movie detail page shows full movie information alongside its reviews. On that page, signed-in users can create, edit, and delete their own reviews, and report reviews that are inappropriate or offensive; a report immediately removes the review from the page. A shopping cart lets a user add movies, view cart contents, and clear the cart entirely before checking out. An accounts flow covers registration and login, and an order history page lists a user's past orders. An administrative panel, restricted to staff, gives full create, read, update, and delete control over users, movies, reviews, and orders. The whole app is deployed on PythonAnywhere with a responsive Bootstrap layout that adapts across screen sizes.",
     process:
-      "I worked through Django 5 for the Impatient chapter by chapter, structuring development in dependency order: templates and static files first, then the movie catalog, accounts, reviews, cart, and orders, with deployment last, so each new feature could build on ones that already worked. I documented each session as I went, which made it easier to isolate bugs instead of guessing at fixes across a tangle of half-finished features. Two bugs stood out. Before I'd written any application code, running startapp threw an import error — Django wasn't installed in the active environment, because the virtual environment was deactivated. A good early reminder to check the basics before assuming something more complex was wrong. Later, while building the review form, a POST request was hitting a 404, and the URL in the error message was the literal text of a Django template tag rather than a rendered URL — meaning the tag was never being evaluated. Tracing it back to a quoting mismatch in the form's action attribute was a useful lesson in how easily template syntax errors can masquerade as routing problems.",
+      "I worked through Django 5 for the Impatient chapter by chapter, structuring development in dependency order. I built templates and static files first, then the movie catalog, accounts, reviews, cart, and orders, with deployment last, so each new feature could build on ones that already worked. I documented each session as I went, which made it easier to isolate bugs instead of guessing at fixes across a tangle of half-finished features. Two bugs stood out. Before I'd written any application code, running startapp threw an import error, because Django wasn't installed in the active environment since the virtual environment was deactivated. That was a good early reminder to check the basics before assuming something more complex was wrong. Later, while building the review form, a POST request was hitting a 404, and the URL in the error message was the literal text of a Django template tag rather than a rendered URL, meaning the tag was never being evaluated. Tracing it back to a quoting mismatch in the form's action attribute was a useful lesson in how easily template syntax errors can masquerade as routing problems.",
     stack: ["Django", "Python", "SQLite", "Bootstrap", "PythonAnywhere"],
   },
   {
