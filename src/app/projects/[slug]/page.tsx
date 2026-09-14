@@ -45,6 +45,7 @@ export default async function ProjectPage({
     ...(project.inspiration
       ? [{ heading: "Inspiration", body: project.inspiration }]
       : []),
+    ...(project.process ? [{ heading: "Process", body: project.process }] : []),
   ];
 
   return (
@@ -97,7 +98,7 @@ export default async function ProjectPage({
         </p>
       </section>
 
-      {(project.github || project.link) && (
+      {(project.github || project.link || project.video) && (
         <p className="mt-12 flex flex-wrap gap-x-5 text-sm">
           {project.github && (
             <a href={project.github} target="_blank" rel="noopener noreferrer" className="prose-link">
@@ -107,6 +108,11 @@ export default async function ProjectPage({
           {project.link && (
             <a href={project.link} target="_blank" rel="noopener noreferrer" className="prose-link">
               Live site →
+            </a>
+          )}
+          {project.video && (
+            <a href={project.video} target="_blank" rel="noopener noreferrer" className="prose-link">
+              Watch demo video →
             </a>
           )}
         </p>
