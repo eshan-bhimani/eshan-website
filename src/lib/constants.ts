@@ -426,6 +426,23 @@ export const FEATURED_PROJECTS: Project[] = [
     stack: ["Next.js", "TypeScript", "Supabase", "Alpaca API", "Coinbase API", "React-PDF", "Resend"],
   },
   {
+    title: "GT Movies Store",
+    slug: "gt-movies-store",
+    date: "2025-05-01",
+    summary:
+      "Full-stack Django movie store with reviews, cart, orders, and an admin panel, built for Georgia Tech's CS 2340.",
+    categories: ["django", "python", "sqlite", "bootstrap", "ecommerce"],
+    description:
+      "A full-stack Django web application for browsing movies, reading and writing reviews, and placing orders, built for Georgia Tech's CS 2340 Objects and Design course.",
+    tags: ["Django", "Python", "SQLite", "Bootstrap"],
+    link: "https://eshanb.pythonanywhere.com",
+    whatItIs:
+      "Users browse a movie catalog with search, view movie detail pages alongside reviews, and manage a shopping cart before placing an order. Accounts let users register, log in, and see their order history. Reviews can be created, edited, deleted by their author, or reported by other users, which removes them from the page. An administrative panel gives staff full CRUD control over users, movies, reviews, and orders. It's deployed on PythonAnywhere with a responsive Bootstrap layout.",
+    whyItMatters:
+      "Built chapter by chapter while working through Django 5 for the Impatient, in dependency order — templates and static files, then the catalog, accounts, reviews, cart, and orders, with deployment last. Debugging a POST request that 404'd on the literal text of a template tag, traced back to a quoting mismatch in a form's action attribute, was a good lesson in how template syntax errors can masquerade as routing problems. An earlier import error from a deactivated virtual environment was a reminder to check the basics before assuming something more complex was wrong.",
+    stack: ["Django", "Python", "SQLite", "Bootstrap", "PythonAnywhere"],
+  },
+  {
     title: "Order Book Simulator",
     slug: "order-book-simulator",
     date: "2025-10-01",
