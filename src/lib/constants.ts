@@ -279,6 +279,8 @@ export interface Project {
   process?: string;
   /** Optional: URL to a demo video (YouTube/Loom/Drive share link) */
   video?: string;
+  /** Optional override for the video link text (defaults to "Watch demo video →") */
+  videoLabel?: string;
   stack: string[];
 }
 
@@ -334,6 +336,9 @@ export const FEATURED_PROJECTS: Project[] = [
     linkLabel: "Live App Link: https://eshanb.pythonanywhere.com",
     github: "https://github.com/eshan-bhimani/moviesstore",
     githubLabel: "GitHub Link: https://github.com/eshan-bhimani/moviesstore",
+    video:
+      "https://gtvault-my.sharepoint.com/:v:/g/personal/ebhimani3_gatech_edu/IQDe23BSveS-T47FkyueNPj-AXblgN-v-wRYrnvbJB-sXuY?e=zqYlZN&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D",
+    videoLabel: "Movies Store Demo Video →",
     whatItIs:
       "Each screen maps to a user story from the course spec. The home page introduces the store, the movie list and search page lets a user browse the full catalog or search by title, and a movie detail page shows full movie information alongside its reviews. On that page, signed-in users can create, edit, and delete their own reviews, and report reviews that are inappropriate or offensive; a report immediately removes the review from the page. A shopping cart lets a user add movies, view cart contents, and clear the cart entirely before checking out. An accounts flow covers registration and login, and an order history page lists a user's past orders. An administrative panel, restricted to staff, gives full create, read, update, and delete control over users, movies, reviews, and orders. The whole app is deployed on PythonAnywhere with a responsive Bootstrap layout that adapts across screen sizes.",
     process:

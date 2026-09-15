@@ -114,7 +114,7 @@ export default async function ProjectPage({
           )}
           {project.video && (
             <a href={project.video} target="_blank" rel="noopener noreferrer" className="prose-link">
-              Watch demo video →
+              {project.videoLabel ?? "Watch demo video →"}
             </a>
           )}
         </p>
