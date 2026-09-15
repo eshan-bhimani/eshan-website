@@ -275,6 +275,8 @@ export interface Project {
   whatItIs: string;
   whyItMatters?: string;
   inspiration?: string;
+  /** Optional: list mapping each screen/feature to the user story number(s) it satisfies */
+  userStories?: { feature: string; stories: string }[];
   /** Optional: how you worked — methodology, approach, how doubts were navigated */
   process?: string;
   /** Optional: URL to a demo video (YouTube/Loom/Drive share link) */
@@ -341,6 +343,25 @@ export const FEATURED_PROJECTS: Project[] = [
     videoLabel: "Movies Store Demo Video →",
     whatItIs:
       "Each screen maps to a user story from the course spec. The home page introduces the store, the movie list and search page lets a user browse the full catalog or search by title, and a movie detail page shows full movie information alongside its reviews. On that page, signed-in users can create, edit, and delete their own reviews, and report reviews that are inappropriate or offensive; a report immediately removes the review from the page. A shopping cart lets a user add movies, view cart contents, and clear the cart entirely before checking out. An accounts flow covers registration and login, and an order history page lists a user's past orders. An administrative panel, restricted to staff, gives full create, read, update, and delete control over users, movies, reviews, and orders. The whole app is deployed on PythonAnywhere with a responsive Bootstrap layout that adapts across screen sizes.",
+    userStories: [
+      { feature: "Home page", stories: "US 1 — view information about the store" },
+      { feature: "Registration and login", stories: "US 2, 3 — register an account, log in" },
+      { feature: "Movie list and search", stories: "US 4, 5 — view list of movies, search by title" },
+      { feature: "Shopping cart", stories: "US 6, 7, 9 — access cart, add items, remove all items" },
+      { feature: "Movie reviews", stories: "US 8, 10, 11, 12 — create, edit, delete, view reviews" },
+      { feature: "Movie detail page", stories: "US 13 — view movie details" },
+      { feature: "Order history", stories: "US 14 — view list of past orders" },
+      { feature: "Cross-browser desktop access", stories: "US 15" },
+      { feature: "Responsive layout", stories: "US 16 — Bootstrap-based responsive GUI" },
+      { feature: "Admin panel: user management", stories: "US 17" },
+      { feature: "Admin panel: movie management", stories: "US 18" },
+      { feature: "Admin panel: review management", stories: "US 19" },
+      { feature: "Admin panel: order management", stories: "US 20" },
+      {
+        feature: "Report review feature",
+        stories: "US 21 — report inappropriate reviews, removes them from the page",
+      },
+    ],
     process:
       "I worked through Django 5 for the Impatient chapter by chapter, structuring development in dependency order. I built templates and static files first, then the movie catalog, accounts, reviews, cart, and orders, with deployment last, so each new feature could build on ones that already worked. I documented each session as I went, which made it easier to isolate bugs instead of guessing at fixes across a tangle of half-finished features. Two bugs stood out. Before I'd written any application code, running startapp threw an import error, because Django wasn't installed in the active environment since the virtual environment was deactivated. That was a good early reminder to check the basics before assuming something more complex was wrong. Later, while building the review form, a POST request was hitting a 404, and the URL in the error message was the literal text of a Django template tag rather than a rendered URL, meaning the tag was never being evaluated. Tracing it back to a quoting mismatch in the form's action attribute was a useful lesson in how easily template syntax errors can masquerade as routing problems. I ran into many issues recording through Microsoft Teams. The share screen function would often continuously unshare while I was working, and I reference it a good amount in my video recordings; I will go to office hours to discuss it with Professor. My laptop also crashed frequently due to RAM issues, which I will also discuss with Professor.",
     stack: ["Django", "Python", "SQLite", "Bootstrap", "PythonAnywhere"],

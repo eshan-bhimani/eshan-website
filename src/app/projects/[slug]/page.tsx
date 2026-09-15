@@ -39,7 +39,7 @@ export default async function ProjectPage({
   const project = FEATURED_PROJECTS.find((p) => p.slug === slug);
   if (!project) notFound();
 
-  const sections = [
+  const sectionsBeforeProcess = [
     { heading: "What it is", body: project.whatItIs },
     ...(project.whyItMatters
       ? [{ heading: "Why it matters", body: project.whyItMatters }]
@@ -47,6 +47,8 @@ export default async function ProjectPage({
     ...(project.inspiration
       ? [{ heading: "Inspiration", body: project.inspiration }]
       : []),
+  ];
+  const sectionsAfterProcess = [
     ...(project.process ? [{ heading: "Process", body: project.process }] : []),
   ];
 
@@ -79,7 +81,27 @@ export default async function ProjectPage({
 
       <p className="mt-10 text-lg">{project.description}</p>
 
-      {sections.map((section) => (
+      {sectionsBeforeProcess.map((section) => (
+        <section key={section.heading} className="mt-12">
+          <h2 className="display text-3xl">{section.heading}</h2>
+          <p className="mt-4 text-ink-soft">{section.body}</p>
+        </section>
+      ))}
+
+      {project.userStories && (
+        <section className="mt-12">
+          <h2 className="display text-3xl">User Stories</h2>
+          <ul className="mt-4 space-y-2 text-ink-soft">
+            {project.userStories.map((item) => (
+              <li key={item.feature}>
+                <span className="text-ink">{item.feature}</span> — {item.stories}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {sectionsAfterProcess.map((section) => (
         <section key={section.heading} className="mt-12">
           <h2 className="display text-3xl">{section.heading}</h2>
           <p className="mt-4 text-ink-soft">{section.body}</p>
