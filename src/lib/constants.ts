@@ -36,7 +36,7 @@ export const EXPERIENCE: Experience[] = [
     period: "May 2026 – August 2026",
     location: "Atlanta, GA",
     bullets: [
-      "Built a Graph RAG query system for NCR’s Data & AI Team on Microsoft Fabric using LangChain, Neo4j, and LLM-generated Cypher queries, reducing agent response latency 70% and improving answer accuracy 50%",
+      "Built a Graph RAG query system for the Data & AI Team on Microsoft Fabric using LangChain, Neo4j, and LLM-generated Cypher queries, reducing agent response latency 70% and improving answer accuracy 50%",
       "Developed an agentic schema-recommendation engine with Azure OpenAI that profiled raw SQL tables and generated Power BI-ready semantic models, reducing setup time ~60% and automating schema scaffolding",
       "Architected a Neo4j-backed data layer integrating 5+ internal data sources and 10M+ relationships into a unified graph backend, reducing multi-hop retrieval latency ~40%",
     ],
