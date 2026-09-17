@@ -32,13 +32,13 @@ export interface Experience {
 export const EXPERIENCE: Experience[] = [
   {
     company: "NCR Atleos",
-    role: "Software Engineer Intern — Data & AI Team",
+    role: "Software Engineer Intern",
     period: "May 2026 – August 2026",
     location: "Atlanta, GA",
     bullets: [
-      "Built a Graph RAG natural language Q&A layer on Microsoft Fabric using LangChain and Cypher-generating LLM pipelines, reducing agent response times by ~70% while increasing answer accuracy and capability by ~50%",
-      "Developed an AI-powered semantic layer recommendation engine using Azure OpenAI and agentic workflows to profile raw SQL tables and auto-generate Power BI-ready schemas, reducing scaffolding time by ~60%",
-      "Architected a Neo4j-backed data layer integrating 5+ cross-domain internal data sources (10M+ node relationships) into a unified backend, enabling connected querying and reducing multi-hop retrieval latency by ~40%",
+      "Built a Graph RAG query system for NCR’s Data & AI Team on Microsoft Fabric using LangChain, Neo4j, and LLM-generated Cypher queries, reducing agent response latency 70% and improving answer accuracy 50%",
+      "Developed an agentic schema-recommendation engine with Azure OpenAI that profiled raw SQL tables and generated Power BI-ready semantic models, reducing setup time ~60% and automating schema scaffolding",
+      "Architected a Neo4j-backed data layer integrating 5+ internal data sources and 10M+ relationships into a unified graph backend, reducing multi-hop retrieval latency ~40%",
     ],
     tags: ["Neo4j", "LangChain", "Azure OpenAI", "Microsoft Fabric", "Graph RAG"],
   },
@@ -49,8 +49,8 @@ export const EXPERIENCE: Experience[] = [
     location: "Atlanta, GA",
     bullets: [
       "Engineered an AI-powered image processing pipeline using OpenCV and FastAPI to automate card photo cropping, reducing manual processing time by 75% and managing 1,000+ images via the Google Photos API on GCP",
-      "Architected a pricing engine and auction monitor in Python with 90 rules and real-time bid tracking across marketplaces",
-      "Built a domain-aware trade matching engine with a weighted scoring algorithm across grade, set, and grading company",
+      "Built a Python pricing engine with real-time marketplace bid monitoring, automating valuation across inventory",
+      "Built a trade matching engine with weighted scoring across grade, set, and grading company to rank comparable sales",
     ],
     tags: ["OpenCV", "FastAPI", "Python", "GCP", "Google Photos API"],
   },
@@ -58,18 +58,18 @@ export const EXPERIENCE: Experience[] = [
     company: "Algoverse AI",
     role: "AI Researcher",
     period: "September 2025 – March 2026",
-    location: "Remote",
+    location: "Palo Alto, CA",
     bullets: [
-      "Developed a novel multi-task benchmark evaluating LLMs' vision-based tool use capabilities in geolocation reasoning tasks, architecting evaluation frameworks that test spatial reasoning; submitted to COLM 2026",
-      "Automated 300+ location data collection via Python/Selenium and the Street View API with programmatic validation",
-      "Refactored the prototype codebase into a production-ready repository with CI/CD integration, implementing 50+ automated tests and type checks that reduced setup time by 20% and enabled reproducible one-command execution",
+      "Developed a novel multi-task benchmark evaluating LLMs' vision-based capabilities on geolocation reasoning and tool use; designed spatial reasoning evaluations and submitted the work to COLM 2026",
+      "Automated collection and validation of 300+ geolocation samples using Python, Selenium, and the Street View API",
+      "Productionized the research codebase with CI/CD and 50+ automated tests and type checks, reducing setup time 20% and enabling one-command reproducible evaluation",
     ],
     tags: ["Python", "Selenium", "Street View API", "CI/CD", "LLMs"],
   },
 ];
 
 export const SKILLS: Record<string, string[]> = {
-  Languages: ["Python", "Java", "C++", "TypeScript", "JavaScript", "SQL", "Bash"],
+  Languages: ["Python", "Java", "C++", "TypeScript", "JavaScript", "SQL", "Linux"],
   "AI Tools": [
     "Azure OpenAI",
     "LangChain",
@@ -81,7 +81,16 @@ export const SKILLS: Record<string, string[]> = {
     "Antigravity",
     "GitHub Copilot",
   ],
-  Frameworks: ["React", "Next.js", "FastAPI", "Spring Boot", "Node.js", "D3.js"],
+  Frameworks: [
+    "React",
+    "Next.js",
+    "FastAPI",
+    "Django",
+    "PyTorch",
+    "Node.js",
+    "D3.js",
+    "Spring Boot",
+  ],
   "Tools & Libraries": [
     "Git",
     "Docker",
@@ -90,11 +99,10 @@ export const SKILLS: Record<string, string[]> = {
     "Vercel",
     "Neo4j",
     "PostgreSQL",
+    "Supabase",
     "Redis",
     "OpenCV",
-    "PyTorch",
     "pybind11",
-    "SQLAlchemy",
   ],
 };
 
@@ -188,38 +196,20 @@ export const NEWS_ITEMS: NewsItem[] = [
 
 export const EDUCATION = {
   school: "Georgia Institute of Technology",
-  degree: "B.S. Computer Science",
-  gpa: "3.87 / 4.0",
+  degree: "B.S. in Computer Science",
+  gpa: "3.94 / 4.0",
   grad: "Expected May 2028",
-  concentration: "Systems & Architecture + Intelligence",
-  honors: "Presidential Scholar, Dean's List, Zell Miller Scholarship",
+  threads: "Systems & Architecture, Artificial Intelligence",
+  honors: "Presidential Scholar, Zell Miller Scholar",
   courses: [
     "Data Structures",
     "Algorithms",
     "Computer Organization",
     "Artificial Intelligence",
-    "Objects and Design",
     "Machine Learning",
-    "Database Management",
-    "Software Development",
-    "Linear Algebra",
-    "Discrete Math",
+    "Database Systems",
   ],
 } as const;
-
-/* UGA research role — on the site but not on the current resume PDF */
-const UGA_RESEARCH: Experience = {
-  company: "University of Georgia",
-  role: "Undergraduate Researcher",
-  period: "September 2025 – April 2026",
-  location: "Athens, GA",
-  bullets: [
-    "Developed high-performance spectral preprocessing algorithms in Python for signal normalization and noise reduction, optimizing computational throughput by 25% across high-dimensional datasets for downstream ML models",
-    "Architected robust, modular data pipelines to automate raw spectral data transformation into analysis-ready formats",
-    "Implemented programmatic verification systems using NumPy and SciPy to validate signal accuracy across the data lifecycle",
-  ],
-  tags: ["Python", "NumPy", "SciPy", "Data Pipelines"],
-};
 
 /*
   Full resume history, reverse-chronological. Derived from EXPERIENCE so the
@@ -228,7 +218,6 @@ const UGA_RESEARCH: Experience = {
 export const RESUME_EXPERIENCE: Experience[] = [
   EXPERIENCE[0],
   EXPERIENCE[1],
-  UGA_RESEARCH,
   EXPERIENCE[2],
 ];
 

@@ -42,9 +42,8 @@ export default function Home() {
         <p>
           I&apos;m a third-year Computer Science student at{" "}
           <span className="font-medium">Georgia Tech</span>, graduating May
-          2028. I&apos;m a Presidential Scholar, Zell Miller Scholar, and on
-          the Dean&apos;s List, with threads in Intelligence and Systems &amp;
-          Architecture.
+          2028. I&apos;m a Presidential Scholar and Zell Miller Scholar, with
+          threads in Systems &amp; Architecture and Artificial Intelligence.
         </p>
         <p>
           This summer I was a Software Engineer Intern on the Data &amp; AI team
@@ -71,7 +70,7 @@ export default function Home() {
           </div>
         </div>
         <ul className="mt-4 space-y-2">
-          <Bullet>Concentration: {EDUCATION.concentration}</Bullet>
+          <Bullet>Threads: {EDUCATION.threads}</Bullet>
           <Bullet>Honors: {EDUCATION.honors}</Bullet>
           <Bullet>Coursework: {EDUCATION.courses.join(", ")}</Bullet>
         </ul>

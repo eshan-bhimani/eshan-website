@@ -45,7 +45,7 @@ export default function ResumePage() {
           </div>
         </div>
         <ul className="mt-4 space-y-2">
-          <Bullet>Concentration: {EDUCATION.concentration}</Bullet>
+          <Bullet>Threads: {EDUCATION.threads}</Bullet>
           <Bullet>Honors: {EDUCATION.honors}</Bullet>
           <Bullet>Relevant coursework: {EDUCATION.courses.join(", ")}</Bullet>
         </ul>

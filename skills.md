@@ -77,3 +77,8 @@ Whenever you make progress, fix a bug, discover an architectural detail, or rece
 - If a lesson applies to a specific directory, add a `skills.md` there.
 - If a lesson applies to a reusable workflow, update the relevant global skill.
 - Write specific rules, not vague reminders.
+
+## Resume Content
+
+- `public/resume.pdf` is the canonical downloadable resume supplied by Eshan.
+- Keep `EDUCATION`, `EXPERIENCE`, `RESUME_EXPERIENCE`, and `SKILLS` in `src/lib/constants.ts` aligned with that PDF so the homepage and resume page do not drift.
