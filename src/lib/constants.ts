@@ -26,6 +26,8 @@ export interface Experience {
   role: string;
   period: string;
   location: string;
+  logo?: string;
+  website?: string;
   homepageDescription: string;
   link?: { label: string; href: string };
   bullets: string[];
@@ -38,6 +40,7 @@ export const EXPERIENCE: Experience[] = [
     role: "Software Engineer Intern",
     period: "May 2026 – August 2026",
     location: "Atlanta, GA",
+    logo: "/companies/ncr-atleos.jpeg",
     homepageDescription:
       "Developing AI Agents and AI automation pipelines over the data lake to drive informed business decision-making",
     bullets: [
@@ -66,6 +69,7 @@ export const EXPERIENCE: Experience[] = [
     role: "AI Researcher",
     period: "September 2025 – March 2026",
     location: "Palo Alto, CA",
+    logo: "/companies/algoverse-ai.jpeg",
     homepageDescription:
       "Engineered a production-grade benchmark using GeoGuessr to evaluate agentic reasoning and vision-based navigation in LLMs. Submitted to COLM 2026.",
     link: {
@@ -84,6 +88,8 @@ export const EXPERIENCE: Experience[] = [
     role: "Co-Founder",
     period: "February 2026 – May 2026",
     location: "Atlanta, GA",
+    logo: "/companies/switch.jpeg",
+    website: "https://theswitchai.com",
     homepageDescription:
       "Building the most effective and efficient routing intelligence layer for AI models and Agents",
     bullets: [],

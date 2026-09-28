@@ -76,21 +76,49 @@ export default function Home() {
         <ul className="space-y-8">
           {EXPERIENCE.map((exp) => (
             <li key={exp.company}>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                <h3 className="display text-2xl">{exp.company}</h3>
-                <span className="text-sm text-ink-muted">{exp.period}</span>
+              <div className={exp.logo ? "flex items-start gap-4" : undefined}>
+                {exp.logo && (
+                  <span className="brand-plate mt-1 h-12 w-12 shrink-0 overflow-hidden rounded-md">
+                    <Image
+                      src={exp.logo}
+                      alt=""
+                      width={48}
+                      height={48}
+                      className="h-full w-full object-contain"
+                    />
+                  </span>
+                )}
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                    <h3 className="display text-2xl">
+                      {exp.website ? (
+                        <a
+                          href={exp.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline"
+                        >
+                          {exp.company}
+                        </a>
+                      ) : (
+                        exp.company
+                      )}
+                    </h3>
+                    <span className="text-sm text-ink-muted">{exp.period}</span>
+                  </div>
+                  <p className="mt-0.5 text-ink-soft">
+                    {exp.role} · {exp.location}
+                  </p>
+                  <p className="mt-3">{exp.homepageDescription}</p>
+                  {exp.link && (
+                    <p className="mt-2 text-sm">
+                      <a href={exp.link.href} className="prose-link">
+                        {exp.link.label} →
+                      </a>
+                    </p>
+                  )}
+                </div>
               </div>
-              <p className="mt-0.5 text-ink-soft">
-                {exp.role} · {exp.location}
-              </p>
-              <p className="mt-3">{exp.homepageDescription}</p>
-              {exp.link && (
-                <p className="mt-2 text-sm">
-                  <a href={exp.link.href} className="prose-link">
-                    {exp.link.label} →
-                  </a>
-                </p>
-              )}
             </li>
           ))}
         </ul>
