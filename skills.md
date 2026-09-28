@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is Eshan Bhimani's personal portfolio website built with Next.js, showcasing his work as a CS student at Georgia Tech. It solves the problem of having a polished, professional online presence that goes beyond a resume — featuring detailed project deep dives with engineering challenges, code snippets, and performance metrics. The core workflow is a static-first site where visitors can browse projects, read about Eshan's background, view his resume, and reach out via contact links. All content is config-driven from a single constants file, making updates fast and consistent across the site.
+This is Eshan Bhimani's personal portfolio website built with Next.js, showcasing his work as a CS student at Georgia Tech. It provides a polished professional presence beyond a resume, with project deep dives, engineering context, performance metrics, writing, and research. Do not embed code snippets in the public frontend. The core workflow is a static-first site where visitors can browse projects, read about Eshan's background and work, view his resume, and reach out via contact links. All content is config-driven from a single constants file, making updates fast and consistent across the site.
 
 ## Tech Stack
 
@@ -46,7 +46,7 @@ This is Eshan Bhimani's personal portfolio website built with Next.js, showcasin
 - `src/app/globals.css`: Tailwind import, CSS variable theme (colors, fonts), scrollbar and selection styles
 - `src/components/`: Reusable UI components (Navbar, Footer, ProjectCard, ProjectDeepDive, SectionReveal, AnimatedGrid)
 - `src/components/ui/`: Presentational components specific to sections or visual effects
-- `src/lib/constants.ts`: **Single source of truth** — all nav links, social links, and full project data including deep dive content, metrics, challenges, and code snippets
+- `src/lib/constants.ts`: **Single source of truth** — all nav links, social links, résumé details, writing entries, and project content including deep dives, metrics, and challenges
 
 ## Commands
 
@@ -66,7 +66,7 @@ npm run lint       # Run Next.js ESLint
 - **`ProjectCard` + `ProjectDeepDive`** use Framer Motion `layoutId` for shared element transitions — always pass a unique stable `id` per project
 - **Color palette** uses CSS variables defined in `globals.css`; prefer `var(--color-*)` over raw hex values in new components
 - **Georgia Tech gold** is `#B3A369` — used for current-status highlights and education accents
-- **JetBrains Mono** (`font-mono`) is used for code blocks, tags, and technical labels
+- **JetBrains Mono** (`font-mono`) is used for filters, tags, dates, and technical labels
 - **No backend, no auth, no DB** — keep the site static; avoid adding server actions or API routes unless the scope changes significantly
 
 ## Self-Improvement Rule

@@ -6,8 +6,6 @@ import {
   RESUME_EXPERIENCE,
   FEATURED_PROJECTS,
   SKILLS,
-  AWARDS,
-  INTERESTS,
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -17,7 +15,9 @@ export const metadata: Metadata = {
 };
 
 export default function ResumePage() {
-  const projects = FEATURED_PROJECTS.slice(0, 4);
+  const projects = FEATURED_PROJECTS.filter(
+    (project) => project.resumeOrder !== undefined
+  ).sort((a, b) => (a.resumeOrder ?? 0) - (b.resumeOrder ?? 0));
 
   return (
     <article className="pt-16 sm:pt-24">
@@ -71,6 +71,13 @@ export default function ResumePage() {
               <p className="mt-3 text-sm text-ink-muted">
                 {exp.tags.join(" · ")}
               </p>
+              {exp.link && (
+                <p className="mt-2 text-sm">
+                  <a href={exp.link.href} className="prose-link">
+                    {exp.link.label} →
+                  </a>
+                </p>
+              )}
             </li>
           ))}
         </ul>
@@ -81,17 +88,28 @@ export default function ResumePage() {
         <ul className="space-y-6">
           {projects.map((project) => (
             <li key={project.title}>
-              <h3 className="display text-2xl">{project.title}</h3>
-              <p className="mt-1 text-ink-soft">{project.description}</p>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 className="display text-2xl">
+                  {project.resumeTitle ?? project.title}
+                </h3>
+                <span className="text-sm text-ink-muted">{project.resumePeriod}</span>
+              </div>
               <p className="mt-2 text-sm text-ink-muted">
-                {project.tags.join(" · ")}
+                {(project.resumeStack ?? project.tags).join(" · ")}
               </p>
+              {project.resumeBullets && (
+                <ul className="mt-3 space-y-2">
+                  {project.resumeBullets.map((bullet) => (
+                    <Bullet key={bullet}>{bullet}</Bullet>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>
         <p className="mt-7">
           <Link href="/projects" className="prose-link">
-            All {FEATURED_PROJECTS.length} projects, with engineering write-ups
+            All Projects, more details
           </Link>
         </p>
       </Section>
@@ -105,20 +123,6 @@ export default function ResumePage() {
               <dd className="mt-1">{items.join(", ")}</dd>
             </div>
           ))}
-        </dl>
-      </Section>
-
-      {/* ── Awards & interests ── */}
-      <Section title="Awards & interests">
-        <dl className="space-y-4">
-          <div>
-            <dt className="eyebrow">Awards</dt>
-            <dd className="mt-1">{AWARDS.join(", ")}</dd>
-          </div>
-          <div>
-            <dt className="eyebrow">Interests</dt>
-            <dd className="mt-1">{INTERESTS.join(", ")}</dd>
-          </div>
         </dl>
       </Section>
 

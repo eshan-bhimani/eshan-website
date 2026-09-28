@@ -9,6 +9,7 @@ export const SITE_CONFIG = {
 export const NAV_LINKS = [
   { label: "News", href: "/news" },
   { label: "Projects", href: "/projects" },
+  { label: "Writing", href: "/writing" },
   { label: "Resume", href: "/resume" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -25,6 +26,8 @@ export interface Experience {
   role: string;
   period: string;
   location: string;
+  homepageDescription: string;
+  link?: { label: string; href: string };
   bullets: string[];
   tags: string[];
 }
@@ -35,10 +38,12 @@ export const EXPERIENCE: Experience[] = [
     role: "Software Engineer Intern",
     period: "May 2026 – August 2026",
     location: "Atlanta, GA",
+    homepageDescription:
+      "Developing AI Agents and AI automation pipelines over the data lake to drive informed business decision-making",
     bullets: [
       "Built a Graph RAG query system for the Data & AI Team on Microsoft Fabric using LangChain, Neo4j, and LLM-generated Cypher queries, reducing agent response latency 70% and improving answer accuracy 50%",
       "Developed an agentic schema-recommendation engine with Azure OpenAI that profiled raw SQL tables and generated Power BI-ready semantic models, reducing setup time ~60% and automating schema scaffolding",
-      "Architected a Neo4j-backed data layer integrating 5+ internal data sources and 10M+ relationships into a unified graph backend, reducing multi-hop retrieval latency ~40%",
+      "Architected a Neo4j-backed data layer integrating 5+ internal data sources and 10M+ relationships into a unified graph backend, reducing multi-hop retrieval latency 50%",
     ],
     tags: ["Neo4j", "LangChain", "Azure OpenAI", "Microsoft Fabric", "Graph RAG"],
   },
@@ -47,10 +52,12 @@ export const EXPERIENCE: Experience[] = [
     role: "Software Engineer Intern",
     period: "December 2025 – July 2026",
     location: "Atlanta, GA",
+    homepageDescription:
+      "Lead Software Engineer at startup working to revolutionize the Sports memorabilia & Sports Convention industries",
     bullets: [
-      "Engineered an AI-powered image processing pipeline using OpenCV and FastAPI to automate card photo cropping, reducing manual processing time by 75% and managing 1,000+ images via the Google Photos API on GCP",
+      "Engineered an AI-powered image processing pipeline using OpenCV and FastAPI to automate card photo cropping, reducing manual processing time by 75% and managing 1,000+ images via Google Photos API on GCP",
       "Built a Python pricing engine with real-time marketplace bid monitoring, automating valuation across inventory",
-      "Built a trade matching engine with weighted scoring across grade, set, and grading company to rank comparable sales",
+      "Built a trade matching engine with weighted scoring across grade, set, and company to rank comparable sales",
     ],
     tags: ["OpenCV", "FastAPI", "Python", "GCP", "Google Photos API"],
   },
@@ -59,23 +66,39 @@ export const EXPERIENCE: Experience[] = [
     role: "AI Researcher",
     period: "September 2025 – March 2026",
     location: "Palo Alto, CA",
+    homepageDescription:
+      "Engineered a production-grade benchmark using GeoGuessr to evaluate agentic reasoning and vision-based navigation in LLMs. Submitted to COLM 2026.",
+    link: {
+      label: "Read the research paper",
+      href: "/research/geoguesser-bench.pdf",
+    },
     bullets: [
       "Developed a novel multi-task benchmark evaluating LLMs' vision-based capabilities on geolocation reasoning and tool use; designed spatial reasoning evaluations and submitted the work to COLM 2026",
-      "Automated collection and validation of 300+ geolocation samples using Python, Selenium, and the Street View API",
+      "Automated collection and validation of 300+ geolocation samples using Python, Selenium, and the GSV API",
       "Productionized the research codebase with CI/CD and 50+ automated tests and type checks, reducing setup time 20% and enabling one-command reproducible evaluation",
     ],
     tags: ["Python", "Selenium", "Street View API", "CI/CD", "LLMs"],
+  },
+  {
+    company: "Switch",
+    role: "Co-Founder",
+    period: "February 2026 – May 2026",
+    location: "Atlanta, GA",
+    homepageDescription:
+      "Building the most effective and efficient routing intelligence layer for AI models and Agents",
+    bullets: [],
+    tags: ["Next.js", "TypeScript", "Supabase", "pgvector", "OpenAI", "Anthropic"],
   },
 ];
 
 export const SKILLS: Record<string, string[]> = {
   Languages: ["Python", "Java", "C++", "TypeScript", "JavaScript", "SQL", "Linux"],
   "AI Tools": [
-    "Azure OpenAI",
     "LangChain",
     "LangGraph",
     "Agno Agent",
     "Claude Code",
+    "Azure OpenAI",
     "pgvector",
     "MCP",
     "Antigravity",
@@ -199,15 +222,15 @@ export const EDUCATION = {
   degree: "B.S. in Computer Science",
   gpa: "3.94 / 4.0",
   grad: "Expected May 2028",
-  threads: "Systems & Architecture, Artificial Intelligence",
-  honors: "Presidential Scholar, Zell Miller Scholar",
+  threads: "Systems & Architecture, Intelligence",
+  honors: "Presidential Scholar, Zell Miller Scholar, Dean’s List",
   courses: [
     "Data Structures",
     "Algorithms",
     "Computer Organization",
-    "Artificial Intelligence",
+    "AI",
     "Machine Learning",
-    "Database Systems",
+    "Database",
   ],
 } as const;
 
@@ -243,6 +266,14 @@ export interface Project {
   title: string;
   /** URL segment for the project's detail page, e.g. /projects/overflow */
   slug: string;
+  /** Whether this project appears in Selected work on the home page */
+  showOnHomepage?: boolean;
+  /** Ordering and résumé-specific detail for projects featured on the résumé page */
+  resumeOrder?: number;
+  resumeTitle?: string;
+  resumePeriod?: string;
+  resumeStack?: string[];
+  resumeBullets?: string[];
   /** One-line summary shown in the projects list */
   summary: string;
   /** Concise 1–2 sentence intro shown at the top of the detail page and on the home page */
@@ -279,6 +310,7 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "Overflow",
     slug: "overflow",
+    showOnHomepage: true,
     date: "2026-08-01",
     summary:
       "Multi-agent RL environment for autonomous vehicle fleet oversight, built on Meta's OpenEnv.",
@@ -295,18 +327,28 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "Switch",
     slug: "switch",
+    showOnHomepage: true,
+    resumeOrder: 2,
+    resumeTitle: "Switch: AI Model Routing Platform",
+    resumePeriod: "February 2026",
+    resumeStack: ["TypeScript", "Next.js", "pgvector", "LangGraph"],
+    resumeBullets: [
+      "Launched an AI model-router that directs prompts to the best-fit model for each task, serving 1,000+ users",
+      "Built and fine-tuned a prompt-routing classifier that split traffic 70/30 between economy and premium models; unified 4 provider APIs behind middleware for consistent streaming, model fallback, and request handling",
+      "Engineered Cortex, a persistent memory system using Supabase PostgreSQL and pgvector, enabling low-latency semantic retrieval of user context and conversation history supporting 13K+ daily database requests across LLMs",
+    ],
     date: "2026-02-01",
     summary:
       "Multi-model AI chat platform — switch between OpenAI and Anthropic mid-conversation without losing context.",
     categories: ["llm", "nextjs", "typescript", "supabase", "pgvector", "streaming"],
     description:
-      "A full-stack multi-model AI platform serving 100+ users and 14K+ daily backend requests. Switch between models mid-conversation without losing context.",
+      "A full-stack multi-model AI platform serving 1,000+ users and 13K+ daily database requests. Switch between models mid-conversation without losing context.",
     tags: ["Next.js", "TypeScript", "Supabase", "pgvector", "OpenAI", "Anthropic"],
     link: "https://theswitchai.com",
     github: "https://github.com/importgabriel/switch",
     image: "/projects/switch.png",
     whatItIs:
-      "A chat platform that treats OpenAI and Anthropic as interchangeable behind a single normalized message schema, so a thread can hop between models with full continuity. A custom prompt-routing classifier splits traffic 70/30 between economy and premium models, and Cortex — a persistent memory system on Supabase Postgres with pgvector embeddings — gives every conversation low-latency semantic recall across 10K+ daily queries.",
+      "A chat platform that treats OpenAI and Anthropic as interchangeable behind a single normalized message schema, so a thread can hop between models with full continuity. A custom prompt-routing classifier splits traffic 70/30 between economy and premium models, and Cortex — a persistent memory system on Supabase Postgres with pgvector embeddings — gives every conversation low-latency semantic recall across 13K+ daily database requests.",
     whyItMatters:
       "Every provider has a different API shape, token budget, and streaming protocol, so people end up locked into one model and one context window. Switch removes that fragmentation: pick the best model for each message and keep the conversation intact.",
     inspiration:
@@ -436,19 +478,29 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "Polymarket HFT Bot",
     slug: "polymarket-hft-bot",
+    showOnHomepage: true,
+    resumeOrder: 1,
+    resumeTitle: "Polymarket HFT Bot: Low Latency Systems",
+    resumePeriod: "April 2026",
+    resumeStack: ["C++23", "Python", "PyTorch", "pybind11", "Goldsky"],
+    resumeBullets: [
+      "Engineered a high-frequency trading framework in C++ and Python targeting Polymarket BTC 15-minute prediction markets, integrating Polymarket CLOB API and Goldsky for real-time on-chain market data ingestion",
+      "Implemented cross-venue arbitrage detection across Polymarket, Kalshi, and Binance using a Log-Normal probability model with a PPO reinforcement learning agent and LSTM actor-critic network built in PyTorch",
+      "Bridged C++23 execution engine with Python ML inference via pybind11 for sub-millisecond order routing",
+    ],
     date: "2025-12-01",
     summary:
       "C++/Python market-making bot for Polymarket with an LSTM actor-critic trained via recurrent PPO.",
     categories: ["RL", "trading", "cpp", "python", "pytorch"],
     description:
-      "A low-latency hybrid C++/Python trading framework for Polymarket BTC 15-minute prediction markets, pairing a C++20 execution engine with a PPO agent through pybind11.",
-    tags: ["C++20", "Python", "PyTorch", "Goldsky", "pybind11", "Polymarket CLOB"],
+      "A low-latency hybrid C++/Python trading framework for Polymarket BTC 15-minute prediction markets, pairing a C++23 execution engine with a PPO agent through pybind11.",
+    tags: ["C++23", "Python", "PyTorch", "Goldsky", "pybind11", "Polymarket CLOB"],
     github: "https://github.com/eshan-bhimani/polymarket-hft-bot",
     whatItIs:
       "The C++ layer ingests Polymarket CLOB and Binance aggTrade WebSocket feeds with sub-millisecond latency, maintaining a thread-safe L2 order book with live micro-price and volatility estimates. A log-normal probability model prices the contracts fairly and flags cross-venue arbitrage across Polymarket, Kalshi, and Binance. The Python layer runs a PPO agent with an LSTM actor-critic that learns entry and exit timing across the 15-minute contract lifecycle, with reward shaping for fees, gas, and inventory risk.",
     whyItMatters:
       "Short-dated prediction markets are thin, fast, and mispriced relative to spot — but exploiting that needs both microsecond execution and a policy that adapts to the contract's lifecycle. Splitting the system across C++ and Python gets both without compromising either.",
-    stack: ["C++20", "Python 3.11", "PyTorch", "Gymnasium", "boost::beast", "pybind11", "scipy", "py-clob-client"],
+    stack: ["C++23", "Python 3.11", "PyTorch", "Gymnasium", "boost::beast", "pybind11", "scipy", "py-clob-client"],
   },
   {
     title: "FolioTrust",
@@ -484,5 +536,24 @@ export const FEATURED_PROJECTS: Project[] = [
     whyItMatters:
       "Exchange matching engines are black boxes. Building one end to end — and a market to feed it — is the clearest way to understand how liquidity, priority, and order types actually interact.",
     stack: ["Python 3.11", "FastAPI", "WebSockets", "Redis", "Pydantic", "asyncio"],
+  },
+];
+
+export interface WritingItem {
+  title: string;
+  summary: string;
+  date: string;
+  categories: string[];
+  href: string;
+}
+
+export const WRITING_ITEMS: WritingItem[] = [
+  {
+    title: "GeoGuesser Bench: Benchmarking Vision–Language Agents on Interactive Geolocation",
+    summary:
+      "A benchmark for evaluating how vision-language agents navigate, reason, and use tools in interactive Google Street View environments.",
+    date: "2026-03-20",
+    categories: ["agentic-ai", "ai/ml", "research"],
+    href: "/research/geoguesser-bench.pdf",
   },
 ];

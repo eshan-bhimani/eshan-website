@@ -4,13 +4,12 @@ import YellowJacket from "@/components/YellowJacket";
 import {
   EXPERIENCE,
   FEATURED_PROJECTS,
-  SKILLS,
   SOCIAL_LINKS,
   EDUCATION,
 } from "@/lib/constants";
 
 export default function Home() {
-  const featured = FEATURED_PROJECTS.slice(0, 4);
+  const featured = FEATURED_PROJECTS.filter((project) => project.showOnHomepage);
 
   return (
     <article className="pt-16 sm:pt-24">
@@ -69,11 +68,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <ul className="mt-4 space-y-2">
-          <Bullet>Threads: {EDUCATION.threads}</Bullet>
-          <Bullet>Honors: {EDUCATION.honors}</Bullet>
-          <Bullet>Coursework: {EDUCATION.courses.join(", ")}</Bullet>
-        </ul>
+        <p className="mt-4 text-ink-soft">Threads: {EDUCATION.threads}</p>
       </Section>
 
       {/* ── Experience ── */}
@@ -88,11 +83,14 @@ export default function Home() {
               <p className="mt-0.5 text-ink-soft">
                 {exp.role} · {exp.location}
               </p>
-              <ul className="mt-3 space-y-2">
-                {exp.bullets.map((bullet) => (
-                  <Bullet key={bullet}>{bullet}</Bullet>
-                ))}
-              </ul>
+              <p className="mt-3">{exp.homepageDescription}</p>
+              {exp.link && (
+                <p className="mt-2 text-sm">
+                  <a href={exp.link.href} className="prose-link">
+                    {exp.link.label} →
+                  </a>
+                </p>
+              )}
             </li>
           ))}
         </ul>
@@ -137,21 +135,9 @@ export default function Home() {
         </ul>
         <p className="mt-8">
           <Link href="/projects" className="prose-link">
-            All {FEATURED_PROJECTS.length} projects, with engineering write-ups
+            All Projects, more details
           </Link>
         </p>
-      </Section>
-
-      {/* ── Skills ── */}
-      <Section id="skills" title="Toolkit">
-        <dl className="space-y-4">
-          {Object.entries(SKILLS).map(([category, items]) => (
-            <div key={category}>
-              <dt className="eyebrow">{category}</dt>
-              <dd className="mt-1">{items.join(", ")}</dd>
-            </div>
-          ))}
-        </dl>
       </Section>
 
       {/* ── Contact ── */}
@@ -227,16 +213,5 @@ function Section({
       <h2 className="display mb-6 text-3xl">{title}</h2>
       {children}
     </section>
-  );
-}
-
-function Bullet({ children }: { children: React.ReactNode }) {
-  return (
-    <li className="flex gap-3">
-      <span aria-hidden className="select-none text-ink-muted">
-        •
-      </span>
-      <span>{children}</span>
-    </li>
   );
 }
