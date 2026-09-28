@@ -59,14 +59,14 @@ export default function Home() {
 
       {/* ── Education ── */}
       <Section id="education" title="Education">
-        <div className="flex items-start gap-4">
-          <YellowJacket size={64} className="mt-1 shrink-0" />
-          <div>
-            <p className="display text-2xl">{EDUCATION.school}</p>
-            <p className="mt-1 text-ink-soft">
-              {EDUCATION.degree} · GPA {EDUCATION.gpa} · {EDUCATION.grad}
-            </p>
-          </div>
+        <div className="relative">
+          <span className="absolute right-full top-0 mr-4 hidden h-12 w-12 min-[50rem]:block">
+            <YellowJacket size={48} />
+          </span>
+          <p className="display text-2xl">{EDUCATION.school}</p>
+          <p className="mt-1 text-ink-soft">
+            {EDUCATION.degree} · GPA {EDUCATION.gpa} · {EDUCATION.grad}
+          </p>
         </div>
         <p className="mt-4 text-ink-soft">Threads: {EDUCATION.threads}</p>
       </Section>
