@@ -551,9 +551,130 @@ export interface WritingItem {
   date: string;
   categories: string[];
   href: string;
+  slug?: string;
+  sections?: {
+    heading?: string;
+    paragraphs: string[];
+  }[];
 }
 
 export const WRITING_ITEMS: WritingItem[] = [
+  {
+    title: "The Data Behind a Useful AI Agent",
+    summary:
+      "Why dependable retrieval and trustworthy context matter as much as model capability when building useful agents.",
+    date: "2026-09-24",
+    categories: ["agentic-ai", "ai/ml", "data"],
+    href: "/writing/the-data-behind-a-useful-ai-agent",
+    slug: "the-data-behind-a-useful-ai-agent",
+    sections: [
+      {
+        paragraphs: [
+          "While building a question-answering system over company data during my internship, I expected the hardest part to be getting the model to reason well. More often, the hard part came earlier: finding the right information and knowing whether it could be trusted.",
+          "An agent can sound confident with very little context. To do useful work, it needs the right context at the right time.",
+        ],
+      },
+      {
+        heading: "Retrieval Changes the Answer",
+        paragraphs: [
+          "If two documents disagree, the agent needs a way to tell which one is current. If a relationship lives across several systems, it needs a way to connect them. If a source is incomplete, it should be able to say so.",
+          "Those are data problems before they are model problems. A stronger model can sometimes work around messy input, but that is an expensive way to compensate for missing structure.",
+        ],
+      },
+      {
+        heading: "Why I Think Good Data Will Cost More",
+        paragraphs: [
+          "I expect the value of *usable* data to rise as more companies build agents. I don’t mean that every large dataset becomes valuable. Data that is outdated, duplicated, or impossible to use legally can create more work than it saves.",
+          "The scarce part is data that is accurate, current, relevant to a task, and available with clear rights to use it. Collecting it is only the beginning. Someone has to maintain it, resolve conflicts, and make it retrievable. As agents take on more work, that effort starts to look less like housekeeping and more like core infrastructure.",
+        ],
+      },
+      {
+        heading: "The Next Constraint",
+        paragraphs: [
+          "Model capability will keep improving. But when two teams can use similarly capable models, the team with better access to trustworthy information may build the more useful agent.",
+          "That has changed how I think about AI products. I still care about the model. I spend a lot more time asking what the system knows, where that knowledge came from, and what happens when it is wrong.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "What Access to Finance Actually Means",
+    summary:
+      "Financial access should mean more than reaching a buy button—it should include understanding, agency, and meaningful control.",
+    date: "2026-09-06",
+    categories: ["finance", "fintech"],
+    href: "/writing/what-access-to-finance-actually-means",
+    slug: "what-access-to-finance-actually-means",
+    sections: [
+      {
+        paragraphs: [
+          "It has become much easier to open a financial account or place a trade. I think that is real progress. I also think access means more than reaching a button that says “buy.”",
+          "People need to understand what they own, what it costs them, and what choices they have after they acquire it.",
+        ],
+      },
+      {
+        heading: "The Interface Matters",
+        paragraphs: [
+          "A confusing interface can keep someone out of a market as effectively as a formal barrier. Small details matter: whether fees are legible, whether risks appear before a decision, and whether a beginner can learn without feeling that every screen is pushing them to act.",
+          "Good financial software should make participation easier while making the consequences of a decision clearer. Lower friction is useful when it removes unnecessary steps. It is less useful when it removes the moment someone needed to think.",
+        ],
+      },
+      {
+        heading: "Ownership Matters Too",
+        paragraphs: [
+          "Digital assets raise another question I find interesting: how much control should a person have over what they own online?",
+          "A more open financial system could let people move assets between services, build on shared infrastructure, and participate without asking each platform for permission. That possibility is exciting. It also puts more responsibility on the software. When transfers are hard to reverse, clear explanations and careful safeguards matter even more.",
+        ],
+      },
+      {
+        heading: "The Part I Want to Build",
+        paragraphs: [
+          "The most interesting financial products, to me, give people both access and agency. They help someone start, understand the tradeoffs, and retain meaningful control as their needs change.",
+          "That is a harder engineering goal than making a transaction fast. It is also a better measure of whether technology has made finance more open.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "The Hard Part of Giving Business Software an Agent",
+    summary:
+      "Business agents become useful when they can assemble scattered context, handle exceptions, and take bounded action.",
+    date: "2026-08-17",
+    categories: ["agentic-ai", "ai/ml", "business"],
+    href: "/writing/the-hard-part-of-giving-business-software-an-agent",
+    slug: "the-hard-part-of-giving-business-software-an-agent",
+    sections: [
+      {
+        paragraphs: [
+          "A customer asks a simple question: “Why was I charged twice?”",
+          "The answer might require a payment record, a subscription change, an earlier support conversation, and a company policy. Resolving it might require a refund, an explanation, or approval from a person.",
+          "This is where business agents get interesting. The task is not just producing a convincing reply. It is understanding what happened and taking the right next step.",
+        ],
+      },
+      {
+        heading: "Context Is Scattered",
+        paragraphs: [
+          "Most companies already have plenty of customer information. It sits in tickets, calls, account records, internal notes, and separate tools. An agent that sees only one piece can give an answer that sounds reasonable and is still wrong.",
+          "Bringing that context together could make service and sales much more useful. It could also expose old records, conflicting facts, and assumptions that employees have learned to work around. Agents will force companies to confront the quality of the information behind their workflows.",
+        ],
+      },
+      {
+        heading: "Exceptions Are the Real Product",
+        paragraphs: [
+          "A demo usually follows the happy path. Real work rarely does.",
+          "What should happen when the payment record conflicts with the support note? When a customer asks for something outside policy? When the agent can explain a problem but lacks permission to fix it?",
+          "I think the quality of a business agent will be measured by how it handles those moments. It should know which actions it can take, show the evidence behind its decision, and hand the case to a person with enough context to continue. A handoff that makes the customer repeat everything is not much of a handoff.",
+        ],
+      },
+      {
+        heading: "From Answers to Work",
+        paragraphs: [
+          "Business software has spent years helping people record what happened. Agents could help them decide and act on what should happen next.",
+          "To earn that role, an agent needs more than a fluent voice. It needs dependable data, clear boundaries, and a way to recover when reality does not match the workflow.",
+        ],
+      },
+    ],
+  },
   {
     title: "GeoGuesser Bench: Benchmarking Vision–Language Agents on Interactive Geolocation",
     summary:
