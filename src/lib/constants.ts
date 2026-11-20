@@ -29,12 +29,24 @@ export interface Experience {
   logo?: string;
   website?: string;
   homepageDescription: string;
+  team?: string;
   link?: { label: string; href: string };
   bullets: string[];
   tags: string[];
 }
 
 export const EXPERIENCE: Experience[] = [
+  {
+    company: "Salesforce",
+    role: "Incoming Software Engineer Intern",
+    period: "Summer 2027",
+    location: "San Francisco, CA",
+    team: "Missionforce",
+    logo: "/companies/salesforce.svg",
+    homepageDescription: "",
+    bullets: [],
+    tags: [],
+  },
   {
     company: "NCR Atleos",
     role: "Software Engineer Intern",
@@ -244,11 +256,7 @@ export const EDUCATION = {
   Full resume history, reverse-chronological. Derived from EXPERIENCE so the
   shared roles never drift between the home page and the resume page.
 */
-export const RESUME_EXPERIENCE: Experience[] = [
-  EXPERIENCE[0],
-  EXPERIENCE[1],
-  EXPERIENCE[2],
-];
+export const RESUME_EXPERIENCE = EXPERIENCE.filter((exp) => exp.company !== "Switch");
 
 export const AWARDS = [
   "Presidential Scholar (4.0 GPA)",

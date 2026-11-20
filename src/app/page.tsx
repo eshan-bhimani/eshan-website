@@ -50,7 +50,7 @@ export default function Home() {
           agents and reduced their time to action.
         </p>
         <p>
-          I&apos;m currently looking for Spring and Summer 2027 internships. My
+          I&apos;m currently looking for Spring 2027 internships. My
           interests include AI, software, startups, health &amp; wellness,
           fashion, tennis, poker, and content creation. Long term, I want to
           start a company at the intersection of AI, technology, and software.
@@ -72,23 +72,23 @@ export default function Home() {
       </Section>
 
       {/* ── Experience ── */}
-      <Section id="experience" title="Where I've worked">
+      <Section id="experience" title="Experience">
         <ul className="space-y-8">
           {EXPERIENCE.map((exp) => (
             <li key={exp.company} className="relative">
-              {exp.logo && (
-                <span className="brand-plate absolute right-full top-0 mr-4 hidden h-12 w-12 overflow-hidden rounded-md min-[50rem]:inline-flex">
-                  <Image
-                    src={exp.logo}
-                    alt=""
-                    width={48}
-                    height={48}
-                    className="h-full w-full object-contain"
-                  />
-                </span>
-              )}
               <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                <h3 className="display text-2xl">
+                <h3 className="display flex items-center gap-2 text-2xl">
+                  {exp.logo && (
+                    <span className="brand-plate h-12 w-12 shrink-0 overflow-hidden min-[50rem]:absolute min-[50rem]:right-full min-[50rem]:top-0 min-[50rem]:mr-4">
+                      <Image
+                        src={exp.logo}
+                        alt=""
+                        width={48}
+                        height={48}
+                        className="h-full w-full object-contain"
+                      />
+                    </span>
+                  )}
                   {exp.website ? (
                     <a
                       href={exp.website}
@@ -105,9 +105,9 @@ export default function Home() {
                 <span className="text-sm text-ink-muted">{exp.period}</span>
               </div>
               <p className="mt-0.5 text-ink-soft">
-                {exp.role} · {exp.location}
+                {exp.role} · {exp.location}{exp.team && <> · {exp.team} team</>}
               </p>
-              <p className="mt-3">{exp.homepageDescription}</p>
+              {exp.homepageDescription && <p className="mt-3">{exp.homepageDescription}</p>}
               {exp.link && (
                 <p className="mt-2 text-sm">
                   <a href={exp.link.href} className="prose-link">

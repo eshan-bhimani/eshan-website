@@ -61,16 +61,20 @@ export default function ResumePage() {
                 <span className="text-sm text-ink-muted">{exp.period}</span>
               </div>
               <p className="mt-0.5 text-ink-soft">
-                {exp.role} · {exp.location}
+                {exp.role} · {exp.location}{exp.team && <> · {exp.team} team</>}
               </p>
-              <ul className="mt-3 space-y-2">
-                {exp.bullets.map((bullet) => (
-                  <Bullet key={bullet}>{bullet}</Bullet>
-                ))}
-              </ul>
-              <p className="mt-3 text-sm text-ink-muted">
-                {exp.tags.join(" · ")}
-              </p>
+              {exp.bullets.length > 0 && (
+                <ul className="mt-3 space-y-2">
+                  {exp.bullets.map((bullet) => (
+                    <Bullet key={bullet}>{bullet}</Bullet>
+                  ))}
+                </ul>
+              )}
+              {exp.tags.length > 0 && (
+                <p className="mt-3 text-sm text-ink-muted">
+                  {exp.tags.join(" · ")}
+                </p>
+              )}
               {exp.link && (
                 <p className="mt-2 text-sm">
                   <a href={exp.link.href} className="prose-link">
